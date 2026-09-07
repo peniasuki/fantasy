@@ -26,6 +26,8 @@ export type LeagueSettings = {
   machineOfferJitter: number;
   maxBidTeamValueShare: number;
   maxPurchaseOfVm: number;
+  /** Suelo de puja: fracción del VM (p. ej. 0.75 = 75%). */
+  minPurchaseOfVm: number;
   bonusPerPoint: number;
   bonusIdealXi: number;
   bonusMvp: number;
@@ -45,6 +47,7 @@ export const DEFAULT_SETTINGS: LeagueSettings = {
   machineOfferJitter: 0.05,
   maxBidTeamValueShare: 0.25,
   maxPurchaseOfVm: 1.5,
+  minPurchaseOfVm: 0.75,
   bonusPerPoint: 20_000,
   bonusIdealXi: 50_000,
   bonusMvp: 60_000,

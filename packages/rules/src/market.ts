@@ -12,6 +12,18 @@ export function maxPurchasePrice(vm: number, settings: LeagueSettings): number {
   return Math.floor(vm * settings.maxPurchaseOfVm);
 }
 
+export function minPurchasePrice(vm: number, settings: LeagueSettings): number {
+  const ratio = settings.minPurchaseOfVm ?? 0.75;
+  return Math.max(0, Math.ceil(vm * ratio));
+}
+
+/** Rango válido de puja por un jugador (además del tope de saldo del manager). */
+export function purchasePriceBounds(vm: number, settings: LeagueSettings): { min: number; max: number } {
+  const min = minPurchasePrice(vm, settings);
+  const max = maxPurchasePrice(vm, settings);
+  return { min, max: Math.max(min, max) };
+}
+
 export function machineOffer(vm: number, settings: LeagueSettings, random = Math.random): number {
   const jitter = (random() * 2 - 1) * settings.machineOfferJitter;
   return Math.max(1, Math.round(vm * (1 + jitter)));
@@ -62,10 +74,11 @@ export function settleListing(params: {
   });
 
   const cap = maxPurchasePrice(params.vm, settings);
+  const floor = minPurchasePrice(params.vm, settings);
   const eligible = bids.filter((bid) => {
     const maxBid = maxBidAmount(params.balances[bid.bidderId] ?? 0, 0, settings);
     const afford = (params.balances[bid.bidderId] ?? 0) >= bid.amount;
-    return afford && bid.amount <= cap && bid.amount <= maxBid;
+    return afford && bid.amount >= floor && bid.amount <= cap && bid.amount <= maxBid;
   });
 
   if (listing.kind === "sale") {

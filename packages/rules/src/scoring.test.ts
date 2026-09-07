@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { scoreEstadisticas } from "./scoring";
 import { DEFAULT_SETTINGS } from "./types";
-import { maxBidAmount, settleListing } from "./market";
+import { maxBidAmount, minPurchasePrice, settleListing } from "./market";
 
 describe("scoreEstadisticas", () => {
   it("gives 0 without minutes", () => {
@@ -66,6 +66,10 @@ describe("market", () => {
     expect(maxBidAmount(10_000_000, 40_000_000, DEFAULT_SETTINGS)).toBe(20_000_000);
   });
 
+  it("sets a 75% market-value floor", () => {
+    expect(minPurchasePrice(10_000_000, DEFAULT_SETTINGS)).toBe(7_500_000);
+  });
+
   it("awards the highest bid", () => {
     const result = settleListing({
       listing: {
@@ -88,5 +92,26 @@ describe("market", () => {
     });
     expect(result.winnerId).toBe("b");
     expect(result.price).toBe(8_000_000);
+  });
+
+  it("rejects bids below the market-value floor at settlement", () => {
+    const result = settleListing({
+      listing: {
+        id: "l2",
+        playerId: "p2",
+        sellerId: "machine",
+        askPrice: 10_000_000,
+        listedAt: 0,
+        expiresAt: 10,
+        kind: "free_agent",
+      },
+      bids: [{ id: "b1", listingId: "l2", playerId: "p2", bidderId: "a", amount: 5_000_000, createdAt: 1 }],
+      vm: 10_000_000,
+      balances: { a: 40_000_000 },
+      settings: DEFAULT_SETTINGS,
+      now: 5,
+    });
+    expect(result.reason).toBe("no_sale");
+    expect(result.winnerId).toBeNull();
   });
 });

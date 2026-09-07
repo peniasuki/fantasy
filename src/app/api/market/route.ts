@@ -4,12 +4,18 @@ import {
   formatMoney,
   maxBidAmount,
   maxPurchasePrice,
+  minPurchasePrice,
   nextMarketClose,
+  purchasePriceBounds,
   type Bid,
 } from "fantasy-rules";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
 import { LEAGUE_ID, getLeague, requireMember, settingsOf } from "@/lib/league";
+
+function playerVm(player: { currentPrice?: number; vm?: number } | undefined): number {
+  return player?.currentPrice ?? player?.vm ?? 0;
+}
 
 export async function GET() {
   try {
@@ -41,23 +47,32 @@ export async function GET() {
     const teamValue = ownedSnap.docs
       .filter((d) => d.data().ownerId === user.uid)
       .reduce((sum, d) => sum + (players[d.data().playerId]?.vm ?? 0), 0);
+    const walletMax = maxBidAmount(member.balance, teamValue, settings);
     const listings = listingsSnap.docs
       .map((d) => {
         const listing = d.data();
+        const player = players[listing.playerId];
+        if (!player) return null;
+        const vm = playerVm(player);
+        const bounds = purchasePriceBounds(vm, settings);
         return {
           ...listing,
-          player: players[listing.playerId],
+          player,
           myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
+          minBid: bounds.min,
+          maxBid: Math.min(bounds.max, walletMax, member.balance),
         };
       })
-      .filter((row) => Boolean(row.player));
+      .filter((row): row is NonNullable<typeof row> => Boolean(row));
     return NextResponse.json({
       listings,
       myBids: bidsSnap.docs.map((d) => d.data()),
       closeAt: nextMarketClose(new Date()).getTime(),
       balance: member.balance,
       teamValue,
-      maxBid: maxBidAmount(member.balance, teamValue, settings),
+      maxBid: walletMax,
+      minPurchaseOfVm: settings.minPurchaseOfVm ?? 0.75,
+      maxPurchaseOfVm: settings.maxPurchaseOfVm,
       formatHint: formatMoney(member.balance),
       ownership,
     });
@@ -94,24 +109,38 @@ export async function POST(request: Request) {
       if (!listingSnap.exists) return NextResponse.json({ error: "Listado inexistente." }, { status: 404 });
       const listing = listingSnap.data()!;
       const player = (await db().collection("players").doc(listing.playerId).get()).data();
+      const vm = playerVm(player);
       const owned = await db()
         .collection("leagues")
         .doc(LEAGUE_ID)
         .collection("ownership")
         .where("ownerId", "==", user.uid)
         .get();
-      const teamValue = owned.docs.reduce((sum, d) => sum + ((player && d.data().playerId === player.id ? player.vm : 0) || 0), 0);
       const ownedPlayers = await Promise.all(
         owned.docs.map((d) => db().collection("players").doc(d.data().playerId).get()),
       );
-      const realTeamValue = ownedPlayers.reduce((sum, s) => sum + (s.data()?.vm ?? 0), 0);
+      const realTeamValue = ownedPlayers.reduce((sum, s) => sum + playerVm(s.data()), 0);
       const capBid = maxBidAmount(member.balance, realTeamValue, settings);
-      const capBuy = maxPurchasePrice(player?.vm ?? 0, settings);
+      const floorBuy = minPurchasePrice(vm, settings);
+      const capBuy = maxPurchasePrice(vm, settings);
+      if (body.amount < floorBuy) {
+        return NextResponse.json(
+          {
+            error: `Puja mínima ${floorBuy.toLocaleString("es-ES")} € (${Math.round((settings.minPurchaseOfVm ?? 0.75) * 100)}% del VM).`,
+          },
+          { status: 400 },
+        );
+      }
       if (body.amount > capBid) {
         return NextResponse.json({ error: `Puja máxima ${capBid.toLocaleString("es-ES")} €.` }, { status: 400 });
       }
       if (body.amount > capBuy) {
-        return NextResponse.json({ error: "La puja supera el 150% del valor de mercado." }, { status: 400 });
+        return NextResponse.json(
+          {
+            error: `La puja supera el ${Math.round(settings.maxPurchaseOfVm * 100)}% del valor de mercado.`,
+          },
+          { status: 400 },
+        );
       }
       if (body.amount > member.balance) {
         return NextResponse.json({ error: "No tienes saldo." }, { status: 400 });
@@ -156,7 +185,7 @@ export async function POST(request: Request) {
       });
       if (!check.ok) return NextResponse.json({ error: check.reason }, { status: 400 });
       const player = (await db().collection("players").doc(body.playerId).get()).data();
-      const ask = body.askPrice ?? player?.vm ?? 0;
+      const ask = body.askPrice ?? playerVm(player);
       const id = `sale_${body.playerId}`;
       await db()
         .collection("leagues")

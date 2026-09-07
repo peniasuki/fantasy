@@ -9,6 +9,8 @@ type Listing = {
   kind: string;
   askPrice: number;
   expiresAt: number;
+  minBid: number;
+  maxBid: number;
   player: { name: string; position: string; vm: number; teamName: string };
   myBid: { amount: number } | null;
 };
@@ -38,6 +40,8 @@ export default function MercadoPage() {
     closeAt: number;
     balance: number;
     maxBid: number;
+    minPurchaseOfVm: number;
+    maxPurchaseOfVm: number;
   } | null>(null);
   const [amounts, setAmounts] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState("");
@@ -47,7 +51,14 @@ export default function MercadoPage() {
   const [team, setTeam] = useState("ALL");
 
   async function load() {
-    const res = await api<{ listings: Listing[]; closeAt: number; balance: number; maxBid: number }>("/api/market");
+    const res = await api<{
+      listings: Listing[];
+      closeAt: number;
+      balance: number;
+      maxBid: number;
+      minPurchaseOfVm: number;
+      maxPurchaseOfVm: number;
+    }>("/api/market");
     setData(res);
   }
 
@@ -86,16 +97,19 @@ export default function MercadoPage() {
 
   if (!data) return <p className="text-sm text-white/60">{msg || "Cargando mercado…"}</p>;
 
+  const minPct = Math.round((data.minPurchaseOfVm ?? 0.75) * 100);
+  const maxPct = Math.round((data.maxPurchaseOfVm ?? 1.5) * 100);
+
   return (
     <div className="space-y-4 pb-6">
       <section className="rounded-2xl border border-line bg-panel p-4">
         <p className="text-sm text-white/60">Hora CET {formatCet(now, false)}</p>
         <p className="mt-1 text-sm text-white/60">Cierre {formatCet(data.closeAt)} CET</p>
         <p className="mt-2">
-          Saldo {formatMoney(data.balance)} · puja máx. {formatMoney(data.maxBid)}
+          Saldo {formatMoney(data.balance)} · tope cartera {formatMoney(data.maxBid)}
         </p>
         <p className="mt-1 text-xs text-white/45">
-          {data.listings.length} en mercado · todos los no fichados siguen disponibles
+          Pujas entre {minPct}% y {maxPct}% del VM · {data.listings.length} en mercado
         </p>
       </section>
 
@@ -152,11 +166,14 @@ export default function MercadoPage() {
           <p className="text-sm text-white/60">
             {listing.player?.position} · {listing.player?.teamName} · VM {formatMoney(listing.player?.vm ?? 0)}
           </p>
+          <p className="mt-1 text-xs text-white/45">
+            Mín {formatMoney(listing.minBid)} · Máx {formatMoney(listing.maxBid)}
+          </p>
           {listing.myBid && <p className="text-xs text-grass">Tu puja: {formatMoney(listing.myBid.amount)}</p>}
           <div className="mt-3 flex gap-2">
             <input
               inputMode="numeric"
-              placeholder="Puja"
+              placeholder={`Mín ${listing.minBid}`}
               value={amounts[listing.id] ?? ""}
               onChange={(e) => setAmounts({ ...amounts, [listing.id]: e.target.value })}
               className="flex-1 rounded-lg border border-line bg-ink px-3 py-2 text-sm"

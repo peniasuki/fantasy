@@ -7,6 +7,8 @@ import { loginGoogle, watchAuth } from "@/lib/session";
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
   const configured = firebaseConfigured();
 
   useEffect(() => {
@@ -19,6 +21,18 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
       setReady(true);
     });
   }, [configured]);
+
+  async function onLogin() {
+    setBusy(true);
+    setError("");
+    try {
+      await loginGoogle();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No se pudo iniciar sesión");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   if (!ready) {
     return <p className="px-4 py-10 text-sm text-white/60">Cargando…</p>;
@@ -44,11 +58,13 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
           finalizar cada partido.
         </p>
         <button
-          onClick={() => loginGoogle()}
-          className="mt-8 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink"
+          disabled={busy}
+          onClick={onLogin}
+          className="mt-8 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink disabled:opacity-60"
         >
-          Entrar con Google
+          {busy ? "Abriendo Google…" : "Entrar con Google"}
         </button>
+        {error && <p className="mt-4 max-w-sm text-left text-xs text-red-400">{error}</p>}
       </div>
     );
   }

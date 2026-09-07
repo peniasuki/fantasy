@@ -17,7 +17,12 @@ export function watchAuth(cb: (user: User | null) => void) {
 }
 
 export async function loginGoogle() {
-  await signInWithPopup(clientAuth(), googleProvider);
+  try {
+    await signInWithPopup(clientAuth(), googleProvider);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message);
+  }
 }
 
 export async function logout() {

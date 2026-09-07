@@ -51,8 +51,8 @@ export default function AdminPage() {
     <div className="space-y-3 pb-6">
       <h2 className="text-lg font-semibold">Admin</h2>
       <p className="text-sm text-white/60">
-        Herramientas del administrador. El seed de plantillas hay que lanzarlo por tandas (Free = 100 req/día).
-        Prueba de catálogo con temporada <span className="text-gold">2024</span> (plan Free).
+        Herramientas del administrador. Seed por tandas (Free: 100 req/día, máx. 3 páginas/equipo). Temporada{" "}
+        <span className="text-gold">2024</span>. Cada clic continúa donde se quedó.
       </p>
       {status && !status.hasLeague && (
         <p className="rounded-lg border border-gold/30 bg-panel px-3 py-2 text-sm text-gold/90">
@@ -66,9 +66,9 @@ export default function AdminPage() {
       <button
         disabled={canRun === false}
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
-        onClick={() => run("/api/jobs/seed-catalog?maxTeams=5")}
+        onClick={() => run("/api/jobs/seed-catalog?maxTeams=3")}
       >
-        Importar plantillas (5 equipos)
+        Importar plantillas (siguiente tanda · 3 equipos)
       </button>
       <button
         disabled={canRun === false}

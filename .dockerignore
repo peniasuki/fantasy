@@ -1,0 +1,8 @@
+Dockerfile
+.git
+.terraform
+node_modules
+.next
+.env.local
+*.md
+infra

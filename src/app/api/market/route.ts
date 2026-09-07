@@ -23,19 +23,34 @@ export async function GET() {
       db().collection("players").get(),
       db().collection("leagues").doc(LEAGUE_ID).collection("ownership").get(),
     ]);
-    const players = Object.fromEntries(playersSnap.docs.map((d) => [d.id, d.data()]));
+    const players = Object.fromEntries(
+      playersSnap.docs
+        .filter((d) => d.data().active !== false)
+        .map((d) => {
+          const data = d.data();
+          return [
+            d.id,
+            {
+              ...data,
+              vm: data.currentPrice ?? data.vm ?? 0,
+            },
+          ];
+        }),
+    );
     const ownership = Object.fromEntries(ownedSnap.docs.map((d) => [d.data().playerId, d.data()]));
     const teamValue = ownedSnap.docs
       .filter((d) => d.data().ownerId === user.uid)
       .reduce((sum, d) => sum + (players[d.data().playerId]?.vm ?? 0), 0);
-    const listings = listingsSnap.docs.map((d) => {
-      const listing = d.data();
-      return {
-        ...listing,
-        player: players[listing.playerId],
-        myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
-      };
-    });
+    const listings = listingsSnap.docs
+      .map((d) => {
+        const listing = d.data();
+        return {
+          ...listing,
+          player: players[listing.playerId],
+          myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
+        };
+      })
+      .filter((row) => Boolean(row.player));
     return NextResponse.json({
       listings,
       myBids: bidsSnap.docs.map((d) => d.data()),

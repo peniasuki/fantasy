@@ -43,7 +43,7 @@ export type Settlement = {
   winnerId: string | "machine" | null;
   price: number;
   previousOwnerId: string | "machine";
-  reason: "highest_bid" | "clause" | "machine_buy" | "expired" | "no_sale";
+  reason: "highest_bid" | "clause" | "machine_buy" | "no_sale";
 };
 
 export function settleListing(params: {
@@ -105,17 +105,7 @@ export function settleListing(params: {
     };
   }
 
-  if (listing.kind === "free_agent" && now >= listing.expiresAt) {
-    return {
-      playerId: listing.playerId,
-      listingId: listing.id,
-      winnerId: null,
-      price: 0,
-      previousOwnerId: "machine",
-      reason: "expired",
-    };
-  }
-
+  // Agentes libres: permanecen listados hasta que alguien gane una puja (no caducan).
   return {
     playerId: listing.playerId,
     listingId: listing.id,

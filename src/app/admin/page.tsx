@@ -51,38 +51,30 @@ export default function AdminPage() {
     <div className="space-y-3 pb-6">
       <h2 className="text-lg font-semibold">Admin</h2>
       <p className="text-sm text-white/60">
-        Herramientas del administrador. Seed por tandas (Free: 100 req/día, máx. 3 páginas/equipo). Temporada{" "}
-        <span className="text-gold">2024</span>. Cada clic continúa donde se quedó.
+        Producto en <span className="text-gold">fantasy-bros.online</span> · temporada actual vía Jornada Perfecta.
+        El entorno <code className="text-white/80">2024.*</code> queda solo para pruebas API-Football Free.
       </p>
-      {status && !status.hasLeague && (
-        <p className="rounded-lg border border-gold/30 bg-panel px-3 py-2 text-sm text-gold/90">
-          Aún no hay liga. Puedes importar plantillas ahora, o{" "}
-          <Link href="/" className="underline">
-            crear la liga
-          </Link>{" "}
-          primero.
-        </p>
-      )}
+
       <button
         disabled={canRun === false}
-        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
-        onClick={() => run("/api/jobs/seed-catalog?maxTeams=3")}
+        className="w-full rounded-lg bg-grass py-3 font-medium disabled:opacity-40"
+        onClick={() => run("/api/jobs/seed-jp-catalog?openMarket=1")}
       >
-        Importar plantillas (siguiente tanda · 3 equipos)
-      </button>
-      <button
-        disabled={canRun === false}
-        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
-        onClick={() => run("/api/jobs/sync-fixtures")}
-      >
-        Sincronizar calendario
+        Importar catálogo JP + abrir mercado (todos libres)
       </button>
       <button
         disabled={canRun === false}
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
         onClick={() => run("/api/jobs/settle-market")}
       >
-        Cerrar mercado ahora
+        Cerrar / sincronizar mercado
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
+        onClick={() => run("/api/jobs/sync-fixtures")}
+      >
+        Sincronizar calendario (API-Football)
       </button>
       <button
         disabled={canRun === false}
@@ -90,6 +82,13 @@ export default function AdminPage() {
         onClick={() => run("/api/jobs/ingest-match")}
       >
         Puntuar partidos FT
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-line py-3 text-white/50 disabled:opacity-40"
+        onClick={() => run("/api/jobs/seed-catalog?maxTeams=3")}
+      >
+        [Prueba 2024] Importar plantillas API-Football
       </button>
       {msg && <pre className="whitespace-pre-wrap rounded-lg bg-panel p-3 text-xs text-white/70">{msg}</pre>}
     </div>

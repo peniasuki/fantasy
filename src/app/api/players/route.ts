@@ -13,14 +13,25 @@ export async function GET() {
     ]);
     const ownership = Object.fromEntries(ownedSnap.docs.map((d) => [d.data().playerId, d.data()]));
     const players = playersSnap.docs.map((d) => {
-      const data = d.data() as { vm?: number; name?: string; position?: string; teamName?: string };
+      const data = d.data() as {
+        vm?: number;
+        currentPrice?: number;
+        name?: string;
+        position?: string;
+        teamName?: string;
+        active?: boolean;
+        photo?: string;
+        lastTransferPrice?: number | null;
+      };
+      if (data.active === false) return null;
       return {
         id: d.id,
         ...data,
+        vm: data.currentPrice ?? data.vm ?? 0,
         ownerId: ownership[d.id]?.ownerId ?? null,
       };
-    });
-    players.sort((a, b) => (b.vm ?? 0) - (a.vm ?? 0));
+    }).filter(Boolean);
+    players.sort((a, b) => ((b as { vm?: number }).vm ?? 0) - ((a as { vm?: number }).vm ?? 0));
     return NextResponse.json({ players });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";

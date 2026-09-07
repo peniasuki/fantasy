@@ -17,6 +17,7 @@ export type FormationId = keyof typeof FORMATIONS;
 export type LeagueSettings = {
   initialBalance: number;
   maxSquadSize: number;
+  /** @deprecated Ya no limita el mercado: se listan todos los no fichados. */
   freeAgentsPerCycle: number;
   freeAgentDays: number;
   maxListingsPerManager: number;
@@ -29,6 +30,8 @@ export type LeagueSettings = {
   bonusIdealXi: number;
   bonusMvp: number;
   scoringSystem: ScoringSystem;
+  /** Si true, todos los jugadores sin dueño permanecen como agentes libres. */
+  keepAllUnownedListed: boolean;
 };
 
 export const DEFAULT_SETTINGS: LeagueSettings = {
@@ -46,6 +49,7 @@ export const DEFAULT_SETTINGS: LeagueSettings = {
   bonusIdealXi: 50_000,
   bonusMvp: 60_000,
   scoringSystem: "stats",
+  keepAllUnownedListed: true,
 };
 
 export type PlayerMatchStats = {

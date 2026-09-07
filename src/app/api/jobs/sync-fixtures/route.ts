@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   try {
     await requireJobOrAdmin(request);
     const leagueId = Number(process.env.LALIGA_ID || 140);
-    const season = Number(process.env.SEASON || 2026);
+    const season = Number(process.env.SEASON || 2024);
     const data = await footballFetch<FootballResponse<Fixture[]>>(
       "fixtures",
       { league: leagueId, season },

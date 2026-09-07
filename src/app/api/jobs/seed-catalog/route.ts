@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const resumeAfter = url.searchParams.get("after") || "";
     const maxTeams = Number(url.searchParams.get("maxTeams") || 6);
     const leagueId = Number(process.env.LALIGA_ID || 140);
-    const season = Number(process.env.SEASON || 2026);
+    const season = Number(process.env.SEASON || 2024);
     const budget = await footballBudget();
     const teams = await footballFetch<FootballResponse<Team[]>>(
       "teams",

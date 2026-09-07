@@ -52,6 +52,7 @@ export default function AdminPage() {
       <h2 className="text-lg font-semibold">Admin</h2>
       <p className="text-sm text-white/60">
         Herramientas del administrador. El seed de plantillas hay que lanzarlo por tandas (Free = 100 req/día).
+        Prueba de catálogo con temporada <span className="text-gold">2024</span> (plan Free).
       </p>
       {status && !status.hasLeague && (
         <p className="rounded-lg border border-gold/30 bg-panel px-3 py-2 text-sm text-gold/90">

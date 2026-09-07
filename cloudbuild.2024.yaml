@@ -1,0 +1,15 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --build-arg=NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyC6tPGAuCulwvCXEzWGgplLE0QrYZaWUrw
+      - --build-arg=NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=fantasy-507821.firebaseapp.com
+      - --build-arg=NEXT_PUBLIC_FIREBASE_PROJECT_ID=fantasy-507821
+      - --build-arg=NEXT_PUBLIC_FIREBASE_APP_ID=1:886456192409:web:e4e9ca7dc09faf0c779708
+      - --build-arg=NEXT_PUBLIC_APP_URL=https://2024.fantasy-bros.online
+      - -t
+      - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v2024
+      - .
+images:
+  - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v2024
+timeout: 1200s

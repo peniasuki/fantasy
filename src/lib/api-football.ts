@@ -7,7 +7,28 @@ export class ApiBudgetError extends Error {
   }
 }
 
+export class ApiFootballError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ApiFootballError";
+  }
+}
+
 type Budget = { day: string; used: number };
+
+function formatApiErrors(errors: unknown): string | null {
+  if (!errors) return null;
+  if (Array.isArray(errors)) {
+    if (!errors.length) return null;
+    return errors.map(String).join("; ");
+  }
+  if (typeof errors === "object") {
+    const entries = Object.entries(errors as Record<string, unknown>);
+    if (!entries.length) return null;
+    return entries.map(([k, v]) => `${k}: ${String(v)}`).join("; ");
+  }
+  return String(errors);
+}
 
 export async function footballFetch<T>(
   path: string,
@@ -33,11 +54,17 @@ export async function footballFetch<T>(
   if (!res.ok) {
     throw new Error(`API-Football ${res.status}`);
   }
-  return (await res.json()) as T;
+  const data = (await res.json()) as T & { errors?: unknown };
+  const apiError = formatApiErrors(data.errors);
+  if (apiError) {
+    throw new ApiFootballError(apiError);
+  }
+  return data as T;
 }
 
 export type FootballResponse<T> = {
   results: number;
   paging?: { current: number; total: number };
   response: T;
+  errors?: unknown;
 };

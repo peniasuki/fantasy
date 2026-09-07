@@ -1,10 +1,10 @@
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse } from "next/server";
 import { baseMarketValue, type Position } from "fantasy-rules";
-import { jobsAuthorized, requireUser } from "@/lib/auth";
+import { requireJobOrAdmin } from "@/lib/auth";
 import { footballFetch, type FootballResponse } from "@/lib/api-football";
 import { db } from "@/lib/firebase-admin";
-import { footballBudget, isAdmin } from "@/lib/league";
+import { footballBudget } from "@/lib/league";
 
 type Team = { team: { id: number; name: string; logo: string } };
 type PlayerRow = {
@@ -24,15 +24,19 @@ function mapPosition(raw: string | null): Position {
   return "FW";
 }
 
+function errorStatus(error: unknown): number {
+  if (error && typeof error === "object" && "status" in error && typeof (error as { status: unknown }).status === "number") {
+    return (error as { status: number }).status;
+  }
+  const message = error instanceof Error ? error.message : "";
+  if (message === "UNAUTHENTICATED") return 401;
+  if (message.startsWith("Forbidden")) return 403;
+  return 500;
+}
+
 export async function POST(request: Request) {
   try {
-    const okJob = jobsAuthorized(request);
-    if (!okJob) {
-      const user = await requireUser();
-      if (!(await isAdmin(user.uid))) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-      }
-    }
+    await requireJobOrAdmin(request);
     const url = new URL(request.url);
     const resumeAfter = url.searchParams.get("after") || "";
     const maxTeams = Number(url.searchParams.get("maxTeams") || 6);
@@ -44,6 +48,16 @@ export async function POST(request: Request) {
       { league: leagueId, season },
       budget,
     );
+    if (!teams.response?.length) {
+      return NextResponse.json(
+        {
+          error: `API-Football no devolvió equipos (liga ${leagueId}, temporada ${season}). El plan Free solo cubre hasta 2024.`,
+          season,
+          leagueId,
+        },
+        { status: 502 },
+      );
+    }
     let imported = 0;
     let lastTeam = "";
     const selected = teams.response.filter((row) => !resumeAfter || String(row.team.id) > resumeAfter).slice(0, maxTeams);
@@ -104,10 +118,16 @@ export async function POST(request: Request) {
       imported,
       teams: selected.length,
       lastTeam,
-      remaining: teams.response.length - teams.response.findIndex((t) => String(t.team.id) === lastTeam) - 1,
+      season,
+      remaining: lastTeam
+        ? Math.max(
+            0,
+            teams.response.length - teams.response.findIndex((t) => String(t.team.id) === lastTeam) - 1,
+          )
+        : teams.response.length,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: errorStatus(error) });
   }
 }

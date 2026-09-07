@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { jobsAuthorized, requireUser } from "@/lib/auth";
+import { requireJobOrAdmin } from "@/lib/auth";
 import { footballFetch, type FootballResponse } from "@/lib/api-football";
 import { db } from "@/lib/firebase-admin";
-import { footballBudget, isAdmin } from "@/lib/league";
+import { footballBudget } from "@/lib/league";
 
 type Fixture = {
   fixture: {
@@ -17,13 +17,7 @@ type Fixture = {
 
 export async function POST(request: Request) {
   try {
-    const okJob = jobsAuthorized(request);
-    if (!okJob) {
-      const user = await requireUser();
-      if (!(await isAdmin(user.uid))) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-      }
-    }
+    await requireJobOrAdmin(request);
     const leagueId = Number(process.env.LALIGA_ID || 140);
     const season = Number(process.env.SEASON || 2026);
     const data = await footballFetch<FootballResponse<Fixture[]>>(
@@ -48,6 +42,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, fixtures: data.response.length });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = message === "UNAUTHENTICATED" ? 401 : message.startsWith("Forbidden") ? 403 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

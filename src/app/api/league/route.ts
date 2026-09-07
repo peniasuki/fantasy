@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS } from "fantasy-rules";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
 import { LEAGUE_ID, requireMember } from "@/lib/league";
+import { appRoleFromEmail, isAdminEmail } from "@/lib/roles";
 
 function code() {
   return Math.random().toString(36).slice(2, 8).toUpperCase();
@@ -13,7 +14,7 @@ export async function GET() {
     const user = await requireUser();
     const leagueSnap = await db().collection("leagues").doc(LEAGUE_ID).get();
     if (!leagueSnap.exists) {
-      return NextResponse.json({ league: null, member: null, user });
+      return NextResponse.json({ league: null, member: null, members: [], user });
     }
     const memberSnap = await db()
       .collection("leagues")
@@ -43,8 +44,15 @@ export async function POST(request: Request) {
     const body = (await request.json()) as { action: "create" | "join"; name?: string; inviteCode?: string };
     const leagueRef = db().collection("leagues").doc(LEAGUE_ID);
     const leagueSnap = await leagueRef.get();
+    const role = appRoleFromEmail(user.email);
 
     if (body.action === "create") {
+      if (!isAdminEmail(user.email)) {
+        return NextResponse.json(
+          { error: "Solo el administrador puede crear la liga. Pídele el código de invitación." },
+          { status: 403 },
+        );
+      }
       if (leagueSnap.exists) {
         return NextResponse.json({ error: "La liga ya existe. Únete con el código." }, { status: 400 });
       }
@@ -80,15 +88,16 @@ export async function POST(request: Request) {
     if (members.size >= 8 && !members.docs.some((d) => d.id === user.uid)) {
       return NextResponse.json({ error: "La liga está llena (8)." }, { status: 400 });
     }
+    const existing = members.docs.find((d) => d.id === user.uid);
     await leagueRef.collection("members").doc(user.uid).set(
       {
         uid: user.uid,
-        role: members.empty ? "admin" : "manager",
+        role, // admin solo si email allowlist; nunca por “primer miembro”
         displayName: user.name || user.email || "Manager",
         picture: user.picture,
-        balance: league.settings?.initialBalance ?? DEFAULT_SETTINGS.initialBalance,
-        points: 0,
-        joinedAt: Date.now(),
+        balance: existing?.data()?.balance ?? league.settings?.initialBalance ?? DEFAULT_SETTINGS.initialBalance,
+        points: existing?.data()?.points ?? 0,
+        joinedAt: existing?.data()?.joinedAt ?? Date.now(),
       },
       { merge: true },
     );

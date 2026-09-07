@@ -3,8 +3,12 @@ import "./globals.css";
 import { AppShell } from "@/components/AppShell";
 
 export const metadata: Metadata = {
-  title: "FANTASY",
-  description: "Liga privada de fantasy fútbol",
+  title: "Fantasy Bros",
+  description: "Liga privada de fantasy fútbol entre amigos",
+  icons: {
+    icon: "/brand/fantasy-bros-logo.jpg",
+    apple: "/brand/fantasy-bros-logo.jpg",
+  },
 };
 
 export const viewport: Viewport = {

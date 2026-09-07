@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { mapApiFootballStats, scoreEstadisticas, type Position } from "fantasy-rules";
-import { jobsAuthorized, requireUser } from "@/lib/auth";
+import { requireJobOrAdmin } from "@/lib/auth";
 import { footballFetch, type FootballResponse } from "@/lib/api-football";
 import { db } from "@/lib/firebase-admin";
-import { LEAGUE_ID, footballBudget, getLeague, isAdmin, settingsOf } from "@/lib/league";
+import { LEAGUE_ID, footballBudget, getLeague, settingsOf } from "@/lib/league";
 
 type PlayerStat = {
   team: { id: number };
@@ -33,13 +33,7 @@ function mapPosition(raw: string | null): Position {
 
 export async function POST(request: Request) {
   try {
-    const okJob = jobsAuthorized(request);
-    if (!okJob) {
-      const user = await requireUser();
-      if (!(await isAdmin(user.uid))) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-      }
-    }
+    await requireJobOrAdmin(request);
     const league = await getLeague();
     const settings = settingsOf(league);
     const fixturesSnap = await db().collection("fixtures").get();
@@ -129,6 +123,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, ingested, pending: pending.length });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = message === "UNAUTHENTICATED" ? 401 : message.startsWith("Forbidden") ? 403 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

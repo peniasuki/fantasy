@@ -1,5 +1,6 @@
 import { DEFAULT_SETTINGS, type LeagueSettings } from "fantasy-rules";
 import { db } from "./firebase-admin";
+import { isAdminEmail } from "./roles";
 
 export const LEAGUE_ID = "main";
 
@@ -24,9 +25,9 @@ export async function requireMember(uid: string) {
   return snap.data() as Member;
 }
 
-export async function isAdmin(uid: string) {
-  const member = await requireMember(uid);
-  return member.role === "admin";
+export async function isAdmin(uid: string): Promise<boolean> {
+  const userSnap = await db().collection("users").doc(uid).get();
+  return isAdminEmail(String(userSnap.data()?.email || ""));
 }
 
 export function settingsOf(league: Record<string, unknown> | null | undefined): LeagueSettings {

@@ -8,8 +8,8 @@ steps:
       - --build-arg=NEXT_PUBLIC_FIREBASE_APP_ID=1:886456192409:web:e4e9ca7dc09faf0c779708
       - --build-arg=NEXT_PUBLIC_APP_URL=https://fantasy-bros.online
       - -t
-      - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v3
+      - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v6
       - .
 images:
-  - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v3
+  - europe-west1-docker.pkg.dev/fantasy-507821/fantasy/app:v6
 timeout: 1200s

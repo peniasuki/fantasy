@@ -1,19 +1,13 @@
 import { NextResponse } from "next/server";
 import { pickFreeAgents } from "fantasy-rules";
-import { jobsAuthorized, requireUser } from "@/lib/auth";
+import { requireJobOrAdmin } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
-import { LEAGUE_ID, getLeague, isAdmin, settingsOf } from "@/lib/league";
+import { LEAGUE_ID, getLeague, settingsOf } from "@/lib/league";
 import { settleListing } from "fantasy-rules";
 
 export async function POST(request: Request) {
   try {
-    const okJob = jobsAuthorized(request);
-    if (!okJob) {
-      const user = await requireUser();
-      if (!(await isAdmin(user.uid))) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-      }
-    }
+    await requireJobOrAdmin(request);
     const league = await getLeague();
     if (!league) return NextResponse.json({ error: "No hay liga." }, { status: 400 });
     const settings = settingsOf(league);
@@ -103,6 +97,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, newFreeAgents: picked.length });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = message === "UNAUTHENTICATED" ? 401 : message.startsWith("Forbidden") ? 403 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

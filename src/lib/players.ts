@@ -32,7 +32,16 @@ export type CatalogPlayer = {
 
   availabilityStatus: string | null;
   injured: boolean;
+  /** Tarjeta / sanción FIFA: no alineable. */
+  suspended: boolean;
   doubt: boolean;
+  /** false si lesionado o sancionado. */
+  alignable: boolean;
+
+  /** Acumulados temporada (JP media AS/SofaScore). */
+  pointsHome: number;
+  pointsAway: number;
+  pointsTotal: number;
 
   season: number;
   catalogSource: "jornadaperfecta";
@@ -73,12 +82,28 @@ export function catalogIdFromBiwenger(biwengerId: string | number): string {
   return `bw_${biwengerId}`;
 }
 
+export function deriveAlignable(flags: {
+  injured?: boolean;
+  suspended?: boolean;
+  availabilityStatus?: string | null;
+}): boolean {
+  if (flags.injured) return false;
+  if (flags.suspended) return false;
+  const status = (flags.availabilityStatus || "").toLowerCase();
+  if (status.includes("sancion")) return false;
+  return true;
+}
+
 export function playerFromJpRow(row: JpMarketRow, season: number, now = Date.now()): CatalogPlayer | null {
   const position = mapJpPosition(row.position);
   if (!position) return null; // entrenador u otros
   const biwengerId = String(row.remote_player);
   const id = catalogIdFromBiwenger(biwengerId);
   const price = Number(row.price ?? row.price_eur ?? 0);
+  const status = row.status ?? null;
+  const injured = String(row.injured || "0") === "1";
+  const suspended = Boolean(status && /sancion/i.test(status));
+  const doubt = String(row.doubt || "0") === "1";
   return {
     id,
     name: row.name,
@@ -101,9 +126,14 @@ export function playerFromJpRow(row: JpMarketRow, season: number, now = Date.now
     jpTeamId: String(row.teamId),
     biwengerTeamId: String(row.remote_team),
     jpSlug: String(row.url || ""),
-    availabilityStatus: row.status ?? null,
-    injured: String(row.injured || "0") === "1",
-    doubt: String(row.doubt || "0") === "1",
+    availabilityStatus: status,
+    injured,
+    suspended,
+    doubt,
+    alignable: deriveAlignable({ injured, suspended, availabilityStatus: status }),
+    pointsHome: 0,
+    pointsAway: 0,
+    pointsTotal: 0,
     season,
     catalogSource: "jornadaperfecta",
     active: true,

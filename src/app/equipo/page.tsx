@@ -10,7 +10,18 @@ type Player = {
   position: "GK" | "DF" | "MF" | "FW";
   vm: number;
   teamName: string;
+  injured?: boolean;
+  suspended?: boolean;
+  alignable?: boolean;
+  availabilityStatus?: string | null;
 };
+
+function playerAlignable(p?: Player | null): boolean {
+  if (!p) return false;
+  if (p.alignable === false) return false;
+  if (p.injured || p.suspended) return false;
+  return true;
+}
 
 export default function EquipoPage() {
   const [formation, setFormation] = useState<FormationId>("4-3-3");
@@ -35,7 +46,9 @@ export default function EquipoPage() {
   }, []);
 
   function assign(slot: number, playerId: string) {
-    setSlots((current) => current.map((s) => (s.slot === slot ? { ...s, playerId } : s)));
+    setSlots((current) =>
+      current.map((s) => (s.slot === slot ? { ...s, playerId: playerId || null } : s)),
+    );
   }
 
   return (
@@ -53,7 +66,14 @@ export default function EquipoPage() {
           ))}
         </select>
       </div>
-      {locked && <p className="text-xs text-gold">Bloqueada: la jornada ya ha empezado.</p>}
+      {locked && (
+        <p className="text-xs text-gold">
+          Bloqueada: ha pasado el cierre de la próxima jornada a puntuar.
+        </p>
+      )}
+      <p className="text-xs text-white/50">
+        Hueco vacío = 0 puntos. Lesionados y sancionados no se pueden alinear.
+      </p>
       <div className="rounded-2xl bg-gradient-to-b from-grass/40 to-grass/10 p-3">
         {slots.map((slot) => (
           <label key={slot.slot} className="mb-2 block rounded-lg bg-black/30 px-2 py-2 text-sm">
@@ -64,14 +84,22 @@ export default function EquipoPage() {
               onChange={(e) => assign(slot.slot, e.target.value)}
               className="w-[70%] bg-transparent"
             >
-              <option value="">—</option>
+              <option value="">— (0 pts)</option>
               {squad
                 .filter((s) => s.player?.position === slot.position)
-                .map((s) => (
-                  <option key={s.playerId} value={s.playerId}>
-                    {s.player?.name}
-                  </option>
-                ))}
+                .map((s) => {
+                  const ok = playerAlignable(s.player);
+                  return (
+                    <option key={s.playerId} value={s.playerId} disabled={!ok}>
+                      {s.player?.name}
+                      {!ok
+                        ? s.player?.suspended
+                          ? " (sancionado)"
+                          : " (lesionado)"
+                        : ""}
+                    </option>
+                  );
+                })}
             </select>
           </label>
         ))}
@@ -98,10 +126,20 @@ export default function EquipoPage() {
             <div className="flex justify-between">
               <span>
                 {s.player?.name} · {s.player?.position}
+                {!playerAlignable(s.player) && (
+                  <span className="ml-2 text-xs text-red-300">
+                    {s.player?.suspended ? "Sancionado" : "Lesionado"}
+                  </span>
+                )}
               </span>
               <span className="text-gold">{formatMoney(s.player?.vm ?? 0)}</span>
             </div>
-            <p className="text-xs text-white/50">{s.player?.teamName}</p>
+            <p className="text-xs text-white/50">
+              {s.player?.teamName}
+              {s.player?.availabilityStatus && s.player.availabilityStatus !== "Disponible"
+                ? ` · ${s.player.availabilityStatus}`
+                : ""}
+            </p>
             <button
               className="mt-2 text-xs text-gold"
               onClick={() =>

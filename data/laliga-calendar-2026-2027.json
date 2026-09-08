@@ -1,0 +1,4542 @@
+{
+  "season": "2026-2027",
+  "competition": "laliga-easports",
+  "laligaSeasonId": 102,
+  "laligaCompetitionId": 1,
+  "sourceUrl": "https://www.laliga.com/calendario-2026-2027/laliga-easports",
+  "sourceJson": "https://assets.laliga.com/assets/calendar/calendar-102-1.json",
+  "fetchedAt": "2026-09-08T12:02:02.133629+02:00",
+  "timezone": "Europe/Madrid",
+  "rules": {
+    "availabilitySyncAt": "day before jornada startsOn, 23:00 Europe/Madrid (lockAt)",
+    "nonAlignable": [
+      "injured",
+      "suspended"
+    ],
+    "emptyLineupSlotPoints": 0
+  },
+  "matchdays": [
+    {
+      "number": 1,
+      "name": "Jornada 1",
+      "officialDate": "16.08.2026",
+      "startsOn": "2026-08-16",
+      "lockAt": "2026-08-15T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102249,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102250,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102251,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102252,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102253,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102254,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102255,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102256,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102257,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102258,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Jornada 2",
+      "officialDate": "23.08.2026",
+      "startsOn": "2026-08-23",
+      "lockAt": "2026-08-22T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102259,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102260,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102261,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102262,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102263,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102264,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102265,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102266,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102267,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102268,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Jornada 3",
+      "officialDate": "30.08.2026",
+      "startsOn": "2026-08-30",
+      "lockAt": "2026-08-29T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102269,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102270,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102271,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102272,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102273,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102274,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102275,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102276,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102277,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102278,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Jornada 4",
+      "officialDate": "06.09.2026",
+      "startsOn": "2026-09-06",
+      "lockAt": "2026-09-05T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102279,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102280,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102281,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102282,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102283,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102284,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102285,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102286,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102287,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102288,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Jornada 5",
+      "officialDate": "13.09.2026",
+      "startsOn": "2026-09-13",
+      "lockAt": "2026-09-12T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102289,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102290,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102291,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102292,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102293,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102294,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102295,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102296,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102297,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102298,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Jornada 6",
+      "officialDate": "16.09.2026",
+      "startsOn": "2026-09-16",
+      "lockAt": "2026-09-15T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102299,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102300,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102301,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102302,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102303,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102304,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102305,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102306,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102307,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102308,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Jornada 7",
+      "officialDate": "20.09.2026",
+      "startsOn": "2026-09-20",
+      "lockAt": "2026-09-19T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102309,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102310,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102311,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102312,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102313,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102314,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102315,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102316,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102317,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102318,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Jornada 8",
+      "officialDate": "11.10.2026",
+      "startsOn": "2026-10-11",
+      "lockAt": "2026-10-10T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102319,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102320,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102321,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102322,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102323,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102324,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102325,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102326,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102327,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102328,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "name": "Jornada 9",
+      "officialDate": "18.10.2026",
+      "startsOn": "2026-10-18",
+      "lockAt": "2026-10-17T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102329,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102330,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102331,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102332,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102333,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102334,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102335,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102336,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102337,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102338,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "name": "Jornada 10",
+      "officialDate": "25.10.2026",
+      "startsOn": "2026-10-25",
+      "lockAt": "2026-10-24T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102339,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102340,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102341,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102342,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102343,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102344,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102345,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102346,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102347,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102348,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "name": "Jornada 11",
+      "officialDate": "01.11.2026",
+      "startsOn": "2026-11-01",
+      "lockAt": "2026-10-31T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102349,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102350,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102351,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102352,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102353,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102354,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102355,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102356,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102357,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102358,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "name": "Jornada 12",
+      "officialDate": "08.11.2026",
+      "startsOn": "2026-11-08",
+      "lockAt": "2026-11-07T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102359,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102360,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102361,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102362,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102363,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102364,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102365,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102366,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102367,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102368,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "name": "Jornada 13",
+      "officialDate": "22.11.2026",
+      "startsOn": "2026-11-22",
+      "lockAt": "2026-11-21T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102369,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102370,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102371,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102372,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102373,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102374,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102375,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102376,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102377,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102378,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "name": "Jornada 14",
+      "officialDate": "29.11.2026",
+      "startsOn": "2026-11-29",
+      "lockAt": "2026-11-28T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102379,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102380,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102381,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102382,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102383,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102384,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102385,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102386,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102387,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102388,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "name": "Jornada 15",
+      "officialDate": "06.12.2026",
+      "startsOn": "2026-12-06",
+      "lockAt": "2026-12-05T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102389,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102390,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102391,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102392,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102393,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102394,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102395,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102396,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102397,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102398,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "name": "Jornada 16",
+      "officialDate": "13.12.2026",
+      "startsOn": "2026-12-13",
+      "lockAt": "2026-12-12T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102399,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102400,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102401,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102402,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102403,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102404,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102405,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102406,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102407,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102408,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "name": "Jornada 17",
+      "officialDate": "20.12.2026",
+      "startsOn": "2026-12-20",
+      "lockAt": "2026-12-19T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102409,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102410,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102411,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102412,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102413,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102414,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102415,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102416,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102417,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102418,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "name": "Jornada 18",
+      "officialDate": "03.01.2027",
+      "startsOn": "2027-01-03",
+      "lockAt": "2027-01-02T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102419,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102420,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102421,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102422,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102423,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102424,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102425,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102426,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102427,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102428,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "name": "Jornada 19",
+      "officialDate": "10.01.2027",
+      "startsOn": "2027-01-10",
+      "lockAt": "2027-01-09T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102429,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102430,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102431,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102432,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102433,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102434,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102435,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102436,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102437,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102438,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "name": "Jornada 20",
+      "officialDate": "17.01.2027",
+      "startsOn": "2027-01-17",
+      "lockAt": "2027-01-16T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102439,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102440,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102441,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102442,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102443,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102444,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102445,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102446,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102447,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102448,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "name": "Jornada 21",
+      "officialDate": "24.01.2027",
+      "startsOn": "2027-01-24",
+      "lockAt": "2027-01-23T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102449,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102450,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102451,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102452,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102453,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102454,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102455,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102456,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102457,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102458,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "name": "Jornada 22",
+      "officialDate": "31.01.2027",
+      "startsOn": "2027-01-31",
+      "lockAt": "2027-01-30T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102459,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102460,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102461,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102462,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102463,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102464,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102465,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102466,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102467,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102468,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "name": "Jornada 23",
+      "officialDate": "07.02.2027",
+      "startsOn": "2027-02-07",
+      "lockAt": "2027-02-06T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102469,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102470,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102471,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102472,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102473,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102474,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102475,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102476,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102477,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102478,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "name": "Jornada 24",
+      "officialDate": "14.02.2027",
+      "startsOn": "2027-02-14",
+      "lockAt": "2027-02-13T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102479,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102480,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102481,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102482,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102483,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102484,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102485,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102486,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102487,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102488,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "name": "Jornada 25",
+      "officialDate": "21.02.2027",
+      "startsOn": "2027-02-21",
+      "lockAt": "2027-02-20T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102489,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102490,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102491,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102492,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102493,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102494,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102495,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102496,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102497,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102498,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "name": "Jornada 26",
+      "officialDate": "28.02.2027",
+      "startsOn": "2027-02-28",
+      "lockAt": "2027-02-27T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102499,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102500,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102501,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102502,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102503,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102504,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102505,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102506,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102507,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102508,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "name": "Jornada 27",
+      "officialDate": "07.03.2027",
+      "startsOn": "2027-03-07",
+      "lockAt": "2027-03-06T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102509,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102510,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102511,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102512,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102513,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102514,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102515,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102516,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102517,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102518,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "name": "Jornada 28",
+      "officialDate": "14.03.2027",
+      "startsOn": "2027-03-14",
+      "lockAt": "2027-03-13T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102519,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102520,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102521,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102522,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102523,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102524,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102525,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102526,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102527,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102528,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "name": "Jornada 29",
+      "officialDate": "21.03.2027",
+      "startsOn": "2027-03-21",
+      "lockAt": "2027-03-20T23:00:00+01:00",
+      "matches": [
+        {
+          "laligaMatchId": 102529,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102530,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102531,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102532,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102533,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102534,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102535,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102536,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102537,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102538,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "name": "Jornada 30",
+      "officialDate": "04.04.2027",
+      "startsOn": "2027-04-04",
+      "lockAt": "2027-04-03T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102539,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102540,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102541,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102542,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102543,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102544,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102545,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102546,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102547,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102548,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "name": "Jornada 31",
+      "officialDate": "11.04.2027",
+      "startsOn": "2027-04-11",
+      "lockAt": "2027-04-10T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102549,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102550,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102551,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102552,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102553,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102554,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102555,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102556,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102557,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102558,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "name": "Jornada 32",
+      "officialDate": "18.04.2027",
+      "startsOn": "2027-04-18",
+      "lockAt": "2027-04-17T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102559,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102560,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102561,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102562,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102563,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102564,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102565,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102566,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102567,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102568,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "name": "Jornada 33",
+      "officialDate": "21.04.2027",
+      "startsOn": "2027-04-21",
+      "lockAt": "2027-04-20T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102569,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102570,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102571,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102572,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102573,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102574,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102575,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102576,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102577,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102578,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "name": "Jornada 34",
+      "officialDate": "02.05.2027",
+      "startsOn": "2027-05-02",
+      "lockAt": "2027-05-01T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102579,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102580,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102581,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102582,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102583,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102584,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        },
+        {
+          "laligaMatchId": 102585,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102586,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102587,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102588,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "name": "Jornada 35",
+      "officialDate": "09.05.2027",
+      "startsOn": "2027-05-09",
+      "lockAt": "2027-05-08T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102589,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102590,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102591,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102592,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102593,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102594,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102595,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102596,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102597,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102598,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "name": "Jornada 36",
+      "officialDate": "16.05.2027",
+      "startsOn": "2027-05-16",
+      "lockAt": "2027-05-15T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102599,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102600,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102601,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102602,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102603,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102604,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102605,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102606,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102607,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102608,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "name": "Jornada 37",
+      "officialDate": "23.05.2027",
+      "startsOn": "2027-05-23",
+      "lockAt": "2027-05-22T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102609,
+          "home": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          },
+          "away": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102610,
+          "home": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          },
+          "away": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          }
+        },
+        {
+          "laligaMatchId": 102611,
+          "home": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          },
+          "away": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          }
+        },
+        {
+          "laligaMatchId": 102612,
+          "home": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          },
+          "away": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          }
+        },
+        {
+          "laligaMatchId": 102613,
+          "home": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          },
+          "away": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102614,
+          "home": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          },
+          "away": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          }
+        },
+        {
+          "laligaMatchId": 102615,
+          "home": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          },
+          "away": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          }
+        },
+        {
+          "laligaMatchId": 102616,
+          "home": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          },
+          "away": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102617,
+          "home": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          },
+          "away": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          }
+        },
+        {
+          "laligaMatchId": 102618,
+          "home": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          },
+          "away": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          }
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "name": "Jornada 38",
+      "officialDate": "30.05.2027",
+      "startsOn": "2027-05-30",
+      "lockAt": "2027-05-29T23:00:00+02:00",
+      "matches": [
+        {
+          "laligaMatchId": 102619,
+          "home": {
+            "name": "Athletic Club",
+            "slug": "athletic-club"
+          },
+          "away": {
+            "name": "Rayo Vallecano",
+            "slug": "rayo-vallecano"
+          }
+        },
+        {
+          "laligaMatchId": 102620,
+          "home": {
+            "name": "Real Betis",
+            "slug": "real-betis"
+          },
+          "away": {
+            "name": "Atlético de Madrid",
+            "slug": "atletico-de-madrid"
+          }
+        },
+        {
+          "laligaMatchId": 102621,
+          "home": {
+            "name": "Elche CF",
+            "slug": "elche-c-f"
+          },
+          "away": {
+            "name": "R. Racing Club",
+            "slug": "r-racing-club"
+          }
+        },
+        {
+          "laligaMatchId": 102622,
+          "home": {
+            "name": "RCD Espanyol de Barcelona",
+            "slug": "rcd-espanyol"
+          },
+          "away": {
+            "name": "Deportivo Alavés",
+            "slug": "d-alaves"
+          }
+        },
+        {
+          "laligaMatchId": 102623,
+          "home": {
+            "name": "Getafe CF",
+            "slug": "getafe-cf"
+          },
+          "away": {
+            "name": "FC Barcelona",
+            "slug": "fc-barcelona"
+          }
+        },
+        {
+          "laligaMatchId": 102624,
+          "home": {
+            "name": "Levante UD",
+            "slug": "levante-ud"
+          },
+          "away": {
+            "name": "RC Celta",
+            "slug": "rc-celta"
+          }
+        },
+        {
+          "laligaMatchId": 102625,
+          "home": {
+            "name": "Málaga CF",
+            "slug": "malaga-cf"
+          },
+          "away": {
+            "name": "Sevilla FC",
+            "slug": "sevilla-fc"
+          }
+        },
+        {
+          "laligaMatchId": 102626,
+          "home": {
+            "name": "CA Osasuna",
+            "slug": "c-a-osasuna"
+          },
+          "away": {
+            "name": "Valencia CF",
+            "slug": "valencia-cf"
+          }
+        },
+        {
+          "laligaMatchId": 102627,
+          "home": {
+            "name": "Real Madrid",
+            "slug": "real-madrid"
+          },
+          "away": {
+            "name": "RC Deportivo",
+            "slug": "rc-deportivo"
+          }
+        },
+        {
+          "laligaMatchId": 102628,
+          "home": {
+            "name": "Real Sociedad",
+            "slug": "real-sociedad"
+          },
+          "away": {
+            "name": "Villarreal CF",
+            "slug": "villarreal-cf"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -31,6 +31,33 @@ export default function AdminPage() {
     }
   }
 
+  async function scoreJornada() {
+    const raw = window.prompt("Número de jornada a puntuar (1–38):");
+    if (raw == null) return;
+    const n = Number(raw.trim());
+    if (!Number.isInteger(n) || n < 1 || n > 38) {
+      setMsg("Número de jornada inválido.");
+      return;
+    }
+    await run(`/api/jobs/score-jornada?matchday=${n}`);
+  }
+
+  async function seedFirstFour() {
+    setMsg("Puntuando jornadas 1–4…");
+    const results: unknown[] = [];
+    for (const n of [1, 2, 3, 4]) {
+      try {
+        const res = await api<Record<string, unknown>>(`/api/jobs/score-jornada?matchday=${n}`, {
+          method: "POST",
+        });
+        results.push(res);
+      } catch (error) {
+        results.push({ matchday: n, error: error instanceof Error ? error.message : "Error" });
+      }
+    }
+    setMsg(JSON.stringify(results, null, 2));
+  }
+
   if (status && !status.isAdmin) {
     return (
       <div className="space-y-3 pb-6">
@@ -51,8 +78,8 @@ export default function AdminPage() {
     <div className="space-y-3 pb-6">
       <h2 className="text-lg font-semibold">Admin</h2>
       <p className="text-sm text-white/60">
-        Producto en <span className="text-gold">fantasy-bros.online</span> · temporada actual vía Jornada Perfecta.
-        El entorno <code className="text-white/80">2024.*</code> queda solo para pruebas API-Football Free.
+        Producto en <span className="text-gold">fantasy-bros.online</span> · puntuación Jornada Perfecta
+        (media AS / SofaScore).
       </p>
 
       <button
@@ -65,30 +92,37 @@ export default function AdminPage() {
       <button
         disabled={canRun === false}
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
+        onClick={() => run("/api/jobs/seed-calendar")}
+      >
+        Publicar calendario maestro LaLiga 26/27
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
+        onClick={() => run("/api/jobs/sync-jp-availability?force=1")}
+      >
+        Actualizar lesionados / sancionados (JP)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
         onClick={() => run("/api/jobs/settle-market")}
       >
         Cerrar / sincronizar mercado
       </button>
       <button
         disabled={canRun === false}
-        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
-        onClick={() => run("/api/jobs/sync-fixtures")}
+        className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
+        onClick={() => void scoreJornada()}
       >
-        Sincronizar calendario (API-Football)
+        Puntuar jornada (JP)…
       </button>
       <button
         disabled={canRun === false}
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
-        onClick={() => run("/api/jobs/ingest-match")}
+        onClick={() => void seedFirstFour()}
       >
-        Puntuar partidos FT
-      </button>
-      <button
-        disabled={canRun === false}
-        className="w-full rounded-lg border border-line py-3 text-white/50 disabled:opacity-40"
-        onClick={() => run("/api/jobs/seed-catalog?maxTeams=3")}
-      >
-        [Prueba 2024] Importar plantillas API-Football
+        Popular puntos jornadas 1–4
       </button>
       {msg && <pre className="whitespace-pre-wrap rounded-lg bg-panel p-3 text-xs text-white/70">{msg}</pre>}
     </div>

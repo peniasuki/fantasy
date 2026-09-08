@@ -11,11 +11,14 @@ type Player = {
   teamName: string;
   vm: number;
   ownerId: string | null;
+  pointsHome?: number;
+  pointsAway?: number;
+  pointsTotal?: number;
 };
 
 type VmSort = "desc" | "asc";
+type PtsSort = "none" | "total-desc" | "total-asc";
 
-/** Iguala tildes/diacríticos: "Alvarez" ≈ "Álvarez". */
 function foldText(value: string): string {
   return value
     .normalize("NFD")
@@ -30,6 +33,7 @@ export default function JugadoresPage() {
   const [pos, setPos] = useState("ALL");
   const [team, setTeam] = useState("ALL");
   const [vmSort, setVmSort] = useState<VmSort>("desc");
+  const [ptsSort, setPtsSort] = useState<PtsSort>("none");
 
   useEffect(() => {
     api<{ players: Player[] }>("/api/players")
@@ -52,11 +56,13 @@ export default function JugadoresPage() {
       return true;
     });
     list.sort((a, b) => {
+      if (ptsSort === "total-desc") return (b.pointsTotal ?? 0) - (a.pointsTotal ?? 0);
+      if (ptsSort === "total-asc") return (a.pointsTotal ?? 0) - (b.pointsTotal ?? 0);
       const diff = (a.vm ?? 0) - (b.vm ?? 0);
       return vmSort === "asc" ? diff : -diff;
     });
     return list;
-  }, [players, q, pos, team, vmSort]);
+  }, [players, q, pos, team, vmSort, ptsSort]);
 
   return (
     <div className="space-y-3 pb-6">
@@ -87,14 +93,24 @@ export default function JugadoresPage() {
           </select>
         </label>
         <label className="block text-[11px] uppercase tracking-wide text-white/45">
-          Valor de mercado
+          Orden
           <select
-            value={vmSort}
-            onChange={(e) => setVmSort(e.target.value as VmSort)}
+            value={ptsSort === "none" ? `vm-${vmSort}` : ptsSort}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (v === "vm-desc" || v === "vm-asc") {
+                setPtsSort("none");
+                setVmSort(v === "vm-asc" ? "asc" : "desc");
+              } else {
+                setPtsSort(v as PtsSort);
+              }
+            }}
             className="mt-1 w-full rounded-lg border border-line bg-panel px-3 py-2 text-sm text-white"
           >
-            <option value="desc">Mayor → menor</option>
-            <option value="asc">Menor → mayor</option>
+            <option value="vm-desc">VM ↓</option>
+            <option value="vm-asc">VM ↑</option>
+            <option value="total-desc">Puntos ↓</option>
+            <option value="total-asc">Puntos ↑</option>
           </select>
         </label>
       </div>
@@ -129,6 +145,10 @@ export default function JugadoresPage() {
             </div>
             <p className="text-xs text-white/50">
               {p.teamName} · {p.ownerId ? "Fichado" : "Libre"}
+            </p>
+            <p className="mt-1 text-xs text-white/70">
+              Casa {p.pointsHome ?? 0} · Fuera {p.pointsAway ?? 0} ·{" "}
+              <span className="text-gold">Total {p.pointsTotal ?? 0}</span>
             </p>
           </li>
         ))}

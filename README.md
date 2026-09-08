@@ -1,10 +1,11 @@
 # FANTASY
 
-Liga privada tipo Biwenger (modo Normal, sistema Estadísticas). Next.js en Cloud Run. Puntos solo al finalizar el partido.
+Liga privada tipo Biwenger (modo Normal). Next.js en Cloud Run.
+Puntos desde Jornada Perfecta (media AS / SofaScore, `puntuacion=16`).
 
 ## Secretos
 
-La API key de API-Football vive en `.env.local` (gitignored) y en Secret Manager. No la subas al repo.
+`JOBS_SHARED_SECRET` vive en `.env.local` (gitignored) y en Secret Manager. No lo subas al repo.
 
 ## Local
 
@@ -24,8 +25,4 @@ chmod +x scripts/bootstrap-gcp.sh
 ./scripts/bootstrap-gcp.sh
 ```
 
-Deploy de la imagen a Artifact Registry + Cloud Run (Terraform en `infra/`).
-
-## Cuota API-Football (Free)
-
-Importa plantillas en tandas desde Admin (`maxTeams=5`). Calendario = 1 request. Puntuar jornada ≈ 10 requests post-FT.
+Deploy: Cloud Build (`cloudbuild.yaml`) + Cloud Run service `fantasy`.

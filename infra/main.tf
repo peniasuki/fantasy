@@ -50,14 +50,6 @@ resource "google_firestore_database" "default" {
   depends_on  = [google_project_service.apis]
 }
 
-resource "google_secret_manager_secret" "api_football" {
-  secret_id = "api-football-key"
-  replication {
-    auto {}
-  }
-  depends_on = [google_project_service.apis]
-}
-
 resource "google_secret_manager_secret" "jobs" {
   secret_id = "jobs-shared-secret"
   replication {
@@ -98,15 +90,6 @@ resource "google_cloud_run_v2_service" "app" {
         value = "production"
       }
       env {
-        name = "API_FOOTBALL_KEY"
-        value_source {
-          secret_key_ref {
-            secret  = google_secret_manager_secret.api_football.secret_id
-            version = "latest"
-          }
-        }
-      }
-      env {
         name = "JOBS_SHARED_SECRET"
         value_source {
           secret_key_ref {
@@ -143,12 +126,13 @@ resource "google_cloud_scheduler_job" "market" {
   depends_on = [google_project_service.apis]
 }
 
-resource "google_cloud_scheduler_job" "ingest" {
-  name      = "ingest-finished-matches"
-  schedule  = "20 23 * * *"
+# Víspera de jornada: el job solo aplica si hoy (Madrid) coincide con lockAt del calendario maestro.
+resource "google_cloud_scheduler_job" "jp_availability" {
+  name      = "sync-jp-availability"
+  schedule  = "0 23 * * *"
   time_zone = "Europe/Madrid"
   http_target {
-    uri         = "${google_cloud_run_v2_service.app.uri}/api/jobs/ingest-match"
+    uri         = "${google_cloud_run_v2_service.app.uri}/api/jobs/sync-jp-availability"
     http_method = "POST"
     headers     = { "x-jobs-secret" = var.jobs_secret }
   }

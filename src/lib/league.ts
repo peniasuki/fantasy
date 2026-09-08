@@ -33,18 +33,3 @@ export async function isAdmin(uid: string): Promise<boolean> {
 export function settingsOf(league: Record<string, unknown> | null | undefined): LeagueSettings {
   return { ...DEFAULT_SETTINGS, ...((league?.settings as LeagueSettings) ?? {}) };
 }
-
-export async function footballBudget() {
-  const ref = db().collection("system").doc("apiFootball");
-  return {
-    async get() {
-      const snap = await ref.get();
-      const data = snap.data() as { day?: string; used?: number } | undefined;
-      return { day: data?.day ?? "", used: data?.used ?? 0 };
-    },
-    async set(b: { day: string; used: number }) {
-      await ref.set(b, { merge: true });
-    },
-    maxPerDay: 90,
-  };
-}

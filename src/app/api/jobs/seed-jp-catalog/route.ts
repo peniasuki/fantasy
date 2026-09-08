@@ -54,6 +54,10 @@ export async function POST(request: Request) {
             lastTransferAt: prev?.lastTransferAt ?? null,
             lastTransferFrom: prev?.lastTransferFrom ?? null,
             lastTransferTo: prev?.lastTransferTo ?? null,
+            // Conservar acumulados de puntos JP.
+            pointsHome: prev?.pointsHome ?? player.pointsHome ?? 0,
+            pointsAway: prev?.pointsAway ?? player.pointsAway ?? 0,
+            pointsTotal: prev?.pointsTotal ?? player.pointsTotal ?? 0,
           },
           { merge: true },
         ),

@@ -22,10 +22,5 @@ if [[ -f .env.local ]]; then
   set +a
 fi
 
-if [[ -n "${API_FOOTBALL_KEY:-}" ]]; then
-  printf '%s' "$API_FOOTBALL_KEY" | gcloud secrets create api-football-key --data-file=- --project="$PROJECT" 2>/dev/null \
-    || printf '%s' "$API_FOOTBALL_KEY" | gcloud secrets versions add api-football-key --data-file=- --project="$PROJECT"
-fi
-
 echo "Siguiente: activa Firebase Auth (Google) en https://console.firebase.google.com/project/$PROJECT/authentication"
 echo "y pega NEXT_PUBLIC_FIREBASE_API_KEY y NEXT_PUBLIC_FIREBASE_APP_ID en .env.local"

@@ -3,6 +3,7 @@
 import { formatMoney } from "fantasy-rules";
 import { useEffect, useMemo, useState } from "react";
 import { api } from "@/lib/api";
+import { useVisibleWindow } from "@/lib/use-visible-window";
 
 type Listing = {
   id: string;
@@ -95,6 +96,9 @@ export default function MercadoPage() {
       .sort((a, b) => (b.player?.vm ?? 0) - (a.player?.vm ?? 0));
   }, [data, q, pos, team]);
 
+  const resetKey = `${q}|${pos}|${team}`;
+  const { visibleCount, sentinelRef, hasMore } = useVisibleWindow(listings.length, resetKey);
+
   if (!data) return <p className="text-sm text-white/60">{msg || "Cargando mercado…"}</p>;
 
   const minPct = Math.round((data.minPurchaseOfVm ?? 0.75) * 100);
@@ -152,10 +156,14 @@ export default function MercadoPage() {
         </div>
       </div>
       <p className="text-xs text-white/45">
-        {listings.length} resultado{listings.length === 1 ? "" : "s"}
+        {listings.length === 0
+          ? "0 resultados"
+          : hasMore
+            ? `Mostrando ${visibleCount} de ${listings.length}`
+            : `${listings.length} resultado${listings.length === 1 ? "" : "s"}`}
       </p>
 
-      {listings.map((listing) => (
+      {listings.slice(0, visibleCount).map((listing) => (
         <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
           <div className="flex justify-between gap-3">
             <h3 className="font-medium">{listing.player?.name}</h3>
@@ -201,6 +209,8 @@ export default function MercadoPage() {
           </div>
         </article>
       ))}
+      {hasMore && <div ref={sentinelRef} className="h-8" aria-hidden />}
+      {hasMore && <p className="text-center text-xs text-white/40">Desliza para ver más…</p>}
       {listings.length === 0 && (
         <p className="text-sm text-white/50">Ningún listado coincide con el filtro.</p>
       )}

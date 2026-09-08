@@ -22,12 +22,18 @@ export async function GET() {
         active?: boolean;
         photo?: string;
         lastTransferPrice?: number | null;
+        pointsHome?: number;
+        pointsAway?: number;
+        pointsTotal?: number;
       };
       if (data.active === false) return null;
       return {
         id: d.id,
         ...data,
         vm: data.currentPrice ?? data.vm ?? 0,
+        pointsHome: Number(data.pointsHome ?? 0),
+        pointsAway: Number(data.pointsAway ?? 0),
+        pointsTotal: Number(data.pointsTotal ?? 0),
         ownerId: ownership[d.id]?.ownerId ?? null,
       };
     }).filter(Boolean);

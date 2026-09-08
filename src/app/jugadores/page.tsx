@@ -3,6 +3,7 @@
 import { formatMoney } from "fantasy-rules";
 import { useEffect, useMemo, useState } from "react";
 import { api } from "@/lib/api";
+import { useVisibleWindow } from "@/lib/use-visible-window";
 
 type Player = {
   id: string;
@@ -16,8 +17,7 @@ type Player = {
   pointsTotal?: number;
 };
 
-type VmSort = "desc" | "asc";
-type PtsSort = "none" | "total-desc" | "total-asc";
+type SortMode = "vm-desc" | "vm-asc" | "points-desc" | "points-asc";
 
 function foldText(value: string): string {
   return value
@@ -32,8 +32,7 @@ export default function JugadoresPage() {
   const [q, setQ] = useState("");
   const [pos, setPos] = useState("ALL");
   const [team, setTeam] = useState("ALL");
-  const [vmSort, setVmSort] = useState<VmSort>("desc");
-  const [ptsSort, setPtsSort] = useState<PtsSort>("none");
+  const [sort, setSort] = useState<SortMode>("vm-desc");
 
   useEffect(() => {
     api<{ players: Player[] }>("/api/players")
@@ -56,13 +55,20 @@ export default function JugadoresPage() {
       return true;
     });
     list.sort((a, b) => {
-      if (ptsSort === "total-desc") return (b.pointsTotal ?? 0) - (a.pointsTotal ?? 0);
-      if (ptsSort === "total-asc") return (a.pointsTotal ?? 0) - (b.pointsTotal ?? 0);
+      if (sort === "points-desc" || sort === "points-asc") {
+        const diff = (a.pointsTotal ?? 0) - (b.pointsTotal ?? 0);
+        if (diff !== 0) return sort === "points-asc" ? diff : -diff;
+        return (b.vm ?? 0) - (a.vm ?? 0);
+      }
       const diff = (a.vm ?? 0) - (b.vm ?? 0);
-      return vmSort === "asc" ? diff : -diff;
+      if (diff !== 0) return sort === "vm-asc" ? diff : -diff;
+      return (b.pointsTotal ?? 0) - (a.pointsTotal ?? 0);
     });
     return list;
-  }, [players, q, pos, team, vmSort, ptsSort]);
+  }, [players, q, pos, team, sort]);
+
+  const resetKey = `${q}|${pos}|${team}|${sort}`;
+  const { visibleCount, sentinelRef, hasMore } = useVisibleWindow(filtered.length, resetKey);
 
   return (
     <div className="space-y-3 pb-6">
@@ -95,22 +101,14 @@ export default function JugadoresPage() {
         <label className="block text-[11px] uppercase tracking-wide text-white/45">
           Orden
           <select
-            value={ptsSort === "none" ? `vm-${vmSort}` : ptsSort}
-            onChange={(e) => {
-              const v = e.target.value;
-              if (v === "vm-desc" || v === "vm-asc") {
-                setPtsSort("none");
-                setVmSort(v === "vm-asc" ? "asc" : "desc");
-              } else {
-                setPtsSort(v as PtsSort);
-              }
-            }}
+            value={sort}
+            onChange={(e) => setSort(e.target.value as SortMode)}
             className="mt-1 w-full rounded-lg border border-line bg-panel px-3 py-2 text-sm text-white"
           >
-            <option value="vm-desc">VM ↓</option>
-            <option value="vm-asc">VM ↑</option>
-            <option value="total-desc">Puntos ↓</option>
-            <option value="total-asc">Puntos ↑</option>
+            <option value="vm-desc">VM · mayor → menor</option>
+            <option value="vm-asc">VM · menor → mayor</option>
+            <option value="points-desc">Puntos acumulados · mayor → menor</option>
+            <option value="points-asc">Puntos acumulados · menor → mayor</option>
           </select>
         </label>
       </div>
@@ -129,13 +127,17 @@ export default function JugadoresPage() {
       </div>
 
       <p className="text-xs text-white/45">
-        {filtered.length} jugador{filtered.length === 1 ? "" : "es"}
+        {filtered.length === 0
+          ? "0 jugadores"
+          : hasMore
+            ? `Mostrando ${visibleCount} de ${filtered.length}`
+            : `${filtered.length} jugador${filtered.length === 1 ? "" : "es"}`}
       </p>
 
       {error && <p className="text-sm text-red-400">{error}</p>}
 
       <ul className="space-y-2">
-        {filtered.slice(0, 120).map((p) => (
+        {filtered.slice(0, visibleCount).map((p) => (
           <li key={p.id} className="rounded-xl border border-line bg-panel px-3 py-2 text-sm">
             <div className="flex justify-between gap-3">
               <span>
@@ -156,6 +158,8 @@ export default function JugadoresPage() {
           <li className="text-sm text-white/50">Ningún jugador coincide con el filtro.</li>
         )}
       </ul>
+      {hasMore && <div ref={sentinelRef} className="h-8" aria-hidden />}
+      {hasMore && <p className="text-center text-xs text-white/40">Desliza para ver más…</p>}
     </div>
   );
 }

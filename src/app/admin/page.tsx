@@ -43,13 +43,14 @@ export default function AdminPage() {
   }
 
   async function seedFirstFour() {
-    setMsg("Puntuando jornadas 1–4…");
+    setMsg("Re-puntuando jornadas 1–4 (force)…");
     const results: unknown[] = [];
     for (const n of [1, 2, 3, 4]) {
       try {
-        const res = await api<Record<string, unknown>>(`/api/jobs/score-jornada?matchday=${n}`, {
-          method: "POST",
-        });
+        const res = await api<Record<string, unknown>>(
+          `/api/jobs/score-jornada?matchday=${n}&force=1`,
+          { method: "POST" },
+        );
         results.push(res);
       } catch (error) {
         results.push({ matchday: n, error: error instanceof Error ? error.message : "Error" });
@@ -122,7 +123,7 @@ export default function AdminPage() {
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
         onClick={() => void seedFirstFour()}
       >
-        Popular puntos jornadas 1–4
+        Popular / corregir puntos jornadas 1–4
       </button>
       {msg && <pre className="whitespace-pre-wrap rounded-lg bg-panel p-3 text-xs text-white/70">{msg}</pre>}
     </div>

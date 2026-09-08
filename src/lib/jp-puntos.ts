@@ -30,6 +30,10 @@ export type JpPuntosJornada = {
   matches: JpPuntosMatch[];
 };
 
+/** Clase del bloque jugador: "puntos-jugador" o "puntos-jugador ideal", nunca -nombre/-puntuacion. */
+const PLAYER_BLOCK_RE =
+  /class="puntos-jugador(?:\s+[^"]*)?"[^>]*>([\s\S]*?)(?=class="puntos-jugador(?:\s+[^"]*)?"|$)/gi;
+
 function decodeHtml(text: string): string {
   return text
     .replace(/&nbsp;/g, " ")
@@ -44,8 +48,8 @@ function decodeHtml(text: string): string {
 
 function parsePlayers(colHtml: string, venue: JpPuntosVenue): JpPuntosPlayer[] {
   const out: JpPuntosPlayer[] = [];
-  const blocks = colHtml.split('class="puntos-jugador"').slice(1);
-  for (const chunk of blocks) {
+  for (const match of colHtml.matchAll(PLAYER_BLOCK_RE)) {
+    const chunk = match[1];
     const bw = chunk.match(/cdn\.biwenger\.com\/i\/p\/(\d+)\.png/i);
     if (!bw) continue;
     const name = chunk.match(/puntos-jugador-nombre[\s\S]*?<a[^>]*>\s*([^<]+)/i);

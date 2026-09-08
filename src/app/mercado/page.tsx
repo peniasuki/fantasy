@@ -12,8 +12,23 @@ type Listing = {
   expiresAt: number;
   minBid: number;
   maxBid: number;
+  bidable?: boolean;
+  sellerId?: string;
   player: { name: string; position: string; vm: number; teamName: string };
   myBid: { amount: number } | null;
+};
+
+type Offer = {
+  id: string;
+  playerId: string;
+  fromId: string;
+  toId: string;
+  price: number;
+  expiresAt: number;
+  expired?: boolean;
+  fromName?: string;
+  toName?: string;
+  player?: { name: string; position: string; vm: number; teamName: string } | null;
 };
 
 const CET = "Europe/Madrid";
@@ -35,14 +50,24 @@ function foldText(value: string): string {
     .toLowerCase();
 }
 
+function kindLabel(kind: string): string {
+  if (kind === "to_market") return "Mercado";
+  if (kind === "sale") return "Venta";
+  return "Libre";
+}
+
 export default function MercadoPage() {
   const [data, setData] = useState<{
     listings: Listing[];
+    incomingOffers: Offer[];
+    outgoingOffers: Offer[];
     closeAt: number;
     balance: number;
     maxBid: number;
     minPurchaseOfVm: number;
     maxPurchaseOfVm: number;
+    salesStartedToday: number;
+    maxSalesPerDay: number;
   } | null>(null);
   const [amounts, setAmounts] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState("");
@@ -54,11 +79,15 @@ export default function MercadoPage() {
   async function load() {
     const res = await api<{
       listings: Listing[];
+      incomingOffers: Offer[];
+      outgoingOffers: Offer[];
       closeAt: number;
       balance: number;
       maxBid: number;
       minPurchaseOfVm: number;
       maxPurchaseOfVm: number;
+      salesStartedToday: number;
+      maxSalesPerDay: number;
     }>("/api/market");
     setData(res);
   }
@@ -93,7 +122,12 @@ export default function MercadoPage() {
         if (needle && !foldText(player.name).includes(needle)) return false;
         return true;
       })
-      .sort((a, b) => (b.player?.vm ?? 0) - (a.player?.vm ?? 0));
+      .sort((a, b) => {
+        // Ventas a máquina arriba del resto filtrado; luego por VM.
+        if (a.kind === "to_market" && b.kind !== "to_market") return -1;
+        if (b.kind === "to_market" && a.kind !== "to_market") return 1;
+        return (b.player?.vm ?? 0) - (a.player?.vm ?? 0);
+      });
   }, [data, q, pos, team]);
 
   const resetKey = `${q}|${pos}|${team}`;
@@ -103,6 +137,8 @@ export default function MercadoPage() {
 
   const minPct = Math.round((data.minPurchaseOfVm ?? 0.75) * 100);
   const maxPct = Math.round((data.maxPurchaseOfVm ?? 1.5) * 100);
+  const incoming = (data.incomingOffers ?? []).filter((o) => !o.expired);
+  const outgoing = data.outgoingOffers ?? [];
 
   return (
     <div className="space-y-4 pb-6">
@@ -113,9 +149,101 @@ export default function MercadoPage() {
           Saldo {formatMoney(data.balance)} · tope cartera {formatMoney(data.maxBid)}
         </p>
         <p className="mt-1 text-xs text-white/45">
-          Pujas entre {minPct}% y {maxPct}% del VM · {data.listings.length} en mercado
+          Pujas {minPct}–{maxPct}% del VM · {data.listings.length} en mercado · ventas hoy{" "}
+          {data.salesStartedToday ?? 0}/{data.maxSalesPerDay ?? 3}
         </p>
       </section>
+
+      {incoming.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">Ofertas recibidas</h2>
+          {incoming.map((offer) => (
+            <article key={offer.id} className="rounded-2xl border border-gold/40 bg-panel p-4">
+              <div className="flex justify-between gap-3">
+                <h3 className="font-medium">{offer.player?.name ?? offer.playerId}</h3>
+                <span className="shrink-0 text-gold">{formatMoney(offer.price)}</span>
+              </div>
+              <p className="text-sm text-white/60">
+                De {offer.fromName ?? offer.fromId}
+                {offer.player?.teamName ? ` · ${offer.player.teamName}` : ""}
+              </p>
+              <p className="mt-1 text-xs text-white/45">Caduca {formatCet(offer.expiresAt)}</p>
+              <div className="mt-3 flex gap-2">
+                <button
+                  type="button"
+                  className="rounded-lg bg-grass px-3 py-2 text-sm text-ink"
+                  onClick={() =>
+                    api("/api/market", {
+                      method: "POST",
+                      body: JSON.stringify({ action: "accept_offer", offerId: offer.id }),
+                    })
+                      .then(() => {
+                        setMsg("Oferta aceptada");
+                        load();
+                      })
+                      .catch((e) => setMsg(e.message))
+                  }
+                >
+                  Aceptar
+                </button>
+                <button
+                  type="button"
+                  className="rounded-lg border border-line px-3 py-2 text-sm"
+                  onClick={() =>
+                    api("/api/market", {
+                      method: "POST",
+                      body: JSON.stringify({ action: "reject_offer", offerId: offer.id }),
+                    })
+                      .then(() => {
+                        setMsg("Oferta rechazada");
+                        load();
+                      })
+                      .catch((e) => setMsg(e.message))
+                  }
+                >
+                  Rechazar
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+      )}
+
+      {outgoing.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-white/50">Ofertas enviadas</h2>
+          {outgoing.map((offer) => (
+            <article key={offer.id} className="rounded-xl border border-line bg-panel/80 px-3 py-2 text-sm">
+              <div className="flex justify-between gap-2">
+                <span>
+                  {offer.player?.name ?? offer.playerId} → {offer.toName ?? offer.toId}
+                </span>
+                <span className="text-gold">{formatMoney(offer.price)}</span>
+              </div>
+              <div className="mt-1 flex items-center justify-between gap-2 text-xs text-white/45">
+                <span>Caduca {formatCet(offer.expiresAt)}</span>
+                <button
+                  type="button"
+                  className="text-gold"
+                  onClick={() =>
+                    api("/api/market", {
+                      method: "POST",
+                      body: JSON.stringify({ action: "cancel_offer", offerId: offer.id }),
+                    })
+                      .then(() => {
+                        setMsg("Oferta cancelada");
+                        load();
+                      })
+                      .catch((e) => setMsg(e.message))
+                  }
+                >
+                  Cancelar
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+      )}
 
       <input
         value={q}
@@ -163,52 +291,67 @@ export default function MercadoPage() {
             : `${listings.length} resultado${listings.length === 1 ? "" : "s"}`}
       </p>
 
-      {listings.slice(0, visibleCount).map((listing) => (
-        <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
-          <div className="flex justify-between gap-3">
-            <h3 className="font-medium">{listing.player?.name}</h3>
-            <span className="shrink-0 text-xs uppercase text-gold">
-              {listing.kind === "sale" ? "Venta" : "Libre"}
-            </span>
-          </div>
-          <p className="text-sm text-white/60">
-            {listing.player?.position} · {listing.player?.teamName} · VM {formatMoney(listing.player?.vm ?? 0)}
-          </p>
-          <p className="mt-1 text-xs text-white/45">
-            Mín {formatMoney(listing.minBid)} · Máx {formatMoney(listing.maxBid)}
-          </p>
-          {listing.myBid && <p className="text-xs text-grass">Tu puja: {formatMoney(listing.myBid.amount)}</p>}
-          <div className="mt-3 flex gap-2">
-            <input
-              inputMode="numeric"
-              placeholder={`Mín ${listing.minBid}`}
-              value={amounts[listing.id] ?? ""}
-              onChange={(e) => setAmounts({ ...amounts, [listing.id]: e.target.value })}
-              className="flex-1 rounded-lg border border-line bg-ink px-3 py-2 text-sm"
-            />
-            <button
-              className="rounded-lg bg-grass px-3 text-sm"
-              onClick={() =>
-                api("/api/market", {
-                  method: "POST",
-                  body: JSON.stringify({
-                    action: "bid",
-                    listingId: listing.id,
-                    amount: Number(amounts[listing.id]),
-                  }),
-                })
-                  .then(() => {
-                    setMsg("Puja guardada (ciega hasta el cierre)");
-                    load();
-                  })
-                  .catch((e) => setMsg(e.message))
-              }
-            >
-              Pujar
-            </button>
-          </div>
-        </article>
-      ))}
+      {listings.slice(0, visibleCount).map((listing) => {
+        const bidable = listing.bidable !== false && listing.kind !== "to_market";
+        return (
+          <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
+            <div className="flex justify-between gap-3">
+              <h3 className="font-medium">{listing.player?.name}</h3>
+              <span className="shrink-0 text-xs uppercase text-gold">{kindLabel(listing.kind)}</span>
+            </div>
+            <p className="text-sm text-white/60">
+              {listing.player?.position} · {listing.player?.teamName} · VM{" "}
+              {formatMoney(listing.player?.vm ?? 0)}
+            </p>
+            {listing.kind === "to_market" ? (
+              <p className="mt-2 text-xs text-white/50">
+                En venta al mercado. Recompra automática al cierre (75–100% del último fichaje). No se
+                puede pujar.
+              </p>
+            ) : (
+              <>
+                <p className="mt-1 text-xs text-white/45">
+                  Mín {formatMoney(listing.minBid)} · Máx {formatMoney(listing.maxBid)}
+                </p>
+                {listing.myBid && (
+                  <p className="text-xs text-grass">Tu puja: {formatMoney(listing.myBid.amount)}</p>
+                )}
+                {bidable && (
+                  <div className="mt-3 flex gap-2">
+                    <input
+                      inputMode="numeric"
+                      placeholder={`Mín ${listing.minBid}`}
+                      value={amounts[listing.id] ?? ""}
+                      onChange={(e) => setAmounts({ ...amounts, [listing.id]: e.target.value })}
+                      className="flex-1 rounded-lg border border-line bg-ink px-3 py-2 text-sm"
+                    />
+                    <button
+                      className="rounded-lg bg-grass px-3 text-sm"
+                      onClick={() =>
+                        api("/api/market", {
+                          method: "POST",
+                          body: JSON.stringify({
+                            action: "bid",
+                            listingId: listing.id,
+                            amount: Number(amounts[listing.id]),
+                          }),
+                        })
+                          .then(() => {
+                            setMsg("Puja guardada (ciega hasta el cierre)");
+                            load();
+                          })
+                          .catch((e) => setMsg(e.message))
+                      }
+                    >
+                      Pujar
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </article>
+        );
+      })}
       {hasMore && <div ref={sentinelRef} className="h-8" aria-hidden />}
       {hasMore && <p className="text-center text-xs text-white/40">Desliza para ver más…</p>}
       {listings.length === 0 && (

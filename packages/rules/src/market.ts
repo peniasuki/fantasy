@@ -24,6 +24,39 @@ export function purchasePriceBounds(vm: number, settings: LeagueSettings): { min
   return { min, max: Math.max(min, max) };
 }
 
+/** Precio de último fichaje del dueño actual (fallback VM). */
+export function lastPurchasePrice(params: {
+  buyPrice?: number | null;
+  lastTransferPrice?: number | null;
+  vm?: number | null;
+}): number {
+  const buy = Number(params.buyPrice ?? 0);
+  if (buy > 0) return buy;
+  const last = Number(params.lastTransferPrice ?? 0);
+  if (last > 0) return last;
+  return Math.max(0, Number(params.vm ?? 0));
+}
+
+/** Oferta máquina al cierre: aleatoria entre 75% y 100% del último fichaje. */
+export function machineBuyOffer(
+  lastPurchase: number,
+  settings: LeagueSettings,
+  random = Math.random,
+): number {
+  const minR = settings.marketBuyMinOfLastTransfer ?? 0.75;
+  const maxR = settings.marketBuyMaxOfLastTransfer ?? 1;
+  const lo = Math.min(minR, maxR);
+  const hi = Math.max(minR, maxR);
+  const ratio = lo + random() * (hi - lo);
+  return Math.max(1, Math.round(lastPurchase * ratio));
+}
+
+export function instantSellPrice(lastPurchase: number, settings: LeagueSettings): number {
+  const ratio = settings.instantSellOfLastTransfer ?? 0.6;
+  return Math.max(1, Math.round(lastPurchase * ratio));
+}
+
+/** @deprecated Prefer machineBuyOffer con último fichaje. */
 export function machineOffer(vm: number, settings: LeagueSettings, random = Math.random): number {
   const jitter = (random() * 2 - 1) * settings.machineOfferJitter;
   return Math.max(1, Math.round(vm * (1 + jitter)));
@@ -34,17 +67,25 @@ export function canListPlayer(params: {
   ownership: Ownership;
   now: number;
   listingsByOwner: number;
+  salesStartedToday: number;
   settings: LeagueSettings;
 }): { ok: boolean; reason?: string } {
   if (params.ownership.ownerId !== params.ownerId) {
     return { ok: false, reason: "No es tuyo." };
   }
-  const lockMs = params.settings.sellLockDays * 24 * 60 * 60 * 1000;
-  if (params.now - params.ownership.boughtAt < lockMs) {
-    return { ok: false, reason: "Aún no puedes venderlo (bloqueo de 2 días)." };
+  const lockDays = params.settings.sellLockDays ?? 0;
+  if (lockDays > 0) {
+    const lockMs = lockDays * 24 * 60 * 60 * 1000;
+    if (params.now - params.ownership.boughtAt < lockMs) {
+      return { ok: false, reason: `Aún no puedes venderlo (bloqueo de ${lockDays} días).` };
+    }
+  }
+  const maxSales = params.settings.maxSalesPerDay ?? 3;
+  if (params.salesStartedToday >= maxSales) {
+    return { ok: false, reason: `Máximo ${maxSales} ventas por día.` };
   }
   if (params.listingsByOwner >= params.settings.maxListingsPerManager) {
-    return { ok: false, reason: "Máximo 3 jugadores en venta." };
+    return { ok: false, reason: "Máximo de jugadores ya en venta." };
   }
   return { ok: true };
 }
@@ -62,12 +103,40 @@ export function settleListing(params: {
   listing: Listing;
   bids: Bid[];
   vm: number;
+  /** Precio de referencia para recompra máquina (último fichaje). */
+  referencePrice?: number;
   balances: Record<string, number>;
   settings: LeagueSettings;
   now: number;
   random?: () => number;
 }): Settlement {
   const { listing, settings, now } = params;
+  const random = params.random ?? Math.random;
+
+  // Venta al mercado: nadie puja; al cierre la máquina recompra.
+  if (listing.kind === "to_market") {
+    if (now < listing.expiresAt) {
+      return {
+        playerId: listing.playerId,
+        listingId: listing.id,
+        winnerId: null,
+        price: 0,
+        previousOwnerId: listing.sellerId,
+        reason: "no_sale",
+      };
+    }
+    const ref = params.referencePrice ?? listing.referencePrice ?? params.vm;
+    const offer = machineBuyOffer(ref, settings, random);
+    return {
+      playerId: listing.playerId,
+      listingId: listing.id,
+      winnerId: "machine",
+      price: offer,
+      previousOwnerId: listing.sellerId,
+      reason: "machine_buy",
+    };
+  }
+
   const bids = [...params.bids].sort((a, b) => {
     if (b.amount !== a.amount) return b.amount - a.amount;
     return a.createdAt - b.createdAt;
@@ -107,7 +176,8 @@ export function settleListing(params: {
   }
 
   if (listing.kind === "sale" && now >= listing.expiresAt) {
-    const offer = machineOffer(params.vm, settings, params.random);
+    const ref = params.referencePrice ?? listing.referencePrice ?? params.vm;
+    const offer = machineBuyOffer(ref, settings, random);
     return {
       playerId: listing.playerId,
       listingId: listing.id,
@@ -118,7 +188,6 @@ export function settleListing(params: {
     };
   }
 
-  // Agentes libres: permanecen listados hasta que alguien gane una puja (no caducan).
   return {
     playerId: listing.playerId,
     listingId: listing.id,
@@ -145,6 +214,31 @@ export function nextMarketClose(now: Date, hour = 7): Date {
     close.setDate(close.getDate() + 1);
   }
   return close;
+}
+
+/** Inicio del día civil Europe/Madrid en epoch ms (aprox. vía partes). */
+export function madridDayStartMs(now = new Date()): number {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Madrid",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const y = Number(parts.find((p) => p.type === "year")?.value);
+  const m = Number(parts.find((p) => p.type === "month")?.value);
+  const d = Number(parts.find((p) => p.type === "day")?.value);
+  // 00:00 Madrid ≈ usar Date UTC noon trick: construct as Madrid midnight via offset guess
+  // Sufficient for "sales today" counting: compare Madrid YMD strings instead when possible.
+  return Date.UTC(y, m - 1, d, 0, 0, 0) - 2 * 60 * 60 * 1000; // CEST bias; OK for daily counters
+}
+
+export function madridDateYmd(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Madrid",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
 }
 
 export function formatMoney(amount: number): string {

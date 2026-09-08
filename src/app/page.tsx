@@ -119,6 +119,9 @@ export default function LigaPage() {
       </section>
       <section>
         <h3 className="mb-2 text-sm uppercase tracking-wide text-white/50">Clasificación</h3>
+        <p className="mb-2 text-xs text-white/45">
+          Solo cuentan los puntos de tu once titular en cada jornada puntuada (desde la J5).
+        </p>
         <ol className="space-y-2">
           {data.members.map((m, i) => (
             <li key={m.uid} className="flex items-center justify-between rounded-xl border border-line bg-panel px-3 py-2">

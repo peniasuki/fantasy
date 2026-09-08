@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { scoreEstadisticas } from "./scoring";
 import { DEFAULT_SETTINGS } from "./types";
-import { maxBidAmount, minPurchasePrice, settleListing } from "./market";
+import { instantSellPrice, maxBidAmount, minPurchasePrice, settleListing } from "./market";
 
 describe("scoreEstadisticas", () => {
   it("gives 0 without minutes", () => {
@@ -113,5 +113,56 @@ describe("market", () => {
     });
     expect(result.reason).toBe("no_sale");
     expect(result.winnerId).toBeNull();
+  });
+
+  it("machine-buys to_market at close using last purchase (75–100%)", () => {
+    const result = settleListing({
+      listing: {
+        id: "m1",
+        playerId: "p3",
+        sellerId: "u1",
+        askPrice: 10_000_000,
+        referencePrice: 10_000_000,
+        listedAt: 0,
+        expiresAt: 10,
+        kind: "to_market",
+      },
+      bids: [],
+      vm: 20_000_000,
+      referencePrice: 10_000_000,
+      balances: {},
+      settings: DEFAULT_SETTINGS,
+      now: 20,
+      random: () => 0, // -> 75%
+    });
+    expect(result.reason).toBe("machine_buy");
+    expect(result.winnerId).toBe("machine");
+    expect(result.price).toBe(7_500_000);
+  });
+
+  it("does not settle to_market before expiry", () => {
+    const result = settleListing({
+      listing: {
+        id: "m2",
+        playerId: "p4",
+        sellerId: "u1",
+        askPrice: 10_000_000,
+        listedAt: 0,
+        expiresAt: 100,
+        kind: "to_market",
+      },
+      bids: [],
+      vm: 10_000_000,
+      balances: {},
+      settings: DEFAULT_SETTINGS,
+      now: 50,
+    });
+    expect(result.reason).toBe("no_sale");
+  });
+});
+
+describe("instant sell", () => {
+  it("pays 60% of last purchase", () => {
+    expect(instantSellPrice(10_000_000, DEFAULT_SETTINGS)).toBe(6_000_000);
   });
 });

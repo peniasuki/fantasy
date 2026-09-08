@@ -123,7 +123,14 @@ export default function AdminPage() {
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
         onClick={() => void seedFirstFour()}
       >
-        Popular / corregir puntos jornadas 1–4
+        Popular / corregir puntos jornadas 1–4 (solo catálogo)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
+        onClick={() => run("/api/jobs/reset-manager-standings")}
+      >
+        Reiniciar clasificación managers (arranque J5)
       </button>
       {msg && <pre className="whitespace-pre-wrap rounded-lg bg-panel p-3 text-xs text-white/70">{msg}</pre>}
     </div>

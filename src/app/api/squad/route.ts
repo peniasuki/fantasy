@@ -34,13 +34,28 @@ export async function GET() {
       db().collection("leagues").doc(LEAGUE_ID).collection("lineups").doc(user.uid).get(),
       lineupLockState(),
     ]);
-    const players = Object.fromEntries(playersSnap.docs.map((d) => [d.id, d.data()]));
+    const players = Object.fromEntries(
+      playersSnap.docs.map((d) => {
+        const data = d.data();
+        return [d.id, { ...data, vm: data.currentPrice ?? data.vm ?? 0 }];
+      }),
+    );
+    const membersSnap = await db().collection("leagues").doc(LEAGUE_ID).collection("members").get();
+    const rivals = membersSnap.docs
+      .filter((d) => d.id !== user.uid)
+      .map((d) => ({ uid: d.id, displayName: d.data().displayName ?? d.id }));
     const squad = ownedSnap.docs.map((d) => {
       const own = d.data();
-      return { ...own, player: players[own.playerId] };
+      return {
+        playerId: own.playerId as string,
+        buyPrice: Number(own.buyPrice ?? 0),
+        boughtAt: Number(own.boughtAt ?? 0),
+        player: players[own.playerId],
+      };
     });
     return NextResponse.json({
       squad,
+      rivals,
       lineup: lineupSnap.data() ?? { formation: "4-3-3", slots: emptyLineup("4-3-3") },
       locked: lock.locked,
       lockAt: lock.lockAt,

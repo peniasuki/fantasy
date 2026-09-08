@@ -217,55 +217,60 @@ export async function POST(request: Request) {
 
     const league = await getLeague();
     const settings = settingsOf(league);
+    const managerFrom = settings.managerScoringFromMatchday ?? 5;
+    const scoreManagers = matchday >= managerFrom;
+
     const [membersSnap, lineupsSnap] = await Promise.all([
       leagueRef.collection("members").get(),
       leagueRef.collection("lineups").get(),
     ]);
-    // Tras force, re-leer puntos/balance actuales (rollback ya aplicado).
     const freshMembers = force ? await leagueRef.collection("members").get() : membersSnap;
     const lineups = Object.fromEntries(lineupsSnap.docs.map((d) => [d.id, d.data()]));
     const roundScores: { uid: string; points: number }[] = [];
+    let mvpUid: string | null = null;
 
-    for (const member of freshMembers.docs) {
-      const lineup = lineups[member.id];
-      const slots = (lineup?.slots ?? []) as { playerId: string | null }[];
-      const points = slots.reduce((sum, slot) => {
-        if (!slot.playerId) return sum;
-        return sum + (pointsByPlayer[slot.playerId] ?? 0);
-      }, 0);
-      roundScores.push({ uid: member.id, points });
-    }
+    if (scoreManagers) {
+      for (const member of freshMembers.docs) {
+        const lineup = lineups[member.id];
+        const slots = (lineup?.slots ?? []) as { playerId: string | null }[];
+        const points = slots.reduce((sum, slot) => {
+          if (!slot.playerId) return sum;
+          return sum + (pointsByPlayer[slot.playerId] ?? 0);
+        }, 0);
+        roundScores.push({ uid: member.id, points });
+      }
 
-    const mvpUid =
-      roundScores.length > 0
-        ? [...roundScores].sort((a, b) => b.points - a.points)[0]?.uid
-        : null;
+      mvpUid =
+        roundScores.length > 0
+          ? [...roundScores].sort((a, b) => b.points - a.points)[0]?.uid ?? null
+          : null;
 
-    for (const row of roundScores) {
-      const memberData = freshMembers.docs.find((d) => d.id === row.uid)?.data() ?? {};
-      const bonus =
-        row.points * settings.bonusPerPoint + (row.uid === mvpUid ? settings.bonusMvp : 0);
-      writes.push((batch) =>
-        batch.set(
-          leagueRef.collection("members").doc(row.uid),
-          {
-            points: Number(memberData.points ?? 0) + row.points,
-            balance: Number(memberData.balance ?? 0) + bonus,
-          },
-          { merge: true },
-        ),
-      );
-      writes.push((batch) =>
-        batch.set(leagueRef.collection("matchdayScores").doc(`${matchday}_${row.uid}`), {
-          uid: row.uid,
-          matchday,
-          points: row.points,
-          bonus,
-          mvp: row.uid === mvpUid,
-          at: now,
-          scoringSystem: JP_SCORING,
-        }),
-      );
+      for (const row of roundScores) {
+        const memberData = freshMembers.docs.find((d) => d.id === row.uid)?.data() ?? {};
+        const bonus =
+          row.points * settings.bonusPerPoint + (row.uid === mvpUid ? settings.bonusMvp : 0);
+        writes.push((batch) =>
+          batch.set(
+            leagueRef.collection("members").doc(row.uid),
+            {
+              points: Number(memberData.points ?? 0) + row.points,
+              balance: Number(memberData.balance ?? 0) + bonus,
+            },
+            { merge: true },
+          ),
+        );
+        writes.push((batch) =>
+          batch.set(leagueRef.collection("matchdayScores").doc(`${matchday}_${row.uid}`), {
+            uid: row.uid,
+            matchday,
+            points: row.points,
+            bonus,
+            mvp: row.uid === mvpUid,
+            at: now,
+            scoringSystem: JP_SCORING,
+          }),
+        );
+      }
     }
 
     writes.push((batch) =>
@@ -277,9 +282,13 @@ export async function POST(request: Request) {
         matches: matchesForStore.length,
         playersStored: storedPlayers,
         playersIgnored: ignored,
-        managersUpdated: roundScores.length,
-        mvpUid,
+        managersUpdated: scoreManagers ? roundScores.length : 0,
+        mvpUid: scoreManagers ? mvpUid : null,
         forced: force,
+        managersScored: scoreManagers,
+        ...(scoreManagers
+          ? {}
+          : { managersSkipReason: `Clasificación de managers desde jornada ${managerFrom}.` }),
       }),
     );
 
@@ -292,6 +301,8 @@ export async function POST(request: Request) {
       matches: matchesForStore.length,
       playersStored: storedPlayers,
       playersIgnored: ignored,
+      managersScored: scoreManagers,
+      managerScoringFromMatchday: managerFrom,
       managers: roundScores.map((r) => ({
         uid: r.uid,
         points: r.points,

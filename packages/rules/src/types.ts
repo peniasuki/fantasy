@@ -28,12 +28,27 @@ export type LeagueSettings = {
   maxPurchaseOfVm: number;
   /** Suelo de puja: fracción del VM (p. ej. 0.75 = 75%). */
   minPurchaseOfVm: number;
+  /** Oferta máquina al cierre: mínimo del último fichaje. */
+  marketBuyMinOfLastTransfer: number;
+  /** Oferta máquina al cierre: máximo del último fichaje. */
+  marketBuyMaxOfLastTransfer: number;
+  /** Venta inmediata: fracción del último fichaje. */
+  instantSellOfLastTransfer: number;
+  /** Máximo de operaciones de venta iniciadas por manager y día (Madrid). */
+  maxSalesPerDay: number;
+  /** Caducidad de ofertas a otro manager (días). */
+  competitorOfferDays: number;
   bonusPerPoint: number;
   bonusIdealXi: number;
   bonusMvp: number;
   scoringSystem: ScoringSystem;
   /** Si true, todos los jugadores sin dueño permanecen como agentes libres. */
   keepAllUnownedListed: boolean;
+  /**
+   * Primera jornada que suma puntos a la clasificación de managers.
+   * Jornadas anteriores solo actualizan puntos de jugadores (catálogo).
+   */
+  managerScoringFromMatchday: number;
 };
 
 export const DEFAULT_SETTINGS: LeagueSettings = {
@@ -42,17 +57,23 @@ export const DEFAULT_SETTINGS: LeagueSettings = {
   freeAgentsPerCycle: 15,
   freeAgentDays: 2,
   maxListingsPerManager: 3,
-  sellLockDays: 2,
-  listingDays: 2,
+  sellLockDays: 0,
+  listingDays: 1,
   machineOfferJitter: 0.05,
   maxBidTeamValueShare: 0.25,
   maxPurchaseOfVm: 1.5,
   minPurchaseOfVm: 0.75,
+  marketBuyMinOfLastTransfer: 0.75,
+  marketBuyMaxOfLastTransfer: 1,
+  instantSellOfLastTransfer: 0.6,
+  maxSalesPerDay: 3,
+  competitorOfferDays: 7,
   bonusPerPoint: 20_000,
   bonusIdealXi: 50_000,
   bonusMvp: 60_000,
   scoringSystem: "stats",
   keepAllUnownedListed: true,
+  managerScoringFromMatchday: 5,
 };
 
 export type PlayerMatchStats = {
@@ -96,7 +117,10 @@ export type Listing = {
   askPrice: number;
   listedAt: number;
   expiresAt: number;
-  kind: "free_agent" | "sale";
+  /** free_agent: pujas. to_market: solo recompra máquina al cierre. sale: legado. */
+  kind: "free_agent" | "sale" | "to_market";
+  /** Precio de referencia (último fichaje) al listar to_market. */
+  referencePrice?: number;
 };
 
 export type Ownership = {
@@ -104,4 +128,15 @@ export type Ownership = {
   ownerId: string;
   buyPrice: number;
   boughtAt: number;
+};
+
+export type CompetitorOffer = {
+  id: string;
+  playerId: string;
+  fromId: string;
+  toId: string;
+  price: number;
+  createdAt: number;
+  expiresAt: number;
+  status: "pending" | "accepted" | "rejected" | "expired" | "cancelled";
 };

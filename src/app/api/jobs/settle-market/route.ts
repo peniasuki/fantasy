@@ -36,11 +36,14 @@ export async function POST(request: Request) {
 
     for (const listingDoc of listingsSnap.docs) {
       const listing = listingDoc.data();
+      const player = players[listing.playerId];
+      const vm = player?.currentPrice ?? player?.vm ?? listing.askPrice ?? 0;
       const bids = bidsSnap.docs.map((d) => d.data()).filter((b) => b.listingId === listing.id);
       const result = settleListing({
         listing: listing as never,
         bids: bids as never,
-        vm: players[listing.playerId]?.vm ?? listing.askPrice ?? 0,
+        vm,
+        referencePrice: listing.referencePrice ?? listing.askPrice ?? vm,
         balances,
         settings,
         now,
@@ -82,6 +85,7 @@ export async function POST(request: Request) {
             );
           }
         } else if (result.reason === "machine_buy" && result.previousOwnerId !== "machine") {
+          // Recompra máquina: paga al vendedor; NO actualiza lastTransferPrice.
           const sellerRef = leagueRef.collection("members").doc(result.previousOwnerId);
           const seller = await tx.get(sellerRef);
           tx.update(sellerRef, { balance: (seller.data()?.balance ?? 0) + result.price });
@@ -89,6 +93,38 @@ export async function POST(request: Request) {
         }
         tx.delete(listingRef);
       });
+
+      if (
+        result.reason === "machine_buy" &&
+        result.previousOwnerId !== "machine" &&
+        typeof result.previousOwnerId === "string"
+      ) {
+        const lineupRef = leagueRef.collection("lineups").doc(result.previousOwnerId);
+        const lineupSnap = await lineupRef.get();
+        if (lineupSnap.exists) {
+          const slots = (lineupSnap.data()?.slots ?? []) as {
+            slot: number;
+            position: string;
+            playerId: string | null;
+          }[];
+          let changed = false;
+          const next = slots.map((s) => {
+            if (s.playerId === listing.playerId) {
+              changed = true;
+              return { ...s, playerId: null };
+            }
+            return s;
+          });
+          if (changed) await lineupRef.set({ slots: next, updatedAt: now }, { merge: true });
+        }
+        const offers = await leagueRef
+          .collection("offers")
+          .where("playerId", "==", listing.playerId)
+          .where("status", "==", "pending")
+          .get();
+        await Promise.all(offers.docs.map((d) => d.ref.set({ status: "cancelled", closedAt: now }, { merge: true })));
+      }
+
       const staleBids = bidsSnap.docs.filter((d) => d.data().listingId === listing.id);
       await Promise.all(staleBids.map((d) => d.ref.delete()));
       settled += 1;
@@ -115,7 +151,7 @@ export async function POST(request: Request) {
     if (keepAll) {
       for (const playerId of freePool) {
         const existing = listedByPlayer.get(playerId);
-        const askPrice = players[playerId]?.vm ?? 0;
+        const askPrice = players[playerId]?.currentPrice ?? players[playerId]?.vm ?? 0;
         if (existing) {
           const data = existing.data();
           if (data.kind === "free_agent") {

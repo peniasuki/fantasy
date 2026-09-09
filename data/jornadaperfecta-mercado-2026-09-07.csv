@@ -1,0 +1,542 @@
+name,position,team,price_eur,max_price,min_price,status,playerId,remote_player,teamId,remote_team,url,lastMarket_1d,lastMarket_3d,lastMarket_7d,injured,doubt
+Mbappé,delantero,Real Madrid,24890000,25930000,22510000,Disponible,154175,19577,2,15,mbappe,10000,70000,120000,0,0
+Yamal,delantero,Barcelona,21300000,22440000,16440000,Disponible,153380,26271,5,3,yamal,90000,180000,260000,0,0
+Raphinha,delantero,Barcelona,18980000,18980000,14320000,Disponible,151831,26930,5,3,raphinha,180000,520000,860000,0,0
+Bellingham,mediocentro,Real Madrid,17860000,17860000,15350000,Disponible,153062,30477,2,15,bellingham,100000,290000,580000,0,0
+Vinícius Jr,delantero,Real Madrid,17110000,18310000,17110000,Disponible,616,15568,2,15,vinicius-jr,-110000,-300000,-420000,0,0
+Pedri,mediocentro,Barcelona,15430000,18590000,14980000,Disponible,15359,19441,5,3,pedri,80000,180000,220000,0,0
+Fermín,mediocentro,Barcelona,13940000,13940000,8700000,Disponible,153324,31243,5,3,fermin,200000,440000,670000,0,0
+Rodri,mediocentro,Barcelona,12210000,12860000,11220000,Disponible,476,429,5,3,rodri,30000,-210000,-630000,0,0
+Oyarzabal,delantero,Real Sociedad,11870000,14900000,11720000,Disponible,382,2603,16,13,oyarzabal,0,10000,30000,0,0
+Gordon,delantero,Barcelona,11670000,11670000,9590000,Disponible,157671,41200,5,3,gordon,110000,400000,720000,0,0
+Valverde,mediocentro,Real Madrid,11580000,12440000,11310000,Disponible,729,9402,2,15,valverde,-100000,-90000,-30000,0,0
+Aubameyang,delantero,Deportivo,11490000,11490000,3550000,Disponible,151523,25769,8,6,aubameyang,280000,770000,1190000,0,0
+Arda Güler,mediocentro,Real Madrid,11180000,11180000,6200000,Disponible,153276,31027,2,15,arda-guler,210000,580000,910000,0,0
+Pépé,delantero,Villarreal,11150000,11150000,8510000,Disponible,154472,34479,20,19,pepe,80000,160000,210000,0,0
+Budimir,delantero,Osasuna,10990000,12470000,10330000,Disponible,6169,18398,15,93,budimir,130000,270000,420000,0,0
+Antony,delantero,Betis,10960000,10960000,9480000,Disponible,154737,35770,6,87,antony,50000,90000,120000,0,0
+Diomande,delantero,Real Madrid,10820000,14600000,10820000,Disponible,154804,8555,2,15,diomande,-240000,-790000,-1250000,0,0
+Mikautadze,delantero,Villarreal,10340000,10770000,8450000,Disponible,156364,38962,20,19,mikautadze,-230000,-420000,-400000,0,0
+Baena,mediocentro,Atlético,9840000,9840000,5160000,Disponible,150234,19547,4,2,baena,100000,400000,750000,0,0
+Cucurella,defensa,Real Madrid,9760000,12740000,9760000,Disponible,5795,15410,2,15,cucurella,-120000,-420000,-580000,0,0
+Dani Olmo,mediocentro,Barcelona,9520000,11660000,9490000,Disponible,154493,34527,5,3,dani-olmo,30000,-20000,-160000,0,0
+Cubarsí,defensa,Barcelona,9500000,10680000,9220000,Disponible,153580,32440,5,3,cubarsi,10000,-50000,-160000,0,0
+Joan García,portero,Barcelona,9210000,10640000,8960000,Disponible,151524,15430,5,3,joan-garcia,-40000,-170000,-380000,0,0
+Jonathan David,delantero,Atlético,9190000,10470000,9190000,Disponible,158259,43263,4,2,jonathan-david,-320000,-900000,-1280000,0,0
+Kang-in Lee,mediocentro,Atlético,8880000,8880000,3680000,Disponible,6046,17687,4,2,kang-in-lee,40000,210000,450000,0,0
+Pape Gueye,mediocentro,Villarreal,8850000,8850000,6530000,Disponible,152893,30081,20,19,pape-gueye,0,30000,60000,0,0
+Adeyemi,delantero,Barcelona,8380000,8640000,7270000,Disponible,158096,42557,5,3,adeyemi,-60000,-140000,-240000,0,0
+Isco,mediocentro,Betis,8180000,10820000,8180000,Disponible,349,1249,6,87,isco,-40000,-140000,-340000,0,0
+Eric García,defensa,Barcelona,8160000,9600000,7740000,Golpe en el tabique nasal,150837,20,5,3,eric-garcia,-160000,-220000,-270000,0,1
+Bernardo Silva,mediocentro,Real Madrid,8070000,10200000,8070000,Disponible,157810,41086,2,15,bernardo-silva,-170000,-480000,-750000,0,0
+Fornals,mediocentro,Betis,7950000,12600000,7950000,Disponible,888,2597,6,87,fornals,-70000,-240000,-500000,0,0
+Lookman,delantero,Atlético,7950000,9370000,6800000,Disponible,156534,39941,4,2,lookman,-230000,-230000,-180000,0,0
+Barrios,mediocentro,Atlético,7800000,7800000,3420000,Disponible,152816,29184,4,2,barrios,60000,230000,430000,0,0
+Julián Alvarez,delantero,Atlético,7760000,11090000,6660000,Disponible,154501,34557,4,2,julian-alvarez,10000,10000,-110000,0,0
+Nico Williams,delantero,Athletic,7750000,9180000,5820000,Disponible,151231,21008,1,1,nico-williams,60000,30000,-220000,0,0
+Moleiro,mediocentro,Villarreal,7650000,9760000,7650000,Disponible,153066,30495,20,19,moleiro,-80000,-230000,-410000,0,0
+Ez Abde,delantero,Betis,7610000,10800000,7610000,Proceso vírico,151437,25127,6,87,ez-abde,-20000,-170000,-180000,0,0
+Cancelo,defensa,Barcelona,6910000,9310000,6910000,Disponible,440,1952,5,3,cancelo,-170000,-400000,-770000,0,0
+Parrott,delantero,Betis,6550000,8740000,6550000,Disponible,158217,42748,6,87,parrott,-10000,-40000,-290000,0,0
+Iñigo Vicente,delantero,Racing,6470000,6470000,3270000,Disponible,16017,18564,878,812,inigo-vicente,30000,90000,170000,0,0
+Gerard Moreno,delantero,Villarreal,6440000,7360000,6290000,Disponible,221,1927,20,19,gerard-moreno,10000,-40000,-80000,0,0
+Pubill,defensa,Atlético,6420000,6510000,5380000,Disponible,151460,25398,4,2,pubill,-10000,30000,90000,0,0
+Gabriel Jesus,delantero,Barcelona,6310000,6310000,6110000,Disponible,158260,42517,5,3,gabriel-jesus,30000,110000,200000,0,0
+Courtois,portero,Real Madrid,6200000,7080000,4270000,Disponible,5651,16738,2,15,courtois,-50000,-170000,-310000,0,0
+Canales,mediocentro,Racing,6100000,7790000,4020000,Disponible,369,947,878,812,canales,30000,-30000,-230000,0,0
+Yeremay Hernández,delantero,Deportivo,6060000,9170000,6060000,Disponible,157797,41082,8,6,yeremay-hernandez,-30000,-110000,-230000,0,0
+Carlos Romero,defensa,Villarreal,6010000,7480000,6010000,molestias sin determinar,153483,26566,20,19,carlos-romero,-180000,-370000,-540000,0,1
+Cucho,delantero,Betis,5970000,7600000,5970000,Disponible,4550,10276,6,87,cucho,-120000,-390000,-620000,0,0
+Roberto Fernández,delantero,Espanyol,5960000,5960000,2200000,Disponible,154716,35678,10,7,roberto-fernandez,80000,260000,470000,0,0
+Marcos Llorente,defensa,Atlético,5940000,6450000,5490000,Disponible,16,2600,4,2,marcos-llorente,-60000,-60000,-30000,0,0
+Giuliano Simeone,mediocentro,Atlético,5840000,6090000,5250000,Disponible,153191,30789,4,2,giuliano-simeone,-210000,-230000,-190000,0,0
+Sancet,mediocentro,Athletic,5780000,6370000,3140000,Disponible,5723,17057,1,1,sancet,80000,100000,50000,0,0
+David Soria,portero,Getafe,5720000,5790000,4990000,Disponible,385,11,23,8,david-soria,-20000,-50000,-70000,0,0
+Leo Román,portero,Deportivo,5610000,5610000,3440000,Disponible,3131,14630,8,6,leo-roman,10000,30000,50000,0,0
+Fran García,defensa,Betis,5480000,5850000,2850000,Disponible,150976,5220,6,87,fran-garcia,-10000,-50000,-170000,0,0
+Huijsen,defensa,Real Madrid,5450000,5450000,3930000,Disponible,155743,37495,2,15,huijsen,70000,190000,280000,0,0
+Konaté,defensa,Real Madrid,5430000,7060000,5430000,Disponible,157811,41087,2,15,konate,-40000,-120000,-330000,0,0
+Kubo,mediocentro,Real Sociedad,5390000,5770000,4490000,Disponible,6946,20102,16,13,kubo,-50000,-200000,-310000,0,0
+Grimaldo,defensa,Atlético,5360000,7060000,5280000,Disponible,157933,41684,4,2,grimaldo,-170000,-320000,-470000,0,0
+Gerard Martín,defensa,Barcelona,5330000,5330000,4000000,Disponible,154609,34111,5,3,gerard-martin,20000,50000,80000,0,0
+Laporte,defensa,Athletic,5280000,5610000,3280000,Disponible,31,1613,1,1,laporte,40000,40000,30000,0,0
+Cristian Romero,defensa,Atlético,5200000,6800000,5200000,Disponible,158185,15828,4,2,cristian-romero,-60000,-160000,-300000,0,0
+Dumfries,defensa,Real Madrid,5190000,6610000,5190000,Disponible,158037,42362,2,15,dumfries,-30000,-120000,-310000,0,0
+Expósito,mediocentro,Espanyol,5170000,5170000,4010000,Disponible,6627,19862,10,7,exposito,10000,40000,70000,0,0
+Remiro,portero,Real Sociedad,5130000,5130000,3250000,Disponible,649,7003,16,13,remiro,30000,80000,150000,0,0
+Larrubia,delantero,Málaga,5110000,6470000,3170000,Disponible,157815,41412,14,65,larrubia,-50000,-120000,-210000,0,0
+Chupe,delantero,Málaga,5100000,6440000,3490000,Disponible,157816,41420,14,65,chupe,-100000,-210000,-350000,0,0
+Oblak,portero,Atlético,5070000,5180000,3110000,Disponible,51,1897,4,2,oblak,-60000,-100000,-110000,0,0
+Enes Ünal,delantero,Getafe,5000000,5000000,1680000,Disponible,1943,9045,23,8,enes-unal,50000,150000,300000,0,0
+Hansi Flick,entrenador,Barcelona,5000000,5080000,4410000,Disponible,154176,19244,5,3,hansi-flick,20000,30000,50000,0,0
+Germán Valera,mediocentro,Elche,4970000,6690000,4970000,Disponible,151412,20969,162,75,german-valera,-70000,-210000,-410000,0,0
+Fofana,mediocentro,Sevilla,4930000,5220000,4930000,Disponible,158262,43272,17,17,fofana,-90000,-260000,-290000,0,0
+Unai Simón,portero,Athletic,4930000,5180000,3140000,Disponible,1909,17021,1,1,unai-simon,50000,120000,170000,0,0
+Mourinho,entrenador,Real Madrid,4890000,5280000,4720000,Disponible,157765,41386,2,15,mourinho,-20000,20000,40000,0,0
+Dmitrovic,portero,Espanyol,4820000,4820000,3180000,Disponible,787,9090,10,7,dmitrovic,0,20000,40000,0,0
+Soler,mediocentro,Real Sociedad,4800000,6040000,4800000,Disponible,518,6837,16,13,soler,-60000,-260000,-380000,0,0
+Audero,portero,Rayo Vallecano,4700000,5790000,4700000,Disponible,158261,43282,106,70,audero,-220000,-750000,-1090000,0,0
+Ayoze,delantero,Villarreal,4700000,5350000,2890000,Disponible,3413,2001,20,19,ayoze,-40000,-130000,-250000,0,0
+Febas,mediocentro,Celta,4680000,8650000,4680000,contusión costal,6629,19860,7,5,febas,-80000,-320000,-810000,1,0
+Tenaglia,defensa,Alavés,4670000,4670000,3210000,Disponible,151458,25384,3,91,tenaglia,50000,140000,260000,0,0
+Álvaro Valles,portero,Betis,4670000,4670000,2380000,Disponible,153070,30487,6,87,alvaro-valles,70000,190000,210000,0,0
+Tchouameni,mediocentro,Real Madrid,4660000,8020000,4660000,molestias musculares,151556,26048,2,15,tchouameni,-30000,-140000,-280000,0,1
+Morten Hjulmand,mediocentro,Atlético,4650000,7850000,4570000,Disponible,158070,42444,4,2,morten-hjulmand,10000,30000,60000,0,0
+Lejeune,defensa,Rayo Vallecano,4620000,6880000,4620000,Disponible,187,2476,106,70,lejeune,-40000,-140000,-280000,0,0
+De Frutos,delantero,Rayo Vallecano,4570000,6370000,4570000,Sancionado,6189,18397,106,70,de-frutos,-210000,-420000,-560000,1,0
+Camello,delantero,Rayo Vallecano,4560000,4560000,2060000,pequeñas molestias,6233,17756,106,70,camello,260000,640000,920000,0,0
+Álex Calatrava,mediocentro,Espanyol,4530000,4680000,1180000,Disponible,158023,42327,10,7,alex-calatrava,-30000,-90000,-140000,0,0
+Marc Bernal,mediocentro,Barcelona,4490000,5490000,3540000,Disponible,154537,34077,5,3,marc-bernal,40000,150000,280000,0,0
+Mariano,delantero,Alavés,4460000,4460000,150000,Disponible,511,5697,3,91,mariano,140000,250000,450000,0,0
+Bryan Zaragoza,delantero,Espanyol,4450000,4450000,4230000,Disponible,153074,30502,10,7,bryan-zaragoza,10000,30000,60000,0,0
+Ryan,portero,Levante,4440000,4440000,3050000,Disponible,437,2184,21,10,ryan,20000,40000,70000,0,0
+Sivera,portero,Alavés,4410000,4410000,3030000,Disponible,877,9887,3,91,sivera,30000,60000,80000,0,0
+Guedes,delantero,Real Sociedad,4370000,6400000,4370000,Disponible,1902,10745,16,13,guedes,-10000,-60000,-120000,0,0
+Hancko,defensa,Atlético,4350000,4370000,2160000,Disponible,156237,38290,4,2,hancko,-20000,-10000,30000,0,0
+Mario Soriano,mediocentro,Deportivo,4310000,5110000,2340000,Disponible,157799,41072,8,6,mario-soriano,-50000,-50000,-30000,0,0
+Roro Riquelme,mediocentro,Betis,4280000,4280000,400000,Disponible,4988,8670,6,87,roro-riquelme,40000,170000,390000,0,0
+Andrés Martín,delantero,Racing,4230000,5870000,3330000,esguince en la rodilla derecha,150979,4753,878,812,andres-martin,-70000,-260000,-630000,1,0
+Barrenetxea,mediocentro,Real Sociedad,4190000,4730000,3160000,Disponible,6140,2602,16,13,barrenetxea,10000,50000,120000,0,0
+Sergio Herrera,portero,Osasuna,4140000,4700000,2710000,Disponible,6221,18251,15,93,sergio-herrera,-30000,-60000,-110000,0,0
+Catena,defensa,Osasuna,4020000,4020000,3010000,Disponible,6060,17731,15,93,catena,10000,70000,130000,0,0
+Álvaro García,delantero,Rayo Vallecano,4000000,4350000,2180000,Disponible,5752,33,106,70,alvaro-garcia,-10000,-50000,-50000,0,0
+Terrats,mediocentro,Getafe,3950000,3950000,790000,Disponible,151578,26092,23,8,terrats,40000,90000,180000,0,0
+Jon Martín,defensa,Real Sociedad,3940000,4420000,3100000,Disponible,154566,33447,16,13,jon-martin,20000,30000,0,0,0
+Alfonso Herrero,portero,Málaga,3920000,4030000,1480000,Disponible,157818,41101,14,65,alfonso-herrero,0,-50000,-100000,0,0
+Guido Rodríguez,mediocentro,Valencia,3920000,5190000,3320000,lesión en la musculatura del cuádriceps de su pierna derecha,7296,163,19,18,guido-rodriguez,-50000,-170000,-410000,1,0
+Javi Guerra,mediocentro,Valencia,3860000,4870000,3130000,molestias musculares,152956,30123,19,18,javi-guerra,-80000,-180000,-340000,0,0
+Robbie Ure,delantero,Sevilla,3850000,4270000,2580000,Disponible,158163,41807,17,17,robbie-ure,-70000,-150000,-300000,0,0
+Xavi Espart,defensa,Barcelona,3850000,3850000,280000,Disponible,156569,40075,5,3,xavi-espart,140000,370000,700000,0,0
+Koundé,defensa,Barcelona,3840000,5280000,3840000,Disponible,6194,18945,5,3,kounde,0,-90000,-240000,0,0
+Elliott,mediocentro,Valencia,3810000,3810000,3740000,Disponible,158263,43260,19,18,elliott,0,30000,70000,0,0
+Ángel Pérez,delantero,Alavés,3740000,3740000,1350000,Disponible,156524,39885,3,91,angel-perez,60000,110000,200000,0,0
+Adama Traoré,delantero,Deportivo,3720000,3720000,3220000,Disponible,151493,25677,8,6,adama-traore,10000,90000,200000,0,0
+Amatucci,mediocentro,Deportivo,3720000,3720000,1090000,Disponible,158062,42425,8,6,amatucci,50000,130000,220000,0,0
+Miguel Sierra,delantero,Sevilla,3700000,3700000,220000,Disponible,157994,39350,17,17,miguel-sierra,60000,200000,380000,0,0
+Renato Veiga,defensa,Villarreal,3690000,4080000,2280000,Disponible,156336,38493,20,19,renato-veiga,-60000,-140000,-220000,0,0
+Odysseas,portero,Sevilla,3660000,4030000,2370000,Disponible,156293,38405,17,17,odysseas,-20000,-90000,-190000,0,0
+Borja Iglesias,delantero,Celta,3650000,6430000,3650000,Disponible,484,2009,7,5,borja-iglesias,0,-80000,-210000,0,0
+Ionut Radu,portero,Celta,3630000,3890000,2880000,Disponible,155839,37600,7,5,ionut-radu,30000,90000,100000,0,0
+Miguel Román,mediocentro,Celta,3630000,3630000,700000,Disponible,156313,3259,7,5,miguel-roman,10000,50000,120000,0,0
+De la Fuente,defensa,Levante,3610000,3610000,2550000,Disponible,155913,37739,21,10,de-la-fuente,50000,120000,220000,0,0
+Javi Hernández,mediocentro,Espanyol,3610000,3610000,210000,Disponible,156066,25322,10,7,javi-hernandez,30000,120000,240000,0,0
+Espí,delantero,Real Madrid,3600000,7020000,3530000,Disponible,155933,37711,2,15,espi,-20000,-60000,-250000,0,0
+Dani Lorenzo,mediocentro,Málaga,3580000,3680000,870000,Pequeñas molestias musculares,157822,41418,14,65,dani-lorenzo,-30000,-90000,-100000,0,0
+Toni Martínez,delantero,Alavés,3570000,6620000,3570000,microrrotura en el sóleo de la pierna derecha,154572,34802,3,91,toni-martinez,-50000,-210000,-660000,0,1
+Marcos Alonso,defensa,Celta,3540000,4000000,2440000,Disponible,152044,28087,7,5,marcos-alonso,0,-20000,-60000,0,0
+Bartra,defensa,Betis,3530000,3530000,1370000,Disponible,1976,1125,6,87,bartra,70000,200000,280000,0,0
+Antonio Blanco,mediocentro,Alavés,3520000,4050000,3240000,Disponible,151362,1612,3,91,antonio-blanco,20000,30000,60000,0,0
+Boyé,delantero,Alavés,3520000,3720000,1950000,Disponible,1980,12494,3,91,boye,160000,210000,310000,0,0
+Iñaki Williams,delantero,Athletic,3480000,3940000,2240000,Disponible,49,1995,1,1,inaki-williams,0,-40000,-70000,0,0
+Sergio Gómez,defensa,Real Sociedad,3480000,3760000,3080000,Disponible,16014,19299,16,13,sergio-gomez,30000,60000,60000,0,0
+Ratiu,defensa,Rayo Vallecano,3450000,5200000,3390000,Disponible,153423,26276,106,70,ratiu,40000,30000,-110000,0,0
+Dimitrievski,portero,Valencia,3430000,3930000,2500000,Disponible,5797,11677,19,18,dimitrievski,-20000,-80000,-160000,0,0
+Satriano,delantero,Getafe,3430000,4600000,2350000,Disponible,156495,39792,23,8,satriano,-40000,-120000,-230000,0,0
+Nathan Saliba,mediocentro,Villarreal,3420000,4550000,3390000,Disponible,158226,42802,20,19,nathan-saliba,30000,-30000,-190000,0,0
+Agoumé,mediocentro,Sevilla,3410000,3410000,1530000,Disponible,153547,32338,17,17,agoume,10000,40000,80000,0,0
+Mojica,defensa,Getafe,3400000,3400000,2480000,Disponible,1905,10245,23,8,mojica,10000,30000,70000,0,0
+Comesaña,mediocentro,Villarreal,3380000,5030000,3380000,Disponible,4568,9480,20,19,comesana,-80000,-190000,-280000,0,0
+Yassir Zabiri,delantero,Racing,3370000,3370000,360000,Disponible,158123,42610,878,812,yassir-zabiri,50000,380000,960000,0,0
+Koke,mediocentro,Atlético,3360000,3410000,2420000,Disponible,63,1083,4,2,koke,-40000,-50000,-20000,0,0
+Jutglà,delantero,Celta,3310000,4350000,3310000,Disponible,151444,3159,7,5,jutgla,-40000,-150000,-250000,0,0
+Iván Martín,mediocentro,Racing,3300000,3300000,2920000,Disponible,151040,12403,878,812,ivan-martin,50000,110000,160000,0,0
+Sørloth,delantero,Atlético,3280000,5630000,3280000,lesión muscular,151364,24576,4,2,sorloth,-40000,-120000,-190000,1,0
+Iago Aspas,delantero,Celta,3270000,3270000,1930000,Disponible,156,1523,7,5,iago-aspas,20000,80000,290000,0,0
+Foyth,defensa,Villarreal,3240000,3720000,630000,molestias musculares,16167,22964,20,19,foyth,-80000,-350000,-480000,0,1
+Zaid Romero,defensa,Getafe,3230000,3960000,2850000,Disponible,156499,39804,23,8,zaid-romero,-20000,-60000,-100000,0,0
+Marc Roca,mediocentro,Betis,3210000,3210000,1250000,Disponible,507,5807,6,87,marc-roca,20000,80000,110000,0,0
+Agirrezabala,portero,Racing,3200000,3250000,440000,Disponible,151286,19192,878,812,agirrezabala,0,-20000,-50000,0,0
+Del Castillo,delantero,Osasuna,3190000,3620000,3190000,Disponible,158264,42173,15,93,del-castillo,-100000,-260000,-430000,0,0
+Cabrera,defensa,Espanyol,3110000,4180000,2920000,Disponible,1958,11800,10,7,cabrera,10000,30000,60000,0,0
+Ejuke,delantero,Sevilla,3110000,3110000,640000,Disponible,154189,33531,17,17,ejuke,60000,320000,660000,0,0
+Guruzeta,delantero,Athletic,3110000,4180000,2510000,Disponible,5722,17056,1,1,guruzeta,-90000,-210000,-340000,0,0
+Juan Iglesias,defensa,Sevilla,3110000,3220000,2540000,Disponible,150233,23840,17,17,juan-iglesias,-30000,-90000,-110000,0,0
+Óskarsson,delantero,Real Sociedad,3110000,3470000,2610000,Disponible,154594,35055,16,13,oskarsson,10000,30000,110000,0,0
+Berenguer,delantero,Athletic,3100000,3100000,1390000,Disponible,322,897,1,1,berenguer,50000,290000,610000,0,0
+Jorge Salinas,defensa,Racing,3090000,3170000,760000,Disponible,157734,41270,878,812,jorge-salinas,-60000,-80000,-80000,0,0
+Luka Sucic,mediocentro,Real Sociedad,3090000,3090000,1400000,Disponible,154470,34469,16,13,luka-sucic,10000,40000,200000,0,0
+Nsongo,delantero,Deportivo,3090000,3090000,1240000,Disponible,157004,40911,8,6,nsongo,120000,250000,390000,0,0
+Natan,defensa,Betis,3080000,3300000,1410000,Disponible,154518,19614,6,87,natan,40000,70000,-20000,0,0
+Pepelu,mediocentro,Valencia,3060000,3240000,1870000,Disponible,151038,12221,19,18,pepelu,-60000,-110000,-170000,0,0
+Gonzalo Villar,mediocentro,Elche,3040000,3040000,1110000,Disponible,151462,25403,162,75,gonzalo-villar,0,0,40000,0,0
+Unai Núñez,defensa,Espanyol,3040000,3050000,600000,Disponible,1851,10155,10,7,unai-nunez,-10000,0,50000,0,0
+Olasagasti,mediocentro,Levante,3010000,3010000,1660000,Disponible,156243,29661,21,10,olasagasti,90000,210000,400000,0,0
+Buchanan,mediocentro,Villarreal,2970000,3610000,2530000,Disponible,154758,35344,20,19,buchanan,-40000,-80000,-70000,0,0
+Dotor,mediocentro,Málaga,2940000,2940000,320000,Disponible,153305,31167,14,65,dotor,0,30000,110000,0,0
+Iván Romero,delantero,Levante,2940000,3820000,2470000,Disponible,6147,17937,21,10,ivan-romero,-40000,-100000,-160000,0,0
+Pathé Ciss,mediocentro,Rayo Vallecano,2920000,3790000,2920000,Disponible,151285,24326,106,70,pathe-ciss,-10000,-50000,-120000,0,0
+Félix Correia,delantero,Sevilla,2910000,3270000,2910000,Disponible,158265,43262,17,17,felix-correia,-120000,-280000,-360000,0,0
+Trent,defensa,Real Madrid,2910000,3290000,2520000,Disponible,155747,37499,2,15,trent,-40000,-30000,110000,0,0
+Simeone,entrenador,Atlético,2900000,3080000,2030000,Disponible,153027,19501,4,2,simeone,-20000,-40000,-60000,0,0
+Stassin,delantero,Sevilla,2870000,2870000,2630000,Disponible,158266,43264,17,17,stassin,120000,180000,240000,0,0
+Ryunosuke Sato,delantero,Valencia,2860000,3800000,710000,Disponible,158046,42389,19,18,ryunosuke-sato,-60000,-130000,-270000,0,0
+De Galarreta,mediocentro,Athletic,2840000,3350000,2330000,Disponible,150958,2055,1,1,de-galarreta,30000,100000,220000,0,0
+Moncayola,mediocentro,Osasuna,2840000,3380000,2370000,Disponible,6947,8747,15,93,moncayola,-20000,-60000,-90000,0,0
+Rubén García,mediocentro,Osasuna,2830000,2920000,2130000,Disponible,764,1602,15,93,ruben-garcia,-20000,-30000,0,0,0
+Dolan,delantero,Espanyol,2820000,3080000,1520000,Disponible,156246,38308,10,7,dolan,-20000,-70000,-120000,0,0
+Guridi,mediocentro,Sevilla,2810000,3180000,940000,Disponible,1949,10158,17,17,guridi,-30000,-90000,-180000,0,0
+Kike Salas,defensa,Sevilla,2800000,3350000,2560000,Disponible,152058,28115,17,17,kike-salas,10000,30000,80000,0,0
+Isaac Romero,delantero,Sevilla,2770000,2990000,440000,Disponible,153549,32363,17,17,isaac-romero,-50000,-120000,-200000,0,0
+Aimar Oroz,mediocentro,Osasuna,2750000,4130000,2490000,lesión en el bíceps femoral de su pierna izquierda,151948,27591,15,93,aimar-oroz,-50000,-200000,-590000,1,0
+Mamadou Sarr,defensa,Real Sociedad,2730000,3530000,2730000,Disponible,158243,43185,16,13,mamadou-sarr,-50000,-290000,-480000,0,0
+Marc Aguado,mediocentro,Elche,2730000,3060000,1440000,Disponible,155920,37717,162,75,marc-aguado,-20000,-80000,-150000,0,0
+Carreira,defensa,Celta,2720000,2780000,2180000,Disponible,16214,10574,7,5,carreira,0,-40000,-60000,0,0
+Peque,delantero,Sevilla,2720000,2800000,300000,Disponible,154420,34127,17,17,peque,-70000,-80000,-40000,0,0
+Santiago Mouriño,defensa,Villarreal,2710000,3310000,2660000,Disponible,153273,31018,20,19,santiago-mourino,-90000,-170000,-220000,0,0
+Mandi,defensa,Levante,2700000,2700000,860000,Disponible,110,2480,21,10,mandi,20000,50000,140000,0,0
+Gavi,mediocentro,Barcelona,2690000,5140000,2690000,Disponible,151371,24732,5,3,gavi,-20000,-40000,-100000,0,0
+Fer Niño,delantero,Elche,2650000,3390000,460000,Disponible,7375,21132,162,75,fer-nino,0,-40000,-150000,0,0
+Robert Navarro,delantero,Athletic,2630000,2630000,1650000,Disponible,151334,24474,1,1,robert-navarro,300000,600000,790000,0,0
+Dituro,portero,Elche,2620000,3530000,1830000,Disponible,151190,17482,162,75,dituro,-30000,-90000,-180000,0,0
+Héctor Fort,defensa,Real Sociedad,2610000,2610000,700000,Disponible,153581,32460,16,13,hector-fort,100000,330000,620000,0,0
+Mangala,mediocentro,Getafe,2610000,2990000,2610000,Disponible,158144,41606,23,8,mangala,-20000,-80000,-150000,0,0
+Arnau Martínez,defensa,Valencia,2590000,3080000,2590000,Disponible,151580,26095,19,18,arnau-martinez,-50000,-130000,-230000,0,0
+Pablo García,delantero,Racing,2590000,2590000,220000,Disponible,155735,35763,878,812,pablo-garcia,340000,870000,1370000,0,0
+Lucas Noubi,defensa,Deportivo,2560000,3240000,640000,Disponible,157804,41083,8,6,lucas-noubi,10000,-10000,-20000,0,0
+Paredes,defensa,Athletic,2540000,2540000,230000,Disponible,152077,27996,1,1,paredes,110000,320000,560000,0,0
+El Hilali,defensa,Espanyol,2530000,2630000,1190000,Disponible,152064,28103,10,7,el-hilali,0,-10000,40000,0,0
+Aramburu,defensa,Real Sociedad,2520000,3030000,1720000,Disponible,153601,32020,16,13,aramburu,60000,170000,180000,0,0
+Facundo Bernal,mediocentro,Betis,2510000,2560000,1000000,Disponible,158042,42370,6,87,facundo-bernal,-10000,-40000,-40000,0,0
+Quagliata,defensa,Deportivo,2510000,2510000,620000,Disponible,157246,40952,8,6,quagliata,80000,190000,330000,0,0
+Etta Eyong,delantero,Levante,2500000,4140000,2500000,molestias sin determinar,155733,32435,21,10,etta-eyong,-110000,-180000,-210000,0,1
+Luiz Júnior,portero,Villarreal,2470000,3550000,1420000,Disponible,154539,34621,20,19,luiz-junior,-80000,-130000,-160000,0,0
+Yuri,defensa,Athletic,2470000,2890000,1700000,Disponible,364,1074,1,1,yuri,30000,70000,130000,0,0
+Lo Celso,mediocentro,Betis,2460000,4290000,2460000,Disponible,5809,11686,6,87,lo-celso,0,-50000,-100000,0,0
+Rüdiger,defensa,Real Madrid,2460000,3640000,2460000,Disponible,151555,2253,2,15,rudiger,-100000,-160000,-90000,0,0
+Unai López,mediocentro,Rayo Vallecano,2450000,2450000,370000,Disponible,287,1969,106,70,unai-lopez,50000,100000,180000,0,0
+Bellerín,defensa,Betis,2420000,3000000,2410000,Disponible,16044,2247,6,87,bellerin,-10000,-30000,-110000,0,0
+Jauregizar,mediocentro,Athletic,2380000,3590000,2080000,Disponible,152996,30210,1,1,jauregizar,-30000,-80000,-150000,0,0
+Isi Palazón,delantero,Rayo Vallecano,2340000,3640000,1670000,lesión muscular en el cuádriceps de la pierna izquierda,150972,5069,106,70,isi-palazon,-20000,-60000,-130000,1,0
+Jonny Castro,defensa,Alavés,2340000,2340000,920000,Disponible,140,1599,3,91,jonny-castro,20000,70000,160000,0,0
+Galán,defensa,Celta,2330000,3430000,2280000,Disponible,6037,17645,7,5,galan,-20000,-100000,-200000,0,0
+Brugué,delantero,Levante,2310000,2310000,250000,Disponible,151194,15396,21,10,brugue,120000,440000,830000,0,0
+Boyomo,defensa,Osasuna,2300000,3520000,2080000,Disponible,154245,33694,15,93,boyomo,-20000,-40000,-70000,0,0
+Hinojo,defensa,Espanyol,2280000,2280000,150000,Disponible,2754,14466,10,7,hinojo,30000,120000,260000,0,0
+Maffeo,defensa,Valencia,2280000,3010000,2280000,Disponible,900,10030,19,18,maffeo,-40000,-100000,-160000,0,0
+Pellegrini,entrenador,Betis,2250000,2360000,1600000,Disponible,153030,19513,6,87,pellegrini,0,0,-50000,0,0
+Hugo Duro,delantero,Valencia,2240000,3100000,1890000,Disponible,6138,6259,19,18,hugo-duro,-40000,-100000,-170000,0,0
+Urko Gonzalez,mediocentro,Espanyol,2240000,2640000,1580000,Disponible,153491,22699,10,7,urko-gonzalez,-30000,-90000,-160000,0,0
+Luismi Cruz,delantero,Deportivo,2220000,2220000,690000,Disponible,153188,25777,8,6,luismi-cruz,160000,290000,390000,0,0
+Yangel Herrera,mediocentro,Real Sociedad,2220000,2420000,700000,Disponible,5949,17344,16,13,yangel-herrera,-20000,-70000,-90000,0,0
+Puga,defensa,Málaga,2210000,2400000,770000,Disponible,157821,41416,14,65,puga,-30000,-70000,-130000,0,0
+Swedberg,mediocentro,Celta,2210000,2760000,1580000,Disponible,151829,26879,7,5,swedberg,-20000,-60000,-130000,0,0
+Peio Canales,mediocentro,Athletic,2200000,2780000,820000,lesión muscular moderada en el sóleo izquierdo,154789,35171,1,1,peio-canales,-40000,-180000,-530000,1,0
+Pablo Ramón,defensa,Racing,2190000,2220000,290000,Disponible,154697,35408,878,812,pablo-ramon,-20000,-30000,0,0,0
+Lomónaco,defensa,Elche,2180000,2360000,2180000,Disponible,158268,43316,162,75,lomonaco,-50000,-160000,-180000,0,0
+Sergio Martínez,mediocentro,Real Madrid,2180000,2950000,150000,Disponible,157740,41259,2,15,sergio-martinez,-90000,-240000,-530000,0,0
+Gerenabarrena,mediocentro,Athletic,2160000,2160000,170000,Disponible,157937,41566,1,1,gerenabarrena,180000,500000,900000,0,0
+Revivo,defensa,Elche,2130000,2620000,2130000,Disponible,158267,43268,162,75,revivo,-130000,-390000,-490000,0,0
+Tárrega,defensa,Valencia,2130000,2390000,960000,Disponible,154248,26592,19,18,tarrega,-50000,-110000,-190000,0,0
+Pablo Ibáñez,mediocentro,Alavés,2090000,2090000,1420000,Disponible,2333,14800,3,91,pablo-ibanez,30000,20000,50000,0,0
+Raúl Moro,delantero,Osasuna,2090000,3420000,1100000,Disponible,154252,33697,15,93,raul-moro,-40000,-130000,-320000,0,0
+Andrés García,defensa,Getafe,2080000,2090000,390000,Disponible,151614,26131,23,8,andres-garcia,0,0,0,0,0
+Íñigo Pérez,entrenador,Villarreal,2070000,2530000,850000,Disponible,153637,26780,20,19,inigo-perez,-50000,-80000,-130000,0,0
+Batalla,portero,Rayo Vallecano,2050000,4070000,2050000,fractura en la tibia,153540,32134,106,70,batalla,-30000,-110000,-240000,1,0
+Dubasin,delantero,Osasuna,2050000,3310000,2050000,Disponible,151758,26360,15,93,dubasin,-30000,-70000,-120000,0,0
+Kochorashvili,mediocentro,Sevilla,2050000,2190000,2030000,Disponible,155910,37733,17,17,kochorashvili,-30000,-60000,-110000,0,0
+Mikel Rodriguez,mediocentro,Alavés,2050000,2510000,220000,rotura del ligamento cruzado anterior de la rodilla derecha,158082,31069,3,91,mikel-rodriguez,-130000,-460000,-390000,1,0
+Izan Merino,mediocentro,Málaga,2010000,2550000,670000,Disponible,157817,41098,14,65,izan-merino,-30000,-70000,-120000,0,0
+Pere Milla,delantero,Espanyol,2010000,3100000,1930000,Disponible,5753,9047,10,7,pere-milla,-30000,-90000,-160000,0,0
+Chust,defensa,Elche,2000000,2140000,1170000,Disponible,3406,1760,162,75,chust,-10000,-50000,-80000,0,0
+Danjuma,delantero,Valencia,2000000,2550000,780000,Disponible,151345,24509,19,18,danjuma,10000,10000,10000,0,0
+Djené,defensa,Getafe,1990000,2220000,1090000,Disponible,891,9983,23,8,djene,-20000,-80000,-160000,0,0
+Rafael Garrido,defensa,Málaga,1990000,1990000,240000,Disponible,157834,41093,14,65,rafael-garrido,10000,30000,90000,0,0
+Arguibide,defensa,Osasuna,1980000,1980000,150000,Disponible,156441,10292,15,93,arguibide,80000,290000,550000,0,0
+Gueye,mediocentro,Racing,1970000,3150000,550000,Disponible,157735,41267,878,812,gueye,-60000,-120000,-190000,0,0
+Iker Muñoz,mediocentro,Osasuna,1960000,1960000,200000,Disponible,152935,18128,15,93,iker-munoz,60000,250000,470000,0,0
+Ilaix Moriba,mediocentro,Celta,1950000,3220000,1950000,Disponible,107773,21084,7,5,ilaix-moriba,-10000,-40000,-100000,0,0
+Juan Cruz Díaz,delantero,Málaga,1950000,3350000,310000,Pequeñas molestias musculares,152078,28282,14,65,juan-cruz-diaz,-30000,-90000,-160000,0,0
+Joaquín Muñoz,delantero,Málaga,1930000,2270000,900000,Disponible,16018,18570,14,65,joaquin-munoz,-30000,-70000,-120000,0,0
+Marc Casadó,mediocentro,Deportivo,1930000,1930000,430000,Disponible,154357,32629,8,6,marc-casado,250000,750000,1250000,0,0
+Starfelt,defensa,Celta,1920000,3030000,800000,Disponible,153356,31321,7,5,starfelt,-30000,-110000,-130000,0,0
+Angeliño,defensa,Deportivo,1910000,3290000,1910000,Disponible,158138,41603,8,6,angelino,-50000,-90000,-150000,0,0
+Diego Llorente,defensa,Betis,1900000,3200000,1900000,fractura en la nariz,810,1679,6,87,diego-llorente,-30000,-110000,-190000,0,1
+Villalibre,delantero,Racing,1880000,3020000,1020000,Disponible,593,6792,878,812,villalibre,-100000,-180000,-250000,0,0
+Adrià Altimira,defensa,Deportivo,1860000,2990000,930000,Disponible,153504,31989,8,6,adria-altimira,-20000,-80000,-210000,0,0
+Ville Koski,defensa,Alavés,1860000,1860000,250000,Disponible,156532,39924,3,91,ville-koski,10000,50000,120000,0,0
+Brahim,delantero,Real Madrid,1850000,2520000,1620000,Disponible,5936,129,2,15,brahim,-50000,-130000,-120000,0,0
+Turrientes,mediocentro,Real Sociedad,1840000,1840000,860000,Disponible,151421,24979,16,13,turrientes,30000,90000,150000,0,0
+Bardeli,mediocentro,Levante,1830000,1830000,480000,Disponible,157766,41385,21,10,bardeli,40000,180000,410000,0,0
+Javi Rodríguez,defensa,Celta,1830000,2260000,1430000,Disponible,154556,33839,7,5,javi-rodriguez,-20000,-70000,-140000,0,0
+Rubén Vargas,delantero,Sevilla,1830000,3670000,1830000, Parameniscitis externa de la rodilla derecha.,154708,35615,17,17,ruben-vargas,-40000,-140000,-170000,1,0
+Camavinga,mediocentro,Real Madrid,1810000,2000000,1390000,Disponible,3754,1733,2,15,camavinga,20000,80000,150000,0,0
+Balde,defensa,Barcelona,1800000,3230000,1800000,Disponible,151411,10040,5,3,balde,-30000,-90000,-180000,0,0
+Giménez,defensa,Deportivo,1790000,1790000,340000,Disponible,56,1676,8,6,gimenez,250000,750000,1250000,0,0
+Le Normand,defensa,Atlético,1780000,2360000,1340000,Disponible,5819,15719,4,2,le-normand,-50000,-90000,-120000,0,0
+Javier Rueda,defensa,Celta,1770000,2030000,1170000,Disponible,156071,33473,7,5,javier-rueda,10000,30000,50000,0,0
+Gayà,defensa,Valencia,1760000,2850000,1750000,Disponible,441,1844,19,18,gaya,-20000,-70000,-160000,0,0
+Bretones,defensa,Osasuna,1750000,1750000,470000,Disponible,154395,33971,15,93,bretones,0,40000,100000,0,0
+Zubeldia,defensa,Real Sociedad,1740000,1890000,520000,Disponible,592,8376,16,13,zubeldia,30000,90000,150000,0,0
+Gabriel Suazo,defensa,Sevilla,1720000,1970000,870000,Disponible,156197,38194,17,17,gabriel-suazo,-10000,-50000,-100000,0,0
+Sebastián Cáceres,defensa,Celta,1700000,1910000,1700000,Disponible,158269,43269,7,5,sebastian-caceres,-50000,-190000,-210000,0,0
+Sotelo,mediocentro,Levante,1700000,3000000,490000,Disponible,153382,25400,21,10,sotelo,-20000,-60000,-90000,0,0
+Belocian,defensa,Racing,1690000,1900000,1690000,Disponible,158270,43259,878,812,belocian,-20000,-140000,-210000,0,0
+Drkusic,defensa,Espanyol,1690000,2780000,1690000,Disponible,158174,42119,10,7,drkusic,-40000,-100000,-150000,0,0
+Justin de Haas,defensa,Valencia,1690000,3220000,1690000,Esguince de tobillo,157991,42271,19,18,justin-de-haas,-20000,-80000,-160000,1,0
+Rioja,delantero,Valencia,1680000,3180000,1680000,molestias en el tobillo,6228,17442,19,18,rioja,-50000,-130000,-240000,0,1
+Mario Martín,mediocentro,Getafe,1670000,2240000,870000,Disponible,154551,2368,23,8,mario-martin,-10000,-40000,-100000,0,0
+Hernando,defensa,Racing,1650000,1650000,420000,Disponible,157731,41263,878,812,hernando,0,30000,110000,0,0
+Lemar,mediocentro,Elche,1650000,2240000,690000,Disponible,4425,11196,162,75,lemar,130000,460000,870000,0,0
+Facundo González,defensa,Racing,1640000,1990000,420000,Disponible,157738,41275,878,812,facundo-gonzalez,-20000,-30000,0,0,0
+Uche,delantero,Getafe,1640000,4460000,1640000,grave lesión en la rodilla derecha,154186,33516,23,8,uche,-20000,-70000,-130000,1,0
+Ceballos,mediocentro,Betis,1620000,1620000,370000,Disponible,851,2044,6,87,ceballos,250000,750000,1250000,0,0
+Sangaré,defensa,Elche,1610000,1770000,270000,Disponible,156551,40010,162,75,sangare,10000,30000,80000,0,0
+Óscar Valentín,mediocentro,Rayo Vallecano,1610000,1790000,1400000,Disponible,150973,5352,106,70,oscar-valentin,-10000,-30000,-30000,0,0
+Dani Cárdenas,portero,Rayo Vallecano,1600000,1730000,180000,Disponible,16177,22975,106,70,dani-cardenas,-20000,-70000,-130000,0,0
+Filip Ugrinic,mediocentro,Valencia,1570000,1580000,610000,Disponible,156277,38368,19,18,filip-ugrinic,-10000,-10000,20000,0,0
+Sadick,defensa,Rayo Vallecano,1570000,1840000,1570000,Disponible,158271,43267,106,70,sadick,-100000,-230000,-270000,0,0
+Péter Gulácsi,portero,Villarreal,1560000,4130000,1560000,Disponible,158129,38433,20,19,peter-gulacsi,-10000,-50000,-130000,0,0
+Sadiq,delantero,Valencia,1540000,2700000,1540000,afectación de la región isquiotibial derecha,151560,26077,19,18,sadiq,-30000,-130000,-370000,1,0
+Andrés Castrín,defensa,Sevilla,1530000,1530000,900000,Disponible,156329,38072,17,17,andres-castrin,10000,30000,80000,0,0
+Bigas,defensa,Elche,1530000,2490000,1530000,Disponible,252,2169,162,75,bigas,-10000,-50000,-90000,0,0
+Yeray,defensa,Athletic,1530000,1960000,820000,golpe en la cabeza,509,5771,1,1,yeray,-10000,-50000,-120000,0,0
+Matarazzo,entrenador,Real Sociedad,1510000,1740000,1060000,Disponible,156459,39399,16,13,matarazzo,-10000,-30000,-50000,0,0
+Eriksson,portero,Racing,1490000,3240000,490000,Disponible,157741,41268,878,812,eriksson,-20000,-80000,-140000,0,0
+Gudelj,mediocentro,Getafe,1490000,1490000,800000,Disponible,6767,18916,23,8,gudelj,50000,220000,520000,0,0
+Manu Sánchez,defensa,Levante,1480000,1700000,780000,Disponible,3705,1721,21,10,manu-sanchez,0,-20000,-50000,0,0
+Vivian,defensa,Athletic,1480000,3130000,1480000,lesión insercional en el aductor largo de su pierna derecha,3756,12400,1,1,vivian,0,-30000,-90000,0,1
+Hugo González,delantero,Celta,1430000,2540000,260000,Disponible,153485,31468,7,5,hugo-gonzalez,-20000,-110000,-190000,0,0
+Thiago Fernández,delantero,Levante,1430000,2080000,1230000,Disponible,156469,39431,21,10,thiago-fernandez,10000,30000,50000,0,0
+Buonanotte,mediocentro,Elche,1410000,1660000,1240000,Disponible,158146,41608,162,75,buonanotte,-10000,-30000,-40000,0,0
+Denis Suárez,mediocentro,Alavés,1410000,1420000,650000,Disponible,90,1876,3,91,denis-suarez,-10000,-10000,20000,0,0
+Ximo Navarro,defensa,Deportivo,1410000,1410000,370000,Disponible,741,9065,8,6,ximo-navarro,40000,70000,120000,0,0
+Aarón Martín,defensa,Racing,1380000,1650000,1380000,Disponible,506,6226,878,812,aaron-martin,-40000,-160000,-270000,0,0
+Mantilla,defensa,Racing,1380000,1530000,410000,Disponible,157732,41264,878,812,mantilla,-40000,-50000,-20000,0,0
+Ratkov,delantero,Levante,1380000,1390000,1320000,Disponible,158272,43270,21,10,ratkov,-10000,20000,60000,0,0
+Torró,mediocentro,Osasuna,1380000,1820000,1290000,Disponible,15361,19485,15,93,torro,-20000,-40000,-70000,0,0
+Driouech,delantero,Celta,1350000,1610000,1350000,Disponible,158227,42813,7,5,driouech,-10000,-40000,-80000,0,0
+Hugo Álvarez,mediocentro,Celta,1350000,1740000,1350000,Disponible,153647,32135,7,5,hugo-alvarez,-20000,-80000,-110000,0,0
+Endrick,delantero,Real Madrid,1340000,3740000,1340000,lesión muscular con afectación del tendón,154345,33796,2,15,endrick,-10000,-50000,-90000,0,1
+Abde Rebbach,delantero,Alavés,1320000,1420000,1140000,Disponible,153086,30510,3,91,abde-rebbach,-10000,-30000,-40000,0,0
+Areso,defensa,Athletic,1320000,1320000,410000,Disponible,4541,8695,1,1,areso,100000,180000,270000,0,0
+André Almeida,mediocentro,Racing,1310000,1310000,330000,Disponible,151979,27929,878,812,andre-almeida,130000,490000,730000,0,0
+Yoel Lago,defensa,Celta,1290000,1290000,260000,Disponible,154747,33474,7,5,yoel-lago,40000,150000,340000,0,0
+Einar Galilea,defensa,Málaga,1280000,1390000,240000,Disponible,4,4070,14,65,einar-galilea,-10000,-30000,-60000,0,0
+Mayoral,delantero,Getafe,1270000,2350000,840000,Disponible,770,91,23,8,mayoral,-10000,-30000,-70000,0,0
+Pablo Martínez,mediocentro,Málaga,1270000,1670000,1270000,Disponible,12565,4245,14,65,pablo-martinez,-10000,-40000,-90000,0,0
+Pedrosa,defensa,Rayo Vallecano,1250000,1250000,250000,Disponible,5796,16889,106,70,pedrosa,20000,110000,360000,0,0
+Sangante,defensa,Sevilla,1250000,1910000,1250000,Sancionado,157480,40910,17,17,sangante,-30000,-70000,-130000,0,0
+Jensen,mediocentro,Deportivo,1240000,1900000,700000,Disponible,158073,42459,8,6,jensen,-50000,-80000,-110000,0,0
+Riedel,defensa,Espanyol,1240000,1830000,260000,Disponible,156340,38517,10,7,riedel,-20000,-60000,-120000,0,0
+Loureiro,defensa,Deportivo,1230000,2300000,530000,Disponible,157495,41031,8,6,loureiro,-10000,-30000,-60000,0,0
+Pau Navarro,defensa,Villarreal,1230000,2520000,1230000,Disponible,154652,35156,20,19,pau-navarro,-50000,-90000,-130000,0,0
+Deossa,mediocentro,Betis,1220000,1410000,220000,Disponible,156268,37416,6,87,deossa,-10000,-30000,-60000,0,0
+Raul García,delantero,Osasuna,1220000,1770000,1140000,Disponible,151780,18382,15,93,raul-garcia,10000,30000,70000,0,0
+Kiko Femenía,defensa,Getafe,1210000,1330000,420000,Disponible,494,856,23,8,kiko-femenia,30000,90000,180000,0,0
+Bordalás,entrenador,Getafe,1200000,1400000,870000,Disponible,153039,19506,23,8,bordalas,-10000,-30000,-70000,0,0
+Yusi Enríquez,defensa,Alavés,1180000,1180000,200000,Disponible,156209,37525,3,91,yusi-enriquez,10000,40000,120000,0,0
+Militão,defensa,Real Madrid,1170000,1810000,1170000,lesión muscular en el bíceps femoral de su pierna izquierda,6164,18173,2,15,militao,0,0,-20000,1,0
+Hartman,defensa,Espanyol,1150000,2480000,1150000,Disponible,158045,42390,10,7,hartman,-10000,-50000,-110000,0,0
+Alemão,delantero,Rayo Vallecano,1140000,1660000,1140000,Disponible,154977,37450,106,70,alemao,-20000,-40000,-50000,0,0
+Azón,delantero,Getafe,1140000,1190000,1140000,Disponible,158273,43261,23,8,azon,-20000,-50000,-40000,0,0
+Moi Gómez,mediocentro,Osasuna,1140000,1140000,610000,Disponible,425,1462,15,93,moi-gomez,50000,130000,290000,0,0
+Terzić,entrenador,Athletic,1130000,1260000,730000,Disponible,158106,42572,1,1,terzic,10000,10000,10000,0,0
+Claudio Giráldez,entrenador,Celta,1110000,1340000,790000,Disponible,3208,14615,7,5,claudio-giraldez,-10000,-30000,-60000,0,0
+Cajuste,mediocentro,Málaga,1080000,1120000,1080000,Disponible,158274,43271,14,65,cajuste,-20000,-40000,-40000,0,0
+Bright Ede,defensa,Deportivo,1070000,1300000,290000,Disponible,158049,42395,8,6,bright-ede,-70000,-110000,-140000,0,0
+Christensen,defensa,Barcelona,1070000,1070000,250000,Disponible,151800,26678,5,3,christensen,20000,50000,110000,0,0
+Davinchi,defensa,Getafe,1050000,1770000,200000,Disponible,156154,38095,23,8,davinchi,-20000,-60000,-130000,0,0
+Toljan,defensa,Levante,1050000,1390000,780000,Disponible,156177,38143,21,10,toljan,0,0,20000,0,0
+Álvaro Carreras,defensa,Real Madrid,1050000,1810000,1050000,Disponible,153459,31707,2,15,alvaro-carreras,-10000,-30000,-70000,0,0
+Matteo Prati,mediocentro,Racing,1040000,1260000,1040000,Disponible,158234,42814,878,812,matteo-prati,-10000,-30000,-50000,0,0
+Gorrotxategi,mediocentro,Real Sociedad,1030000,1790000,1030000,Disponible,156063,37897,16,13,gorrotxategi,0,0,0,0,0
+David Mella,delantero,Deportivo,1020000,1540000,1020000,Disponible,157798,41077,8,6,david-mella,-30000,-60000,-100000,0,0
+Abdelkarim,delantero,Barcelona,1010000,1350000,320000,Disponible,158210,42747,5,3,abdelkarim,-20000,-30000,-80000,0,0
+Diakhaby,defensa,Valencia,1010000,1060000,400000,lesión en el abductor,4579,15464,19,18,diakhaby,-30000,-50000,-50000,1,0
+Sánchez Flores,entrenador,Alavés,1010000,1010000,380000,Disponible,153525,25020,3,91,sanchez-flores,10000,40000,80000,0,0
+Abqar,defensa,Getafe,1000000,1550000,350000,Molestias musculares,153084,30505,23,8,abqar,-10000,-50000,-120000,0,1
+Calero,defensa,Málaga,1000000,2040000,860000,"fracturas costales en las costillas 9, 10 y 11 izquierdas",4584,11045,14,65,calero,-10000,-30000,-70000,0,1
+Sergi Cardona,defensa,Villarreal,1000000,1960000,1000000,Disponible,153076,30493,20,19,sergi-cardona,-10000,-40000,-80000,0,0
+Oriol Rey,mediocentro,Levante,990000,990000,200000,Disponible,155919,37726,21,10,oriol-rey,30000,100000,220000,0,0
+Balliu,defensa,Rayo Vallecano,970000,1280000,210000,Disponible,151230,21063,106,70,balliu,-10000,-30000,-60000,0,0
+Francho Serrano,mediocentro,Getafe,940000,1030000,800000,Disponible,158209,42726,23,8,francho-serrano,-10000,-30000,-60000,0,0
+Luis García,entrenador,Sevilla,940000,940000,280000,Disponible,153258,21854,17,17,luis-garcia,0,0,0,0,0
+Nacho Pérez,defensa,Levante,940000,940000,150000,Disponible,157603,25815,21,10,nacho-perez,10000,30000,80000,0,0
+Jesús Vázquez,defensa,Valencia,900000,1020000,240000,Disponible,151424,24734,19,18,jesus-vazquez,-10000,-30000,-60000,0,0
+Iker Luque,delantero,Racing,880000,980000,880000,Disponible,158256,40552,878,812,iker-luque,-20000,-80000,-100000,0,0
+Kike Barja,mediocentro,Osasuna,870000,870000,310000,Disponible,6183,18256,15,93,kike-barja,20000,90000,220000,0,0
+Manolo González,entrenador,Espanyol,870000,930000,580000,Disponible,154262,33789,10,7,manolo-gonzalez,-10000,-20000,-40000,0,0
+Pol Lozano,mediocentro,Espanyol,870000,1150000,650000,Disponible,6012,17148,10,7,pol-lozano,-10000,-30000,-70000,0,0
+Julio Díaz,defensa,Sevilla,850000,1570000,160000,Disponible,156566,39673,17,17,julio-diaz,-10000,-30000,-40000,0,0
+Mendoza,mediocentro,Atlético,850000,970000,590000,Disponible,155924,37724,4,2,mendoza,-40000,-70000,-100000,0,0
+Yanis Musuayi,delantero,Levante,850000,1710000,230000,Disponible,156004,37863,21,10,yanis-musuayi,-10000,-30000,-70000,0,0
+Akhomach,delantero,Villarreal,840000,1170000,780000,Disponible,151452,25159,20,19,akhomach,-20000,-40000,-50000,0,0
+Aliou Dieng,mediocentro,Valencia,820000,1630000,820000,molestias musculares,158044,42396,19,18,aliou-dieng,0,-20000,-40000,0,0
+Hidalgo,entrenador,Deportivo,820000,820000,330000,Disponible,158108,42569,8,6,hidalgo,50000,100000,150000,0,0
+Adrián Niño,delantero,Málaga,810000,1400000,520000,molestias en el sóleo,157819,35706,14,65,adrian-nino,0,-10000,-30000,0,0
+Diego Rico,defensa,Osasuna,810000,1370000,300000,Disponible,500,5678,15,93,diego-rico,-20000,-50000,-120000,0,0
+Nico Guillén,mediocentro,Sevilla,810000,1280000,190000,Disponible,158143,41604,17,17,nico-guillen,-20000,-50000,-90000,0,0
+Pedro Díaz,mediocentro,Rayo Vallecano,810000,1140000,560000,Disponible,154474,34483,106,70,pedro-diaz,0,-10000,-20000,0,0
+Carlos Maciá,mediocentro,Villarreal,800000,1120000,150000,Disponible,156504,39357,20,19,carlos-macia,-20000,-40000,-80000,0,0
+Gijselhart,mediocentro,Deportivo,790000,1430000,500000,Disponible,157814,41090,8,6,gijselhart,-10000,-30000,-50000,0,0
+Ramis,entrenador,Osasuna,780000,780000,430000,Disponible,157725,41253,15,93,ramis,10000,30000,60000,0,0
+Carmona,defensa,Sevilla,770000,1270000,770000,Disponible,152052,27960,17,17,carmona,-10000,-30000,-50000,0,0
+Salinas,defensa,Málaga,750000,1100000,150000,Disponible,155915,37723,14,65,salinas,0,-20000,-40000,0,0
+Víctor García,mediocentro,Levante,740000,740000,420000,Disponible,151753,17121,21,10,victor-garcia,0,20000,70000,0,0
+Pablo Campos,portero,Levante,700000,1670000,230000,Disponible,156068,37894,21,10,pablo-campos,-10000,-30000,-60000,0,0
+Rosier,defensa,Osasuna,700000,2380000,700000,lesión muscular en el bíceps femoral de la pierna derecha,154394,33970,15,93,rosier,-10000,-30000,-50000,1,0
+Tete Morente,delantero,Elche,700000,700000,280000,Disponible,16095,22690,162,75,tete-morente,20000,70000,160000,0,0
+Aleñá,mediocentro,Alavés,670000,1020000,400000,Disponible,579,10157,3,91,alena,0,-20000,-40000,0,0
+Axel Tape,defensa,Levante,670000,780000,670000,Disponible,158248,43207,21,10,axel-tape,-20000,-40000,-80000,0,0
+Livakovic,portero,Barcelona,670000,880000,670000,Disponible,156368,38960,5,3,livakovic,-10000,-50000,-110000,0,0
+Villares,mediocentro,Deportivo,670000,840000,410000,Disponible,157800,41076,8,6,villares,-20000,-40000,-60000,0,0
+Freeman,defensa,Villarreal,660000,910000,450000,Disponible,156526,39901,20,19,freeman,20000,50000,80000,0,0
+Johnny,mediocentro,Atlético,660000,1210000,660000,Disponible,153533,32120,4,2,johnny,-10000,-30000,-50000,0,0
+Álvaro Núñez,defensa,Celta,650000,650000,440000,Disponible,155916,37719,7,5,alvaro-nunez,60000,170000,210000,0,0
+Moscardo,mediocentro,Espanyol,630000,1260000,620000,Disponible,158058,42412,10,7,moscardo,10000,10000,10000,0,0
+Álvaro Fidalgo,mediocentro,Betis,630000,1140000,630000,Disponible,156537,39966,6,87,alvaro-fidalgo,0,-20000,-50000,0,0
+Hugo Rincón,defensa,Athletic,620000,950000,620000,Disponible,156065,37898,1,1,hugo-rincon,-30000,-50000,-70000,0,0
+De Jong,mediocentro,Barcelona,610000,5370000,610000,rotura del ligamento lateral interno de la rodilla derecha,6159,18174,5,3,de-jong,0,0,-20000,1,0
+Bauzà,mediocentro,Espanyol,590000,600000,170000,Disponible,154806,10997,10,7,bauza,-10000,-10000,20000,0,0
+Neto,mediocentro,Elche,590000,820000,390000,Disponible,156259,38355,162,75,neto,-10000,-30000,-50000,0,0
+Kumbulla,defensa,Rayo Vallecano,580000,1070000,580000,molestias en el aductor,154530,34080,106,70,kumbulla,-10000,-30000,-70000,0,1
+Rodrygo,delantero,Real Madrid,570000,970000,570000,rotura del ligamento cruzado anterior y la rotura del menisco externo de la pierna derecha,6163,18178,2,15,rodrygo,0,0,0,1,0
+Kike García,delantero,Espanyol,560000,1710000,560000,Lesión en el tendón del bíceps femoral ,201,742,10,7,kike-garcia,-10000,-30000,-50000,1,0
+Ponce,delantero,Elche,560000,710000,540000,Disponible,244,5534,162,75,ponce,0,0,20000,0,0
+Pedro Felipe,defensa,Racing,550000,690000,280000,Disponible,158125,33871,878,812,pedro-felipe,0,30000,60000,0,0
+Eddahchouri,delantero,Deportivo,540000,750000,430000,Disponible,157802,41073,8,6,eddahchouri,40000,40000,20000,0,0
+Rafa Rodríguez,mediocentro,Málaga,530000,530000,290000,Disponible,157828,41092,14,65,rafa-rodriguez,0,0,20000,0,0
+Bouare,mediocentro,Rayo Vallecano,520000,520000,260000,Disponible,158238,43172,106,70,bouare,40000,140000,230000,0,0
+Corberán,entrenador,Valencia,510000,630000,360000,Disponible,154683,35316,19,18,corberan,-10000,-30000,-50000,0,0
+Pitarch,mediocentro,Real Madrid,500000,1640000,500000,Lesión en la rodilla,156567,27271,2,15,pitarch,0,0,-20000,0,1
+San José,entrenador,Rayo Vallecano,500000,550000,410000,Disponible,157812,41088,106,70,san-jose,0,-10000,-20000,0,0
+Arnau Ortiz,delantero,Atlético,490000,670000,310000,Disponible,153196,30802,4,2,arnau-ortiz,-20000,-40000,-60000,0,0
+Johaneko,defensa,Athletic,490000,490000,290000,Disponible,158237,43171,1,1,johaneko,20000,50000,90000,0,0
+Miguel Rodríguez,delantero,Alavés,490000,1620000,490000,Disponible,152952,29446,3,91,miguel-rodriguez,-10000,-30000,-50000,0,0
+Ali Houary,mediocentro,Elche,480000,530000,160000,Disponible,156337,38457,162,75,ali-houary,0,0,-10000,0,0
+Funes,entrenador,Málaga,480000,570000,410000,Disponible,158107,42571,14,65,funes,-10000,-10000,-20000,0,0
+Lucas Cepeda,delantero,Elche,480000,480000,150000,Disponible,156519,39874,162,75,lucas-cepeda,0,0,0,0,0
+Manu Bueno,mediocentro,Sevilla,480000,640000,150000,Disponible,154672,26299,17,17,manu-bueno,-10000,-30000,-50000,0,0
+Izei,delantero,Alavés,470000,530000,470000,Disponible,158305,43354,3,91,izei,-20000,0,0,0,0
+Andrés Antañón,mediocentro,Celta,460000,470000,460000,Decisión técnica,158306,24197,7,5,andres-antanon,-10000,0,0,0,0
+Nteka,delantero,Rayo Vallecano,460000,490000,170000,Disponible,151284,24336,106,70,nteka,-20000,-30000,-30000,0,0
+Tsitaishvili,delantero,Rayo Vallecano,450000,800000,450000,Disponible,158171,41940,106,70,tsitaishvili,-10000,-30000,-60000,0,0
+Bayindir,portero,Celta,440000,790000,440000,Disponible,158145,41605,7,5,bayindir,0,-20000,-40000,0,0
+Fran Pérez,delantero,Rayo Vallecano,440000,470000,260000,Sancionado,152933,27995,106,70,fran-perez,-30000,-10000,50000,0,0
+Gorosabel,defensa,Espanyol,420000,420000,260000,molestias en el aductor,1914,15462,10,7,gorosabel,0,40000,120000,1,0
+Luis Castro,entrenador,Levante,420000,420000,250000,Disponible,156460,39398,21,10,luis-castro,0,0,10000,0,0
+Lunin,portero,Real Madrid,420000,830000,420000,Disponible,4574,15289,2,15,lunin,0,0,0,0,0
+Valentini,defensa,Alavés,420000,700000,420000,Disponible,158147,41609,3,91,valentini,-10000,-30000,-50000,0,0
+Adam Aznou,defensa,Málaga,410000,420000,410000,Disponible,154767,35851,14,65,adam-aznou,-10000,-10000,-10000,0,0
+José Alberto López,entrenador,Racing,410000,410000,260000,Disponible,158109,42570,878,812,jose-alberto-lopez,0,0,0,0,0
+Obed Vargas,mediocentro,Atlético,410000,840000,410000,Disponible,156538,39974,4,2,obed-vargas,-20000,-70000,-140000,0,0
+Marcos Fernández,delantero,Espanyol,400000,550000,300000,Disponible,155840,37644,10,7,marcos-fernandez,20000,20000,10000,0,0
+Ángel Recio,defensa,Málaga,400000,400000,150000,Disponible,157835,41419,14,65,angel-recio,20000,20000,40000,0,0
+Herrando,defensa,Osasuna,390000,500000,210000,Lesión en el aductor izquierdo,153312,30141,15,93,herrando,-10000,-30000,-90000,1,0
+Pablo Durán,delantero,Celta,390000,390000,150000,Disponible,152815,29185,7,5,pablo-duran,10000,30000,80000,0,0
+Asencio,defensa,Real Madrid,380000,1360000,380000,Lesión en el recto femoral de la pierna derecha,154646,35249,2,15,asencio,0,-10000,-40000,1,0
+Bisiwu,delantero,Barcelona,380000,630000,200000,fuerte golpe en el tobillo,156028,37817,5,3,bisiwu,-10000,-40000,-90000,1,0
+Pablo Marín,mediocentro,Real Sociedad,380000,610000,380000,lesión muscular,152725,29034,16,13,pablo-marin,0,-10000,-20000,1,0
+Boselli,defensa,Getafe,370000,480000,150000,Disponible,156496,39801,23,8,boselli,0,-10000,-30000,0,0
+Puado,delantero,Espanyol,360000,800000,360000,Rotura del ligamento cruzado anterior,4977,16317,10,7,puado,0,0,0,1,0
+Rubén Sánchez,defensa,Elche,360000,360000,180000,Disponible,151961,23572,162,75,ruben-sanchez,10000,60000,140000,0,0
+Sazonov,defensa,Getafe,350000,390000,270000,Disponible,158124,32569,23,8,sazonov,0,-10000,-30000,0,0
+Abdoulaye Faye,defensa,Celta,340000,600000,340000,Decisión técnica,158130,37990,7,5,abdoulaye-faye,-10000,-30000,-50000,0,0
+Anselmi,entrenador,Elche,340000,380000,310000,Disponible,157768,41388,162,75,anselmi,0,0,-20000,0,0
+Oluwaseyi,delantero,Villarreal,340000,420000,250000,Disponible,156355,38854,20,19,oluwaseyi,0,0,0,0,0
+Ramón Enríquez,mediocentro,Málaga,340000,380000,250000,Disponible,157831,41411,14,65,ramon-enriquez,0,0,0,0,0
+Redondo,mediocentro,Elche,340000,390000,150000,Disponible,156302,38422,162,75,redondo,0,0,-10000,0,0
+Riki Rodríguez,mediocentro,Deportivo,340000,340000,200000,Disponible,157801,41081,8,6,riki-rodriguez,40000,70000,110000,0,0
+Valentín Gómez,defensa,Betis,330000,350000,300000,Disponible,156248,38318,6,87,valentin-gomez,-10000,-20000,-20000,0,0
+Juan Arana,delantero,Racing,320000,660000,320000,Disponible,157729,41262,878,812,juan-arana,0,-10000,-30000,0,0
+Juan Musso,portero,Atlético,320000,430000,320000,Disponible,154570,34805,4,2,juan-musso,0,0,0,0,0
+El-Abdellaoui,delantero,Celta,310000,350000,260000,Disponible,154703,35606,7,5,el-abdellaoui,-10000,-30000,-40000,0,0
+Roony,delantero,Barcelona,310000,1270000,310000,rotura del ligamento cruzado anterior de la rodilla derecha,156202,38216,5,3,roony,0,-10000,-10000,1,0
+Ruibal,mediocentro,Betis,310000,890000,310000,operación en el menisco externo de su rodilla derecha,6216,19141,6,87,ruibal,0,0,0,1,0
+Marchal,delantero,Real Sociedad,300000,300000,220000,Disponible,158201,42627,16,13,marchal,10000,30000,50000,0,0
+Van Oevelen,portero,Valencia,300000,400000,300000,Disponible,158228,42794,19,18,van-oevelen,0,-10000,-30000,0,0
+Álvaro Fernández,portero,Deportivo,290000,430000,290000,Disponible,575,5618,8,6,alvaro-fernandez,0,0,0,0,0
+Djaló,delantero,Athletic,280000,1040000,280000,Disponible,154191,33608,1,1,djalo,-10000,-20000,-30000,0,0
+Ndukwe,defensa,Levante,280000,360000,280000,Disponible,158220,42757,21,10,ndukwe,0,0,-10000,0,0
+Fran González,portero,Sevilla,270000,300000,160000,Disponible,154801,10182,17,17,fran-gonzalez,0,0,0,0,0
+Szczęsny,portero,Barcelona,270000,540000,270000,Disponible,154627,34613,5,3,szczesny,0,0,-10000,0,0
+Aitor Fernández,portero,Osasuna,260000,290000,200000,Disponible,5544,16606,15,93,aitor-fernandez,0,0,-20000,0,0
+Yeboah,defensa,Osasuna,260000,350000,260000,Disponible,158168,41932,15,93,yeboah,0,0,-10000,0,0
+Aihen,defensa,Real Sociedad,250000,270000,210000,Disponible,5933,17200,16,13,aihen,0,0,0,0,0
+Dani Requena,mediocentro,Levante,250000,440000,230000,Disponible,157936,37488,21,10,dani-requena,0,0,0,0,0
+Javi Morcillo,mediocentro,Elche,250000,250000,160000,Disponible,151063,12734,162,75,javi-morcillo,0,0,20000,0,0
+Jofre Carreras,delantero,Espanyol,250000,250000,250000,Disponible,151459,25392,10,7,jofre-carreras,0,0,0,0,0
+Osorio,delantero,Elche,250000,760000,250000,Disponible,157935,41565,162,75,osorio,0,0,0,0,0
+Abaida,delantero,Málaga,240000,240000,150000,Disponible,157836,41421,14,65,abaida,0,0,0,0,0
+Diego Conde,portero,Betis,240000,430000,240000,Disponible,7309,12087,6,87,diego-conde,0,0,0,0,0
+Dani Martínez,defensa,Atlético,230000,280000,160000,Disponible,2547,14424,4,2,dani-martinez,-10000,-10000,-20000,0,0
+Pelayo,defensa,Rayo Vallecano,230000,280000,150000,Disponible,154349,33804,106,70,pelayo,-10000,-20000,-40000,0,0
+Rego,mediocentro,Athletic,230000,310000,230000,Disponible,156421,38449,1,1,rego,0,0,-10000,0,0
+Berrocal,defensa,Málaga,220000,220000,150000,Disponible,151046,12404,14,65,berrocal,0,20000,60000,0,0
+Unai Marrero,portero,Real Sociedad,220000,270000,220000,Disponible,153318,31228,16,13,unai-marrero,0,0,0,0,0
+Alassane Diatta,mediocentro,Villarreal,210000,240000,210000,Disponible,158118,41157,20,19,alassane-diatta,0,0,0,0,0
+Alfon González,delantero,Sevilla,210000,410000,160000,Disponible,151779,23842,17,17,alfon-gonzalez,0,20000,40000,0,0
+De Tomás,delantero,Rayo Vallecano,210000,590000,210000,Disponible,4576,9475,106,70,de-tomas,0,0,0,0,0
+Diangana,mediocentro,Elche,190000,260000,150000,Disponible,156357,38875,162,75,diangana,0,0,0,0,0
+Firpo,defensa,Betis,190000,190000,150000,Disponible,1995,12596,6,87,firpo,0,0,0,0,0
+Guliashvili,delantero,Racing,190000,440000,190000,Disponible,157728,41261,878,812,guliashvili,-10000,-10000,-10000,0,0
+Jon Pacheco,defensa,Real Sociedad,190000,240000,190000,Disponible,151359,12424,16,13,jon-pacheco,0,0,-10000,0,0
+Raba,delantero,Valencia,190000,250000,190000,Disponible,1933,11633,19,18,raba,0,0,0,0,0
+Angel Ortiz,defensa,Betis,180000,180000,150000,Disponible,154738,35765,6,87,angel-ortiz,0,0,0,0,0
+Beitia,defensa,Real Sociedad,180000,300000,180000,Disponible,158200,36538,16,13,beitia,-10000,-30000,-40000,0,0
+Jorge Domínguez,defensa,Atlético,180000,230000,180000,Disponible,158178,42261,4,2,jorge-dominguez,0,0,0,0,0
+Vertrouwd,defensa,Rayo Vallecano,180000,220000,150000,lesión muscular de bajo grado en los isquios de la pierna izquierda,156287,38404,106,70,vertrouwd,0,-10000,-30000,1,0
+Álex Pastor,defensa,Málaga,180000,230000,180000,Disponible,157820,41100,14,65,alex-pastor,0,0,0,0,0
+Diego López,delantero,Valencia,170000,700000,170000,rotura del ligamento cruzado anterior de la rodilla derecha,152957,27994,19,18,diego-lopez,0,0,0,1,0
+Gamón,defensa,Valencia,170000,230000,170000,Disponible,158177,42260,19,18,gamon,0,0,0,0,0
+Logan Costa,defensa,Villarreal,170000,170000,170000,Disponible,154552,34717,20,19,logan-costa,0,0,0,0,0
+Barcia,defensa,Deportivo,160000,180000,160000,Disponible,157805,41080,8,6,barcia,0,0,0,0,0
+Belaid,mediocentro,Rayo Vallecano,160000,160000,160000,Disponible,2284,14512,106,70,belaid,0,0,0,0,0
+Guevara,mediocentro,Alavés,160000,160000,160000,Disponible,6227,17369,3,91,guevara,0,0,0,0,0
+Ives Valou,defensa,Getafe,160000,200000,160000,Disponible,158048,42394,23,8,ives-valou,0,0,0,0,0
+Losada,delantero,Betis,160000,290000,160000,Disponible,154401,10650,6,87,losada,0,-20000,-40000,0,0
+Ochieng,delantero,Real Sociedad,160000,260000,160000,Disponible,158176,40037,16,13,ochieng,0,-20000,-20000,0,0
+Rubén Gómez,portero,Villarreal,160000,180000,160000,Disponible,158179,42021,20,19,ruben-gomez,0,0,0,0,0
+Aarón Ochoa,mediocentro,Málaga,150000,150000,150000,lesión en el menisco externo de la rodilla derecha,157830,41097,14,65,aaron-ochoa,0,0,0,1,0
+Adrián Rodríguez,portero,Alavés,150000,150000,150000,Disponible,154794,36566,3,91,adrian-rodriguez,0,0,0,0,0
+Aitor Mañas,delantero,Alavés,150000,170000,150000,Disponible,157949,39386,3,91,aitor-manas,0,0,0,0,0
+Barzic,defensa,Elche,150000,150000,150000,Disponible,156074,27575,162,75,barzic,0,0,0,0,0
+Benavidez,mediocentro,Alavés,150000,150000,150000,Disponible,153083,30507,3,91,benavidez,0,0,0,0,0
+Beñat Prados,mediocentro,Athletic,150000,190000,150000,Disponible,151233,21033,1,1,benat-prados,0,0,0,0,0
+Boayar,delantero,Elche,150000,150000,150000,Disponible,155934,37709,162,75,boayar,0,0,0,0,0
+Brian Fariñas,mediocentro,Barcelona,150000,200000,150000,Disponible,158126,24255,5,3,brian-farinas,0,0,0,0,0
+Cabello,defensa,Levante,150000,150000,150000,Disponible,155925,37713,21,10,cabello,0,0,0,0,0
+Cardoso,defensa,Sevilla,150000,150000,150000,Disponible,156373,38965,17,17,cardoso,0,0,0,0,0
+Carlos López,portero,Málaga,150000,150000,150000,Disponible,157833,41091,14,65,carlos-lopez,0,0,0,0,0
+Comas,defensa,Deportivo,150000,160000,150000,Disponible,157336,40960,8,6,comas,0,0,0,0,0
+Copete,defensa,Valencia,150000,220000,150000,lesión en el menisco de la rodilla izquierda,151746,26344,19,18,copete,0,0,0,1,0
+Cristian Rivero,portero,Valencia,150000,150000,150000,Disponible,16189,23006,19,18,cristian-rivero,0,0,0,0,0
+Diaby,defensa,Elche,150000,150000,150000,Disponible,155923,37715,162,75,diaby,0,0,0,0,0
+Diego Murillo,defensa,Málaga,150000,200000,150000,lesión en el ligamento lateral interno y del menisco interno,157826,41413,14,65,diego-murillo,0,0,0,1,0
+Egiluz,defensa,Athletic,150000,150000,150000,rotura de la plastia del ligamento cruzado anterior de la rodilla derecha,156179,38144,1,1,egiluz,0,0,0,1,0
+Esquivel,portero,Atlético,150000,190000,150000,Disponible,158275,43281,4,2,esquivel,-10000,-30000,-40000,0,0
+Facundo Garcés,defensa,Alavés,150000,190000,150000,sanción FIFA,154701,35426,3,91,facundo-garces,0,0,0,0,0
+Fortuño,portero,Espanyol,150000,170000,150000,Disponible,154615,30334,10,7,fortuno,0,0,0,0,0
+Foulquier,defensa,Valencia,150000,150000,150000,lesión sin determinar,228,1780,19,18,foulquier,0,0,0,1,0
+Germán Parreño,portero,Deportivo,150000,150000,150000,Disponible,157806,2086,8,6,german-parreno,0,0,0,0,0
+Hugo Novoa,defensa,Alavés,150000,180000,150000,Disponible,154452,34196,3,91,hugo-novoa,0,0,0,0,0
+Iker Cordoba,defensa,Valencia,150000,150000,150000,Disponible,157955,35308,19,18,iker-cordoba,0,0,0,0,0
+Iturbe,portero,Elche,150000,150000,150000,Disponible,156208,37526,162,75,iturbe,0,0,0,0,0
+Iván Villar,portero,Celta,150000,160000,150000,Disponible,1964,10117,7,5,ivan-villar,0,0,0,0,0
+Iñaki Rupérez,defensa,Real Sociedad,150000,170000,150000,Disponible,157997,41153,16,13,inaki-ruperez,0,0,0,0,0
+Jauregi,delantero,Málaga,150000,200000,150000,Disponible,157825,41095,14,65,jauregi,0,0,0,0,0
+Josan,mediocentro,Elche,150000,180000,150000,Disponible,15812,22061,162,75,josan,0,0,0,0,0
+Juanmi,delantero,Getafe,150000,150000,150000,operación en el tendón rotuliano,381,832,23,8,juanmi,0,0,0,1,0
+Kevin Sánchez,delantero,Deportivo,150000,210000,150000,Disponible,157940,41567,8,6,kevin-sanchez,0,0,0,0,0
+Letacek,portero,Getafe,150000,150000,150000,Disponible,154432,34149,23,8,letacek,0,0,0,0,0
+Lobete,delantero,Málaga,150000,200000,150000,lesión en el ligamento cruzado anterior y en el ligamento colateral interno de su rodilla izquierda,151323,15642,14,65,lobete,0,0,0,1,0
+Luiz Felipe,defensa,Rayo Vallecano,150000,170000,150000,lesión en los isquiotibiales,151801,26676,106,70,luiz-felipe,0,0,0,1,0
+Marc Santos,defensa,Levante,150000,150000,150000,Disponible,158002,42277,21,10,marc-santos,0,0,0,0,0
+Marcão,defensa,Sevilla,150000,220000,150000,Disponible,151817,26813,17,17,marcao,0,0,0,0,0
+Mendy,defensa,Real Madrid,150000,240000,150000,desgarro del tendón del recto femoral con separación ósea,6161,1871,2,15,mendy,0,0,0,1,0
+Moussa Diarra,defensa,Málaga,150000,150000,150000,lesión muscular,158024,42328,14,65,moussa-diarra,0,0,0,1,0
+Nico Serrano,delantero,Athletic,150000,160000,150000,Disponible,151434,24956,1,1,nico-serrano,0,0,0,0,0
+Noé Carrillo,mediocentro,Deportivo,150000,170000,150000,lesión en el tobillo,157274,40948,8,6,noe-carrillo,0,0,0,1,0
+Odriozola,defensa,Real Sociedad,150000,150000,150000,Rotura del ligamento cruzado anterior,619,6871,16,13,odriozola,0,0,0,1,0
+Osambela,mediocentro,Osasuna,150000,150000,150000,Disponible,156528,19693,15,93,osambela,0,0,0,0,0
+Paco Cortés,delantero,Levante,150000,150000,150000,Disponible,156485,39736,21,10,paco-cortes,0,0,0,0,0
+Sainz-Maza,mediocentro,Racing,150000,150000,150000,Disponible,157739,41265,878,812,sainz-maza,0,0,0,0,0
+Samu Becerra,mediocentro,Rayo Vallecano,150000,160000,150000,Disponible,157995,39223,106,70,samu-becerra,0,0,0,0,0
+Sannadi,delantero,Athletic,150000,190000,150000,Disponible,154386,33938,1,1,sannadi,0,0,0,0,0
+Selu Diallo,mediocentro,Alavés,150000,200000,150000,Disponible,157942,41560,3,91,selu-diallo,0,0,0,0,0
+Sergi Canós,delantero,Valencia,150000,270000,150000,Lesión en el ligamento cruzado,153397,31494,19,18,sergi-canos,0,0,0,1,0
+Wanjala,defensa,Valencia,150000,180000,150000,Disponible,158119,42605,19,18,wanjala,0,0,0,0,0
+Yago Santiago,delantero,Elche,150000,150000,150000,artroscopia de rodilla,155931,37720,162,75,yago-santiago,0,0,0,1,0
+Zakharyan,mediocentro,Real Sociedad,150000,150000,150000,Disponible,153396,31475,16,13,zakharyan,0,0,0,0,0
+Álex Padilla,portero,Athletic,150000,160000,150000,Disponible,154443,34173,1,1,alex-padilla,0,0,0,0,0
+Álex Primo,portero,Levante,150000,180000,150000,luxación del hombro derecho con lesión de labrum,156345,8517,21,10,alex-primo,0,0,0,1,0

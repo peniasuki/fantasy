@@ -175,7 +175,11 @@ export default function EquipoPage() {
               </p>
               <button
                 type="button"
-                className="mt-2 text-xs text-gold"
+                className={`mt-2 rounded-md px-3 py-1.5 text-sm font-semibold ${
+                  open
+                    ? "border border-line text-white/70"
+                    : "bg-grass text-ink shadow-sm shadow-black/30"
+                }`}
                 onClick={() => setSellPlayerId(open ? null : s.playerId)}
               >
                 {open ? "Cerrar venta" : "Vender"}

@@ -95,7 +95,16 @@ export async function GET() {
         .filter((d) => d.data().active !== false)
         .map((d) => {
           const data = d.data();
-          return [d.id, { ...data, vm: data.currentPrice ?? data.vm ?? 0 }];
+          return [
+            d.id,
+            {
+              ...data,
+              vm: data.currentPrice ?? data.vm ?? 0,
+              pointsHome: Number(data.pointsHome ?? 0),
+              pointsAway: Number(data.pointsAway ?? 0),
+              pointsTotal: Number(data.pointsTotal ?? 0),
+            },
+          ];
         }),
     );
     const members = Object.fromEntries(

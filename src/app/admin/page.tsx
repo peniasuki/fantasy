@@ -59,6 +59,19 @@ export default function AdminPage() {
     setMsg(JSON.stringify(results, null, 2));
   }
 
+  async function resetLeague() {
+    const ok = window.confirm(
+      "¿Restablecer la liga?\n\n• Todos los jugadores fichados vuelven al mercado (VM)\n• Managers a 40M € y 0 puntos\n• Se borran pujas, ofertas y alineaciones\n\nEsta acción no se puede deshacer.",
+    );
+    if (!ok) return;
+    const typed = window.prompt('Escribe RESTABLECER para confirmar:');
+    if (typed !== "RESTABLECER") {
+      setMsg("Cancelado: confirmación incorrecta.");
+      return;
+    }
+    await run("/api/jobs/reset-league");
+  }
+
   if (status && !status.isAdmin) {
     return (
       <div className="space-y-3 pb-6">
@@ -131,6 +144,13 @@ export default function AdminPage() {
         onClick={() => run("/api/jobs/reset-manager-standings")}
       >
         Reiniciar clasificación managers (arranque J5)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-red-500/50 py-3 text-red-300 disabled:opacity-40"
+        onClick={() => void resetLeague()}
+      >
+        Restablecer (mercado + 40M)
       </button>
       {msg && <pre className="whitespace-pre-wrap rounded-lg bg-panel p-3 text-xs text-white/70">{msg}</pre>}
     </div>

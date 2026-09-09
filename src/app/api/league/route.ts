@@ -65,10 +65,15 @@ export async function POST(request: Request) {
         settings: DEFAULT_SETTINGS,
         scoringSystem: "stats",
       });
+      const userDoc = (await db().collection("users").doc(user.uid).get()).data() ?? {};
+      const displayName =
+        String(userDoc.displayName || "").trim() || user.name || user.email || "Admin";
+      const teamName = String(userDoc.teamName || "").trim() || null;
       await leagueRef.collection("members").doc(user.uid).set({
         uid: user.uid,
         role: "admin",
-        displayName: user.name || user.email || "Admin",
+        displayName,
+        teamName,
         picture: user.picture,
         balance: DEFAULT_SETTINGS.initialBalance,
         points: 0,
@@ -89,11 +94,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "La liga está llena (8)." }, { status: 400 });
     }
     const existing = members.docs.find((d) => d.id === user.uid);
+    const userDoc = (await db().collection("users").doc(user.uid).get()).data() ?? {};
+    const displayName =
+      (existing?.data()?.displayName as string | undefined)?.trim() ||
+      String(userDoc.displayName || "").trim() ||
+      user.name ||
+      user.email ||
+      "Manager";
+    const teamName =
+      (existing?.data()?.teamName as string | null | undefined) ??
+      (String(userDoc.teamName || "").trim() || null);
     await leagueRef.collection("members").doc(user.uid).set(
       {
         uid: user.uid,
         role, // admin solo si email allowlist; nunca por “primer miembro”
-        displayName: user.name || user.email || "Manager",
+        displayName,
+        teamName,
         picture: user.picture,
         balance: existing?.data()?.balance ?? league.settings?.initialBalance ?? DEFAULT_SETTINGS.initialBalance,
         points: existing?.data()?.points ?? 0,

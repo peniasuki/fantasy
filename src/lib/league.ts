@@ -8,6 +8,7 @@ export type Member = {
   uid: string;
   role: "admin" | "manager";
   displayName: string;
+  teamName?: string | null;
   picture: string | null;
   balance: number;
   points: number;

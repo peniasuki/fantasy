@@ -9,6 +9,7 @@ import { formatMoney } from "fantasy-rules";
 type Member = {
   uid: string;
   displayName: string;
+  teamName?: string | null;
   points: number;
   balance: number;
   role: string;
@@ -125,11 +126,16 @@ export default function LigaPage() {
         <ol className="space-y-2">
           {data.members.map((m, i) => (
             <li key={m.uid} className="flex items-center justify-between rounded-xl border border-line bg-panel px-3 py-2">
-              <span>
-                {i + 1}. {m.displayName}
-                {m.role === "admin" ? " ★" : ""}
+              <span className="min-w-0">
+                <span className="block">
+                  {i + 1}. {m.displayName}
+                  {m.role === "admin" ? " ★" : ""}
+                </span>
+                {m.teamName ? (
+                  <span className="block truncate text-xs text-white/50">{m.teamName}</span>
+                ) : null}
               </span>
-              <span className="text-gold">{m.points} pts</span>
+              <span className="shrink-0 text-gold">{m.points} pts</span>
             </li>
           ))}
         </ol>

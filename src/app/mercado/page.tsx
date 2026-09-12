@@ -14,6 +14,9 @@ type Listing = {
   maxBid: number;
   bidable?: boolean;
   sellerId?: string;
+  ownershipStatus?: "free" | "owned";
+  ownerId?: string | null;
+  ownerName?: string | null;
   player: {
     name: string;
     position: string;
@@ -40,6 +43,7 @@ type Offer = {
 };
 
 type SortMode = "vm-desc" | "vm-asc" | "points-desc" | "points-asc";
+type OwnFilter = "ALL" | "free" | "owned";
 
 const CET = "Europe/Madrid";
 
@@ -60,10 +64,8 @@ function foldText(value: string): string {
     .toLowerCase();
 }
 
-function kindLabel(kind: string): string {
-  if (kind === "to_market") return "Mercado";
-  if (kind === "sale") return "Venta";
-  return "Libre";
+function isOwnedListing(listing: Listing): boolean {
+  return listing.ownershipStatus === "owned" || listing.kind === "owned" || listing.kind === "to_market";
 }
 
 export default function MercadoPage() {
@@ -85,6 +87,7 @@ export default function MercadoPage() {
   const [q, setQ] = useState("");
   const [pos, setPos] = useState("ALL");
   const [team, setTeam] = useState("ALL");
+  const [own, setOwn] = useState<OwnFilter>("ALL");
   const [sort, setSort] = useState<SortMode>("vm-desc");
 
   async function load() {
@@ -130,11 +133,13 @@ export default function MercadoPage() {
         if (!player) return false;
         if (pos !== "ALL" && player.position !== pos) return false;
         if (team !== "ALL" && player.teamName !== team) return false;
+        const owned = isOwnedListing(listing);
+        if (own === "free" && owned) return false;
+        if (own === "owned" && !owned) return false;
         if (needle && !foldText(player.name).includes(needle)) return false;
         return true;
       })
       .sort((a, b) => {
-        // Ventas a máquina siempre arriba; dentro de cada grupo, mismo criterio que Jugadores.
         if (a.kind === "to_market" && b.kind !== "to_market") return -1;
         if (b.kind === "to_market" && a.kind !== "to_market") return 1;
         if (sort === "points-desc" || sort === "points-asc") {
@@ -146,9 +151,9 @@ export default function MercadoPage() {
         if (diff !== 0) return sort === "vm-asc" ? diff : -diff;
         return (b.player?.pointsTotal ?? 0) - (a.player?.pointsTotal ?? 0);
       });
-  }, [data, q, pos, team, sort]);
+  }, [data, q, pos, team, own, sort]);
 
-  const resetKey = `${q}|${pos}|${team}|${sort}`;
+  const resetKey = `${q}|${pos}|${team}|${own}|${sort}`;
   const { visibleCount, sentinelRef, hasMore } = useVisibleWindow(listings.length, resetKey);
 
   if (!data) return <p className="text-sm text-white/60">{msg || "Cargando mercado…"}</p>;
@@ -314,6 +319,24 @@ export default function MercadoPage() {
           </button>
         ))}
       </div>
+      <div className="flex flex-wrap gap-2 text-xs">
+        {(
+          [
+            ["ALL", "Todos"],
+            ["free", "Libres"],
+            ["owned", "Fichados"],
+          ] as const
+        ).map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => setOwn(value)}
+            className={`rounded-md px-2.5 py-1 ${own === value ? "bg-gold text-ink" : "border border-line text-white/70"}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
       <p className="text-xs text-white/45">
         {listings.length === 0
           ? "0 resultados"
@@ -323,17 +346,31 @@ export default function MercadoPage() {
       </p>
 
       {listings.slice(0, visibleCount).map((listing) => {
-        const bidable = listing.bidable !== false && listing.kind !== "to_market";
+        const owned = isOwnedListing(listing);
+        const bidable = listing.bidable !== false && listing.kind !== "to_market" && listing.kind !== "owned";
         const pts = listing.player?.pointsTotal ?? 0;
         return (
           <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
             <div className="flex justify-between gap-3">
               <h3 className="font-medium">{listing.player?.name}</h3>
-              <span className="shrink-0 text-xs uppercase text-gold">{kindLabel(listing.kind)}</span>
+              <span className={`shrink-0 text-xs font-semibold uppercase ${owned ? "text-red-400" : "text-grass"}`}>
+                {owned ? "Fichado" : "Libre"}
+              </span>
             </div>
             <p className="text-sm text-white/60">
               {listing.player?.position} · {listing.player?.teamName} · VM{" "}
               {formatMoney(listing.player?.vm ?? 0)}
+            </p>
+            <p className="mt-1 text-xs text-white/55">
+              {owned ? (
+                <>
+                  Fichado por{" "}
+                  <span className="text-red-300">{listing.ownerName ?? "un manager"}</span>
+                  {listing.kind === "to_market" ? " · en venta al mercado" : ""}
+                </>
+              ) : (
+                <span className="text-grass">Disponible en mercado</span>
+              )}
             </p>
             <p className="mt-1 text-xs text-white/70">
               Casa {listing.player?.pointsHome ?? 0} · Fuera {listing.player?.pointsAway ?? 0} ·{" "}
@@ -344,7 +381,7 @@ export default function MercadoPage() {
                 En venta al mercado. Recompra automática al cierre (75–100% del último fichaje). No se
                 puede pujar.
               </p>
-            ) : (
+            ) : listing.kind === "owned" ? null : (
               <>
                 <p className="mt-1 text-xs text-white/45">
                   Mín {formatMoney(listing.minBid)} · Máx {formatMoney(listing.maxBid)}

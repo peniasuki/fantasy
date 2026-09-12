@@ -12,12 +12,14 @@ type Player = {
   teamName: string;
   vm: number;
   ownerId: string | null;
+  ownerName?: string | null;
   pointsHome?: number;
   pointsAway?: number;
   pointsTotal?: number;
 };
 
 type SortMode = "vm-desc" | "vm-asc" | "points-desc" | "points-asc";
+type OwnFilter = "ALL" | "free" | "owned";
 
 function foldText(value: string): string {
   return value
@@ -32,6 +34,7 @@ export default function JugadoresPage() {
   const [q, setQ] = useState("");
   const [pos, setPos] = useState("ALL");
   const [team, setTeam] = useState("ALL");
+  const [own, setOwn] = useState<OwnFilter>("ALL");
   const [sort, setSort] = useState<SortMode>("vm-desc");
 
   useEffect(() => {
@@ -51,6 +54,9 @@ export default function JugadoresPage() {
     const list = players.filter((p) => {
       if (pos !== "ALL" && p.position !== pos) return false;
       if (team !== "ALL" && p.teamName !== team) return false;
+      const owned = Boolean(p.ownerId);
+      if (own === "free" && owned) return false;
+      if (own === "owned" && !owned) return false;
       if (needle && !foldText(p.name).includes(needle)) return false;
       return true;
     });
@@ -65,9 +71,9 @@ export default function JugadoresPage() {
       return (b.pointsTotal ?? 0) - (a.pointsTotal ?? 0);
     });
     return list;
-  }, [players, q, pos, team, sort]);
+  }, [players, q, pos, team, own, sort]);
 
-  const resetKey = `${q}|${pos}|${team}|${sort}`;
+  const resetKey = `${q}|${pos}|${team}|${own}|${sort}`;
   const { visibleCount, sentinelRef, hasMore } = useVisibleWindow(filtered.length, resetKey);
 
   return (
@@ -125,6 +131,24 @@ export default function JugadoresPage() {
           </button>
         ))}
       </div>
+      <div className="flex flex-wrap gap-2 text-xs">
+        {(
+          [
+            ["ALL", "Todos"],
+            ["free", "Libres"],
+            ["owned", "Fichados"],
+          ] as const
+        ).map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => setOwn(value)}
+            className={`rounded-md px-3 py-1 ${own === value ? "bg-gold text-ink" : "border border-line text-white/70"}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
       <p className="text-xs text-white/45">
         {filtered.length === 0
@@ -137,7 +161,9 @@ export default function JugadoresPage() {
       {error && <p className="text-sm text-red-400">{error}</p>}
 
       <ul className="space-y-2">
-        {filtered.slice(0, visibleCount).map((p) => (
+        {filtered.slice(0, visibleCount).map((p) => {
+          const owned = Boolean(p.ownerId);
+          return (
           <li key={p.id} className="rounded-xl border border-line bg-panel px-3 py-2 text-sm">
             <div className="flex justify-between gap-3">
               <span>
@@ -146,14 +172,24 @@ export default function JugadoresPage() {
               <span className="shrink-0 text-gold">{formatMoney(p.vm)}</span>
             </div>
             <p className="text-xs text-white/50">
-              {p.teamName} · {p.ownerId ? "Fichado" : "Libre"}
+              {p.teamName} ·{" "}
+              <span className={`font-semibold uppercase ${owned ? "text-red-400" : "text-grass"}`}>
+                {owned ? "Fichado" : "Libre"}
+              </span>
+              {owned && p.ownerName ? (
+                <>
+                  {" "}
+                  · <span className="text-red-300">{p.ownerName}</span>
+                </>
+              ) : null}
             </p>
             <p className="mt-1 text-xs text-white/70">
               Casa {p.pointsHome ?? 0} · Fuera {p.pointsAway ?? 0} ·{" "}
               <span className="text-gold">Total {p.pointsTotal ?? 0}</span>
             </p>
           </li>
-        ))}
+          );
+        })}
         {!error && filtered.length === 0 && (
           <li className="text-sm text-white/50">Ningún jugador coincide con el filtro.</li>
         )}

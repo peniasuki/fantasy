@@ -110,7 +110,11 @@ export async function GET() {
     const members = Object.fromEntries(
       membersSnap.docs.map((d) => [
         d.id,
-        { uid: d.id, displayName: d.data().displayName ?? d.id },
+        {
+          uid: d.id,
+          displayName: d.data().displayName ?? d.id,
+          teamName: d.data().teamName ?? null,
+        },
       ]),
     );
     const ownership = Object.fromEntries(ownedSnap.docs.map((d) => [d.data().playerId, d.data()]));
@@ -134,24 +138,66 @@ export async function GET() {
       };
     };
 
+    const listedPlayerIds = new Set<string>();
     const listings = listingsSnap.docs
       .map((d) => {
         const listing = d.data();
         const player = players[listing.playerId];
         if (!player) return null;
+        listedPlayerIds.add(String(listing.playerId));
         const vm = playerVm(player);
         const bounds = purchasePriceBounds(vm, settings);
         const bidable = listing.kind === "free_agent" || listing.kind === "sale";
+        const ownerId =
+          listing.kind === "free_agent"
+            ? null
+            : listing.sellerId && listing.sellerId !== "machine"
+              ? String(listing.sellerId)
+              : ownership[listing.playerId]?.ownerId
+                ? String(ownership[listing.playerId].ownerId)
+                : null;
         return {
           ...listing,
+          id: d.id,
           player,
           myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
           minBid: bounds.min,
           maxBid: Math.min(bounds.max, walletMax, member.balance),
           bidable,
+          ownershipStatus: listing.kind === "free_agent" ? "free" : "owned",
+          ownerId,
+          ownerName: ownerId ? members[ownerId]?.displayName ?? ownerId : null,
         };
       })
       .filter((row): row is NonNullable<typeof row> => Boolean(row));
+
+    // Jugadores fichados que no están listados (para filtro libre/fichado).
+    for (const doc of ownedSnap.docs) {
+      const own = doc.data();
+      const playerId = String(own.playerId);
+      if (listedPlayerIds.has(playerId)) continue;
+      const player = players[playerId];
+      if (!player) continue;
+      const ownerId = String(own.ownerId);
+      const vm = playerVm(player);
+      listings.push({
+        id: `owned_${playerId}`,
+        playerId,
+        sellerId: ownerId,
+        askPrice: vm,
+        listedAt: Number(own.boughtAt ?? 0),
+        expiresAt: now,
+        kind: "owned",
+        player,
+        myBid: null,
+        minBid: 0,
+        maxBid: 0,
+        bidable: false,
+        ownershipStatus: "owned",
+        ownerId,
+        ownerName: members[ownerId]?.displayName ?? ownerId,
+      } as (typeof listings)[number]);
+    }
 
     return NextResponse.json({
       listings,

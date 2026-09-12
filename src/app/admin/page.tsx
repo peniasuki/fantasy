@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { api } from "@/lib/api";
 
@@ -11,15 +11,39 @@ type AdminStatus = {
   adminEmail: string;
 };
 
+type MemberRow = {
+  uid: string;
+  displayName: string;
+  teamName?: string | null;
+  role: string;
+  points: number;
+};
+
 export default function AdminPage() {
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState<AdminStatus | null>(null);
+  const [members, setMembers] = useState<MemberRow[]>([]);
+  const [removingUid, setRemovingUid] = useState<string | null>(null);
+
+  const loadMembers = useCallback(async () => {
+    const res = await api<{ members: MemberRow[] }>("/api/league");
+    setMembers(res.members ?? []);
+  }, []);
 
   useEffect(() => {
     api<AdminStatus>("/api/admin/status")
-      .then(setStatus)
+      .then(async (s) => {
+        setStatus(s);
+        if (s.isAdmin && s.hasLeague) {
+          try {
+            await loadMembers();
+          } catch (e) {
+            setMsg(e instanceof Error ? e.message : "Error cargando managers");
+          }
+        }
+      })
       .catch((e) => setMsg(e instanceof Error ? e.message : "Error"));
-  }, []);
+  }, [loadMembers]);
 
   async function run(path: string) {
     setMsg("Ejecutando…");
@@ -28,6 +52,37 @@ export default function AdminPage() {
       setMsg(JSON.stringify(res, null, 2));
     } catch (error) {
       setMsg(error instanceof Error ? error.message : "Error");
+    }
+  }
+
+  async function removeMember(m: MemberRow) {
+    if (m.role === "admin") {
+      setMsg("No se puede borrar la cuenta del administrador.");
+      return;
+    }
+    const label = m.teamName ? `${m.displayName} (${m.teamName})` : m.displayName;
+    const ok = window.confirm(
+      `¿Borrar la cuenta de ${label}?\n\n• Sale de la liga\n• Sus jugadores vuelven libres al mercado\n• Se elimina su sesión de Google en la app\n\nNo se puede deshacer.`,
+    );
+    if (!ok) return;
+    const typed = window.prompt(`Escribe BORRAR para confirmar la cuenta de ${m.displayName}:`);
+    if (typed !== "BORRAR") {
+      setMsg("Cancelado: confirmación incorrecta.");
+      return;
+    }
+    setRemovingUid(m.uid);
+    setMsg("Borrando cuenta…");
+    try {
+      const res = await api<Record<string, unknown>>("/api/admin/members/remove", {
+        method: "POST",
+        body: JSON.stringify({ uid: m.uid }),
+      });
+      setMsg(JSON.stringify(res, null, 2));
+      await loadMembers();
+    } catch (error) {
+      setMsg(error instanceof Error ? error.message : "Error");
+    } finally {
+      setRemovingUid(null);
     }
   }
 
@@ -95,6 +150,48 @@ export default function AdminPage() {
         Producto en <span className="text-gold">fantasy-bros.online</span> · puntuación Jornada Perfecta
         (media AS / SofaScore).
       </p>
+
+      {canRun && status?.hasLeague && (
+        <section className="space-y-2 rounded-2xl border border-line bg-panel p-4">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/50">Cuentas</h3>
+          <p className="text-xs text-white/45">
+            Borrar saca al manager de la liga, libera su plantilla al mercado y elimina su cuenta.
+          </p>
+          <ul className="space-y-2">
+            {members.map((m) => (
+              <li
+                key={m.uid}
+                className="flex items-center justify-between gap-3 rounded-xl border border-line bg-ink/40 px-3 py-2"
+              >
+                <span className="min-w-0">
+                  <span className="block truncate text-sm">
+                    {m.displayName}
+                    {m.role === "admin" ? " ★" : ""}
+                  </span>
+                  {m.teamName ? (
+                    <span className="block truncate text-xs text-white/50">{m.teamName}</span>
+                  ) : null}
+                </span>
+                {m.role === "admin" ? (
+                  <span className="shrink-0 text-xs text-white/40">Admin</span>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={removingUid === m.uid}
+                    className="shrink-0 rounded-lg border border-red-500/50 px-2.5 py-1 text-xs text-red-300 disabled:opacity-40"
+                    onClick={() => void removeMember(m)}
+                  >
+                    {removingUid === m.uid ? "…" : "Borrar"}
+                  </button>
+                )}
+              </li>
+            ))}
+            {members.length === 0 && (
+              <li className="text-sm text-white/50">No hay managers en la liga.</li>
+            )}
+          </ul>
+        </section>
+      )}
 
       <button
         disabled={canRun === false}

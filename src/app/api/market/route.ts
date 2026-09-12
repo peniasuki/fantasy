@@ -251,13 +251,22 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "No puedes pujar por tu jugador." }, { status: 400 });
       }
       const bidId = `${body.listingId}_${user.uid}`;
+      const amount = Math.round(body.amount);
+      const existingBid = await leagueRef.collection("bids").doc(bidId).get();
+      const prev = existingBid.data();
+      // Misma cantidad → conservar marca de tiempo (desempate por antigüedad).
+      // Cantidad distinta → nueva marca (quien llega primero a ese importe).
+      const createdAt =
+        prev && Number(prev.amount) === amount && Number(prev.createdAt) > 0
+          ? Number(prev.createdAt)
+          : Date.now();
       const bid: Bid = {
         id: bidId,
         listingId: body.listingId,
         playerId: listing.playerId,
         bidderId: user.uid,
-        amount: Math.round(body.amount),
-        createdAt: Date.now(),
+        amount,
+        createdAt,
       };
       await leagueRef.collection("bids").doc(bidId).set(bid);
       return NextResponse.json({ ok: true });

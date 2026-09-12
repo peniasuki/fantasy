@@ -46,6 +46,10 @@ export default function ReglasPage() {
           <li>Todos los sin dueño van al mercado a su Valor de Mercado (VM).</li>
           <li>Pujas <strong className="text-white">ciegas</strong> hasta el cierre (~07:00 Madrid).</li>
           <li>Gana la puja más alta válida.</li>
+          <li>
+            Si empatan al céntimo, gana quien <strong className="text-white">pujó antes</strong> ese
+            importe.
+          </li>
         </ul>
         <p className="text-sm text-white/75">Para un jugador de VM 10M €:</p>
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">

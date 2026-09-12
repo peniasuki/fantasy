@@ -1,6 +1,12 @@
 "use client";
 
-import { FORMATIONS, formatMoney, type FormationId } from "fantasy-rules";
+import {
+  FORMATIONS,
+  emptyLineup,
+  formatMoney,
+  type FormationId,
+  type Position,
+} from "fantasy-rules";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
@@ -25,6 +31,8 @@ type SquadRow = {
 
 type Rival = { uid: string; displayName: string };
 
+type SlotRow = { slot: number; position: string; playerId: string | null };
+
 function playerAlignable(p?: Player | null): boolean {
   if (!p) return false;
   if (p.alignable === false) return false;
@@ -32,9 +40,25 @@ function playerAlignable(p?: Player | null): boolean {
   return true;
 }
 
+/** Reconstruye huecos al cambiar formación; reasigna jugadores que aún encajan. */
+function remapSlotsForFormation(formation: FormationId, previous: SlotRow[]): SlotRow[] {
+  const next = emptyLineup(formation);
+  const pool = previous
+    .filter((s) => s.playerId)
+    .map((s) => ({ position: s.position as Position, playerId: s.playerId as string }));
+  for (const slot of next) {
+    const idx = pool.findIndex((p) => p.position === slot.position);
+    if (idx >= 0) {
+      slot.playerId = pool[idx].playerId;
+      pool.splice(idx, 1);
+    }
+  }
+  return next;
+}
+
 export default function EquipoPage() {
   const [formation, setFormation] = useState<FormationId>("4-3-3");
-  const [slots, setSlots] = useState<{ slot: number; position: string; playerId: string | null }[]>([]);
+  const [slots, setSlots] = useState<SlotRow[]>([]);
   const [squad, setSquad] = useState<SquadRow[]>([]);
   const [rivals, setRivals] = useState<Rival[]>([]);
   const [locked, setLocked] = useState(false);
@@ -47,7 +71,7 @@ export default function EquipoPage() {
     const res = await api<{
       squad: SquadRow[];
       rivals: Rival[];
-      lineup: { formation: FormationId; slots: { slot: number; position: string; playerId: string | null }[] };
+      lineup: { formation: FormationId; slots: SlotRow[] };
       locked: boolean;
     }>("/api/squad");
     setSquad(res.squad);
@@ -60,6 +84,11 @@ export default function EquipoPage() {
   useEffect(() => {
     load().catch((e) => setMsg(e.message));
   }, []);
+
+  function changeFormation(next: FormationId) {
+    setFormation(next);
+    setSlots((current) => remapSlotsForFormation(next, current));
+  }
 
   function assign(slot: number, playerId: string) {
     setSlots((current) =>
@@ -82,7 +111,7 @@ export default function EquipoPage() {
         <select
           disabled={locked}
           value={formation}
-          onChange={(e) => setFormation(e.target.value as FormationId)}
+          onChange={(e) => changeFormation(e.target.value as FormationId)}
           className="rounded-lg border border-line bg-panel px-2 py-1 text-sm"
         >
           {Object.keys(FORMATIONS).map((id) => (
@@ -96,11 +125,12 @@ export default function EquipoPage() {
         </p>
       )}
       <p className="text-xs text-white/50">
-        Hueco vacío = 0 puntos. Lesionados y sancionados no se pueden alinear.
+        Hueco vacío = 0 puntos. Lesionados y sancionados no se pueden alinear. Un jugador solo en un
+        hueco.
       </p>
       <div className="rounded-2xl bg-gradient-to-b from-grass/40 to-grass/10 p-3">
         {slots.map((slot) => (
-          <label key={slot.slot} className="mb-2 block rounded-lg bg-black/30 px-2 py-2 text-sm">
+          <label key={`${formation}-${slot.slot}`} className="mb-2 block rounded-lg bg-black/30 px-2 py-2 text-sm">
             <span className="mr-2 text-white/50">{slot.position}</span>
             <select
               disabled={locked}
@@ -110,7 +140,13 @@ export default function EquipoPage() {
             >
               <option value="">— (0 pts)</option>
               {squad
-                .filter((s) => s.player?.position === slot.position)
+                .filter((s) => {
+                  if (s.player?.position !== slot.position) return false;
+                  const usedElsewhere = slots.some(
+                    (other) => other.slot !== slot.slot && other.playerId === s.playerId,
+                  );
+                  return !usedElsewhere;
+                })
                 .map((s) => {
                   const ok = playerAlignable(s.player);
                   return (

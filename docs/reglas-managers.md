@@ -59,6 +59,8 @@ Quieres a un delantero de VM 8M €.
 
 Si pujas 9M y otro manager puja 9,5M, él se lo lleva al cierre. Tú no pierdes el dinero de una puja perdedora.
 
+Si dos managers pujan **exactamente lo mismo**, gana quien llegó antes a ese importe (se guarda la hora de la puja).
+
 ---
 
 ## 4. Vender jugadores

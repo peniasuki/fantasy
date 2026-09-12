@@ -140,24 +140,29 @@ describe("market", () => {
     expect(result.price).toBe(7_500_000);
   });
 
-  it("does not settle to_market before expiry", () => {
+  it("on equal bids awards the earliest createdAt", () => {
     const result = settleListing({
       listing: {
-        id: "m2",
-        playerId: "p4",
-        sellerId: "u1",
-        askPrice: 10_000_000,
+        id: "l3",
+        playerId: "p5",
+        sellerId: "machine",
+        askPrice: 8_000_000,
         listedAt: 0,
-        expiresAt: 100,
-        kind: "to_market",
+        expiresAt: 10,
+        kind: "free_agent",
       },
-      bids: [],
-      vm: 10_000_000,
-      balances: {},
+      bids: [
+        { id: "b-late", listingId: "l3", playerId: "p5", bidderId: "late", amount: 8_000_000, createdAt: 200 },
+        { id: "b-early", listingId: "l3", playerId: "p5", bidderId: "early", amount: 8_000_000, createdAt: 50 },
+      ],
+      vm: 8_000_000,
+      balances: { early: 40_000_000, late: 40_000_000 },
       settings: DEFAULT_SETTINGS,
-      now: 50,
+      now: 5,
     });
-    expect(result.reason).toBe("no_sale");
+    expect(result.winnerId).toBe("early");
+    expect(result.price).toBe(8_000_000);
+    expect(result.reason).toBe("highest_bid");
   });
 });
 

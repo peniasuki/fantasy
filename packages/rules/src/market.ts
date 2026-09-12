@@ -138,6 +138,7 @@ export function settleListing(params: {
   }
 
   const bids = [...params.bids].sort((a, b) => {
+    // Mayor importe gana; a igualdad, la puja más temprana (createdAt).
     if (b.amount !== a.amount) return b.amount - a.amount;
     return a.createdAt - b.createdAt;
   });

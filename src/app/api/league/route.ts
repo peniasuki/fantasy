@@ -90,8 +90,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Código incorrecto." }, { status: 403 });
     }
     const members = await leagueRef.collection("members").get();
-    if (members.size >= 8 && !members.docs.some((d) => d.id === user.uid)) {
-      return NextResponse.json({ error: "La liga está llena (8)." }, { status: 400 });
+    if (members.size >= 12 && !members.docs.some((d) => d.id === user.uid)) {
+      return NextResponse.json({ error: "La liga está llena (12)." }, { status: 400 });
     }
     const existing = members.docs.find((d) => d.id === user.uid);
     const userDoc = (await db().collection("users").doc(user.uid).get()).data() ?? {};

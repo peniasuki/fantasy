@@ -49,13 +49,15 @@ Para un jugador con VM = 10.000.000 €:
 | Mínimo | 75% del VM | mínimo **7.500.000 €** |
 | Máximo por VM | 150% del VM | máximo **15.000.000 €** |
 | Tope de cartera | saldo + 25% del valor de tu plantilla | si tienes 5M de saldo y plantilla de 40M → tope **15M** (5 + 10) |
-| Tope real | el menor de (máx. VM, tope cartera, tu saldo) | no puedes pujar más de lo que tienes |
+| Tope real al pujar | el menor de (máx. VM, tope cartera) | puedes pujar por encima de tu saldo efectivo usando el 25% de plantilla |
+| Al cierre | hace falta **efectivo** ≥ puja | si no tienes saldo al settle, esa puja no gana |
 
 **Ejemplo completo**  
 Quieres a un delantero de VM 8M €.  
 - Mínimo: 6M € (75%).  
 - Máximo por VM: 12M € (150%).  
-- Tienes 4M € de saldo → **no puedes** pujar 6M. Necesitas más saldo (vendiendo o con primas de jornada).
+- Tienes 4M € de saldo y plantilla de 0 → tope cartera **4M** → **no puedes** pujar 6M. Necesitas más saldo (vendiendo o con primas).  
+- Si tienes 4M de saldo y plantilla de 40M → tope cartera **14M** → sí puedes pujar hasta 12M (tope VM); al cierre debes tener el efectivo (vende antes si hace falta).
 
 Si pujas 9M y otro manager puja 9,5M, él se lo lleva al cierre. Tú no pierdes el dinero de una puja perdedora.
 

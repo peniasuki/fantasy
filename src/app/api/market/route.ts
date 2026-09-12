@@ -162,7 +162,7 @@ export async function GET() {
           player,
           myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
           minBid: bounds.min,
-          maxBid: Math.min(bounds.max, walletMax, member.balance),
+          maxBid: Math.min(bounds.max, walletMax),
           bidable,
           ownershipStatus: listing.kind === "free_agent" ? "free" : "owned",
           ownerId,
@@ -289,9 +289,6 @@ export async function POST(request: Request) {
           },
           { status: 400 },
         );
-      }
-      if (body.amount > member.balance) {
-        return NextResponse.json({ error: "No tienes saldo." }, { status: 400 });
       }
       if (listing.sellerId === user.uid) {
         return NextResponse.json({ error: "No puedes pujar por tu jugador." }, { status: 400 });

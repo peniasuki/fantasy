@@ -162,6 +162,9 @@ export default function MercadoPage() {
   const maxPct = Math.round((data.maxPurchaseOfVm ?? 1.5) * 100);
   const incoming = (data.incomingOffers ?? []).filter((o) => !o.expired);
   const outgoing = data.outgoingOffers ?? [];
+  const myActiveBids = data.listings
+    .filter((l) => l.myBid && l.kind !== "owned")
+    .sort((a, b) => (b.myBid?.amount ?? 0) - (a.myBid?.amount ?? 0));
 
   return (
     <div className="space-y-4 pb-6">
@@ -176,6 +179,42 @@ export default function MercadoPage() {
           {data.salesStartedToday ?? 0}/{data.maxSalesPerDay ?? 3}
         </p>
       </section>
+
+      {myActiveBids.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">
+            Mis pujas ({myActiveBids.length})
+          </h2>
+          <p className="text-xs text-white/45">
+            Pendientes hasta el cierre {formatCet(data.closeAt)}. Nadie ve tu importe hasta entonces.
+          </p>
+          {myActiveBids.map((listing) => (
+            <article
+              key={listing.id}
+              className="rounded-xl border border-grass/40 bg-panel px-3 py-2.5"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <h3 className="truncate font-medium">{listing.player?.name}</h3>
+                  <p className="text-xs text-white/55">
+                    {listing.player?.position} · {listing.player?.teamName}
+                  </p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="text-sm font-semibold text-grass">
+                    {formatMoney(listing.myBid!.amount)}
+                  </p>
+                  <p className="text-[11px] uppercase tracking-wide text-white/40">Tu puja</p>
+                </div>
+              </div>
+              <p className="mt-1.5 text-xs text-white/60">
+                VM {formatMoney(listing.player?.vm ?? 0)} · Mín {formatMoney(listing.minBid)} · Máx{" "}
+                {formatMoney(listing.maxBid)}
+              </p>
+            </article>
+          ))}
+        </section>
+      )}
 
       {incoming.length > 0 && (
         <section className="space-y-2">
@@ -389,7 +428,13 @@ export default function MercadoPage() {
                 {listing.myBid && (
                   <p className="text-xs text-grass">Tu puja: {formatMoney(listing.myBid.amount)}</p>
                 )}
-                {bidable && (
+                {bidable && listing.maxBid < listing.minBid ? (
+                  <p className="mt-2 text-xs text-red-300">
+                    Tu tope de cartera ({formatMoney(listing.maxBid)}) no alcanza el mínimo. Vende o
+                    espera primas para pujar.
+                  </p>
+                ) : null}
+                {bidable && listing.maxBid >= listing.minBid && (
                   <div className="mt-3 flex gap-2">
                     <input
                       inputMode="numeric"

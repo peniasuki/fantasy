@@ -146,9 +146,10 @@ export function settleListing(params: {
   const cap = maxPurchasePrice(params.vm, settings);
   const floor = minPurchasePrice(params.vm, settings);
   const eligible = bids.filter((bid) => {
-    const maxBid = maxBidAmount(params.balances[bid.bidderId] ?? 0, 0, settings);
-    const afford = (params.balances[bid.bidderId] ?? 0) >= bid.amount;
-    return afford && bid.amount >= floor && bid.amount <= cap && bid.amount <= maxBid;
+    // Al cierre hace falta efectivo: el apalancamiento (25% plantilla) solo vale para pujar;
+    // si no hay saldo suficiente en el settle, la puja no gana.
+    const balance = params.balances[bid.bidderId] ?? 0;
+    return balance >= bid.amount && bid.amount >= floor && bid.amount <= cap;
   });
 
   if (listing.kind === "sale") {

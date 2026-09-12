@@ -56,10 +56,12 @@ export default function ReglasPage() {
           <li>Mínimo: 75% del VM → 7,5M €</li>
           <li>Máximo por VM: 150% → 15M €</li>
           <li>Tope cartera: saldo + 25% del valor de tu plantilla</li>
+          <li>Al cierre hace falta efectivo ≥ puja</li>
         </ul>
         <p className="rounded-lg bg-panel px-3 py-2 text-sm text-white/65">
           <span className="text-white/45">Ejemplo · </span>
-          VM 8M €, saldo 4M € → no puedes pujar el mínimo (6M). Necesitas más saldo.
+          VM 8M €, saldo 4M € sin plantilla → no puedes pujar el mínimo (6M). Con plantilla grande el
+          tope sube; al cierre igual necesitas el efectivo.
         </p>
       </section>
 

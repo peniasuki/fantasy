@@ -127,6 +127,32 @@ export default function AdminPage() {
       <button
         disabled={canRun === false}
         className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
+        onClick={() => {
+          const ok = window.confirm(
+            "¿Cerrar alineaciones de la próxima jornada?\n\nNadie podrá cambiar el once hasta que se puntúe esa jornada.",
+          );
+          if (!ok) return;
+          void run("/api/jobs/lock-lineups");
+        }}
+      >
+        Cerrar alineaciones (manual)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
+        onClick={() => {
+          const ok = window.confirm(
+            "¿Recalcular saldos?\n\nSaldo = 40M − suma de precios de fichaje (pujas) + primas de jornada.\nÚtil si hubo cobros duplicados.",
+          );
+          if (!ok) return;
+          void run("/api/jobs/reconcile-balances");
+        }}
+      >
+        Recalcular saldos (pujas)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
         onClick={() => void scoreJornada()}
       >
         Puntuar jornada (JP)…

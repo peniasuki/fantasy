@@ -56,12 +56,29 @@ function remapSlotsForFormation(formation: FormationId, previous: SlotRow[]): Sl
   return next;
 }
 
+function formatLockAt(iso: string | null): string {
+  if (!iso) return "—";
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return iso;
+  return new Intl.DateTimeFormat("es-ES", {
+    timeZone: "Europe/Madrid",
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(ms));
+}
+
 export default function EquipoPage() {
   const [formation, setFormation] = useState<FormationId>("4-3-3");
   const [slots, setSlots] = useState<SlotRow[]>([]);
   const [squad, setSquad] = useState<SquadRow[]>([]);
   const [rivals, setRivals] = useState<Rival[]>([]);
   const [locked, setLocked] = useState(false);
+  const [lockAt, setLockAt] = useState<string | null>(null);
+  const [lockMatchday, setLockMatchday] = useState<number | null>(null);
   const [msg, setMsg] = useState("");
   const [sellPlayerId, setSellPlayerId] = useState<string | null>(null);
   const [offerTo, setOfferTo] = useState("");
@@ -73,12 +90,16 @@ export default function EquipoPage() {
       rivals: Rival[];
       lineup: { formation: FormationId; slots: SlotRow[] };
       locked: boolean;
+      lockAt: string | null;
+      lockMatchday: number | null;
     }>("/api/squad");
     setSquad(res.squad);
     setRivals(res.rivals ?? []);
     setFormation(res.lineup.formation);
     setSlots(res.lineup.slots);
     setLocked(res.locked);
+    setLockAt(res.lockAt ?? null);
+    setLockMatchday(res.lockMatchday ?? null);
   }
 
   useEffect(() => {
@@ -119,9 +140,17 @@ export default function EquipoPage() {
           ))}
         </select>
       </div>
-      {locked && (
+      {locked ? (
         <p className="text-xs text-gold">
-          Bloqueada: ha pasado el cierre de la próxima jornada a puntuar.
+          Alineación bloqueada
+          {lockMatchday != null ? ` · Jornada ${lockMatchday}` : ""}
+          {lockAt ? ` · desde ${formatLockAt(lockAt)}` : ""}.
+        </p>
+      ) : (
+        <p className="text-xs text-white/60">
+          Cierre de alineación
+          {lockMatchday != null ? ` J${lockMatchday}` : ""}:{" "}
+          <span className="text-gold">{formatLockAt(lockAt)}</span> (Madrid)
         </p>
       )}
       <p className="text-xs text-white/50">

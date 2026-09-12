@@ -1,28 +1,9 @@
 import { NextResponse } from "next/server";
 import { emptyLineup, isValidLineup, type FormationId } from "fantasy-rules";
 import { requireUser } from "@/lib/auth";
-import {
-  getMasterCalendar,
-  isPastLockAt,
-  nextUnscoredMatchday,
-} from "@/lib/calendar";
 import { db } from "@/lib/firebase-admin";
 import { LEAGUE_ID, getLeague, requireMember, settingsOf } from "@/lib/league";
-
-async function lineupLockState() {
-  const scoredSnap = await db()
-    .collection("leagues")
-    .doc(LEAGUE_ID)
-    .collection("scoredJornadas")
-    .get();
-  const scored = scoredSnap.docs.map((d) => Number(d.id)).filter(Number.isFinite);
-  const upcoming = nextUnscoredMatchday(scored, getMasterCalendar());
-  if (!upcoming) {
-    return { locked: true, lockAt: null as string | null, matchday: null as number | null };
-  }
-  const locked = isPastLockAt(upcoming.lockAt);
-  return { locked, lockAt: upcoming.lockAt, matchday: upcoming.number };
-}
+import { getLineupLockState } from "@/lib/lineup-lock";
 
 export async function GET() {
   try {
@@ -32,7 +13,7 @@ export async function GET() {
       db().collection("leagues").doc(LEAGUE_ID).collection("ownership").where("ownerId", "==", user.uid).get(),
       db().collection("players").get(),
       db().collection("leagues").doc(LEAGUE_ID).collection("lineups").doc(user.uid).get(),
-      lineupLockState(),
+      getLineupLockState(),
     ]);
     const players = Object.fromEntries(
       playersSnap.docs.map((d) => {
@@ -60,6 +41,7 @@ export async function GET() {
       locked: lock.locked,
       lockAt: lock.lockAt,
       lockMatchday: lock.matchday,
+      lockSource: lock.source,
       firstKickoff: null,
     });
   } catch (error) {
@@ -78,7 +60,7 @@ export async function PUT(request: Request) {
       formation: FormationId;
       slots: { slot: number; position: "GK" | "DF" | "MF" | "FW"; playerId: string | null }[];
     };
-    const lock = await lineupLockState();
+    const lock = await getLineupLockState();
     if (lock.locked) {
       return NextResponse.json(
         {

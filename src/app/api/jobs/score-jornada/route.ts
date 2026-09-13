@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { WriteBatch } from "firebase-admin/firestore";
+import { scoreManagerLineup } from "fantasy-rules";
 import { requireJobOrAdmin } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
 import { fetchJpPuntosJornada } from "@/lib/jp-puntos";
@@ -226,18 +227,31 @@ export async function POST(request: Request) {
     ]);
     const freshMembers = force ? await leagueRef.collection("members").get() : membersSnap;
     const lineups = Object.fromEntries(lineupsSnap.docs.map((d) => [d.id, d.data()]));
-    const roundScores: { uid: string; points: number }[] = [];
+    const roundScores: {
+      uid: string;
+      points: number;
+      filledPoints: number;
+      emptySlots: number;
+      emptyPenalty: number;
+    }[] = [];
     let mvpUid: string | null = null;
 
     if (scoreManagers) {
       for (const member of freshMembers.docs) {
         const lineup = lineups[member.id];
         const slots = (lineup?.slots ?? []) as { playerId: string | null }[];
-        const points = slots.reduce((sum, slot) => {
-          if (!slot.playerId) return sum;
-          return sum + (pointsByPlayer[slot.playerId] ?? 0);
-        }, 0);
-        roundScores.push({ uid: member.id, points });
+        const scored = scoreManagerLineup({
+          slots,
+          pointsByPlayer,
+          settings,
+        });
+        roundScores.push({
+          uid: member.id,
+          points: scored.points,
+          filledPoints: scored.filledPoints,
+          emptySlots: scored.emptySlots,
+          emptyPenalty: scored.emptyPenalty,
+        });
       }
 
       mvpUid =
@@ -264,6 +278,9 @@ export async function POST(request: Request) {
             uid: row.uid,
             matchday,
             points: row.points,
+            filledPoints: row.filledPoints,
+            emptySlots: row.emptySlots,
+            emptyPenalty: row.emptyPenalty,
             bonus,
             mvp: row.uid === mvpUid,
             at: now,
@@ -321,6 +338,9 @@ export async function POST(request: Request) {
       managers: roundScores.map((r) => ({
         uid: r.uid,
         points: r.points,
+        filledPoints: r.filledPoints,
+        emptySlots: r.emptySlots,
+        emptyPenalty: r.emptyPenalty,
         mvp: r.uid === mvpUid,
       })),
       sourceUrl: jornada.sourceUrl,

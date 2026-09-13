@@ -26,6 +26,9 @@ type SquadRow = {
   playerId: string;
   buyPrice: number;
   boughtAt: number;
+  acquiredVia?: string | null;
+  sellLockedUntil?: number | null;
+  sellLocked?: boolean;
   player: Player;
 };
 
@@ -71,6 +74,17 @@ function formatLockAt(iso: string | null): string {
   }).format(new Date(ms));
 }
 
+function formatSellLockUntil(ms: number): string {
+  return new Intl.DateTimeFormat("es-ES", {
+    timeZone: "Europe/Madrid",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(ms));
+}
+
 export default function EquipoPage() {
   const [formation, setFormation] = useState<FormationId>("4-3-3");
   const [slots, setSlots] = useState<SlotRow[]>([]);
@@ -81,6 +95,8 @@ export default function EquipoPage() {
   const [lockMatchday, setLockMatchday] = useState<number | null>(null);
   const [autoLock, setAutoLock] = useState(false);
   const [msg, setMsg] = useState("");
+  const [sellMsg, setSellMsg] = useState("");
+  const [sellBusy, setSellBusy] = useState(false);
   const [sellPlayerId, setSellPlayerId] = useState<string | null>(null);
   const [offerTo, setOfferTo] = useState("");
   const [offerAmount, setOfferAmount] = useState("");
@@ -121,11 +137,29 @@ export default function EquipoPage() {
   }
 
   async function afterSale(message: string) {
+    setSellMsg("");
     setMsg(message);
     setSellPlayerId(null);
     setOfferTo("");
     setOfferAmount("");
+    setSellBusy(false);
     await load();
+  }
+
+  async function runSell(
+    playerId: string,
+    action: () => Promise<{ message?: string }>,
+    fallback: string,
+  ) {
+    setSellBusy(true);
+    setSellMsg("");
+    try {
+      const res = await action();
+      await afterSale(res.message ?? fallback);
+    } catch (e) {
+      setSellBusy(false);
+      setSellMsg(e instanceof Error ? e.message : "Error");
+    }
   }
 
   return (
@@ -247,33 +281,52 @@ export default function EquipoPage() {
                 Último fichaje{" "}
                 <span className="text-gold">{last > 0 ? formatMoney(last) : "—"}</span>
               </p>
+              {s.sellLocked && s.sellLockedUntil ? (
+                <p className="mt-1 text-xs text-gold/90">
+                  Protección clausulazo hasta {formatSellLockUntil(s.sellLockedUntil)}
+                </p>
+              ) : null}
               <button
                 type="button"
-                className={`mt-2 rounded-md px-3 py-1.5 text-sm font-semibold ${
+                disabled={Boolean(s.sellLocked)}
+                className={`mt-2 rounded-md px-3 py-1.5 text-sm font-semibold disabled:opacity-40 ${
                   open
                     ? "border border-line text-white/70"
                     : "bg-grass text-ink shadow-sm shadow-black/30"
                 }`}
-                onClick={() => setSellPlayerId(open ? null : s.playerId)}
+                onClick={() => {
+                  if (s.sellLocked) return;
+                  setSellMsg("");
+                  setSellPlayerId(open ? null : s.playerId);
+                }}
               >
-                {open ? "Cerrar venta" : "Vender"}
+                {s.sellLocked ? "Venta bloqueada" : open ? "Cerrar venta" : "Vender"}
               </button>
               {open && (
                 <div className="mt-3 space-y-3 border-t border-line pt-3">
+                  {sellMsg && <p className="text-sm text-red-300">{sellMsg}</p>}
                   <button
                     type="button"
-                    className="w-full rounded-lg border border-line px-3 py-2 text-left text-xs"
-                    onClick={() =>
-                      api<{ message?: string }>("/api/market", {
-                        method: "POST",
-                        body: JSON.stringify({ action: "list_to_market", playerId: s.playerId }),
-                      })
-                        .then((res) => afterSale(res.message ?? "En venta al mercado (cierre 00:00)."))
-                        .catch((e) => setMsg(e.message))
-                    }
+                    disabled={sellBusy}
+                    className="w-full rounded-lg border border-gold/40 bg-gold/10 px-3 py-3 text-left text-xs active:scale-[0.99] disabled:opacity-50"
+                    onClick={() => {
+                      const ok = window.confirm(
+                        `¿Poner a ${s.player?.name} en Oferta Mercado?\n\nRecompra automática al cierre (75–100% del último fichaje). Nadie puede pujar.`,
+                      );
+                      if (!ok) return;
+                      void runSell(
+                        s.playerId,
+                        () =>
+                          api<{ message?: string }>("/api/market", {
+                            method: "POST",
+                            body: JSON.stringify({ action: "list_to_market", playerId: s.playerId }),
+                          }),
+                        "En venta al mercado (cierre 00:00).",
+                      );
+                    }}
                   >
-                    <span className="font-medium text-white">1. Oferta Mercado</span>
-                    <span className="mt-0.5 block text-white/50">
+                    <span className="font-medium text-gold">1. Oferta Mercado</span>
+                    <span className="mt-0.5 block text-white/55">
                       Recompra al cierre (75–100% del último fichaje). Nadie puede pujar.
                     </span>
                   </button>
@@ -302,19 +355,23 @@ export default function EquipoPage() {
                     />
                     <button
                       type="button"
-                      className="mt-2 rounded-md bg-grass px-3 py-1.5 text-ink"
+                      disabled={sellBusy}
+                      className="mt-2 rounded-md bg-grass px-3 py-1.5 text-ink disabled:opacity-50"
                       onClick={() =>
-                        api("/api/market", {
-                          method: "POST",
-                          body: JSON.stringify({
-                            action: "offer",
-                            playerId: s.playerId,
-                            toId: offerTo,
-                            amount: Number(offerAmount),
-                          }),
-                        })
-                          .then(() => afterSale("Oferta enviada (caduca en 7 días)."))
-                          .catch((e) => setMsg(e.message))
+                        void runSell(
+                          s.playerId,
+                          () =>
+                            api<{ message?: string }>("/api/market", {
+                              method: "POST",
+                              body: JSON.stringify({
+                                action: "offer",
+                                playerId: s.playerId,
+                                toId: offerTo,
+                                amount: Number(offerAmount),
+                              }),
+                            }),
+                          "Oferta enviada (caduca en 7 días).",
+                        )
                       }
                     >
                       Enviar oferta
@@ -323,7 +380,8 @@ export default function EquipoPage() {
 
                   <button
                     type="button"
-                    className="w-full rounded-lg border border-line px-3 py-2 text-left text-xs"
+                    disabled={sellBusy}
+                    className="w-full rounded-lg border border-line px-3 py-3 text-left text-xs active:scale-[0.99] disabled:opacity-50"
                     onClick={() => {
                       if (
                         !window.confirm(
@@ -332,12 +390,15 @@ export default function EquipoPage() {
                       ) {
                         return;
                       }
-                      api<{ message?: string }>("/api/market", {
-                        method: "POST",
-                        body: JSON.stringify({ action: "instant_sell", playerId: s.playerId }),
-                      })
-                        .then((res) => afterSale(res.message ?? "Venta inmediata hecha."))
-                        .catch((e) => setMsg(e.message));
+                      void runSell(
+                        s.playerId,
+                        () =>
+                          api<{ message?: string }>("/api/market", {
+                            method: "POST",
+                            body: JSON.stringify({ action: "instant_sell", playerId: s.playerId }),
+                          }),
+                        "Venta inmediata hecha.",
+                      );
                     }}
                   >
                     <span className="font-medium text-white">3. Venta inmediata</span>

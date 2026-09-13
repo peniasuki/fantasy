@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { scoreEstadisticas } from "./scoring";
 import { DEFAULT_SETTINGS } from "./types";
-import { instantSellPrice, maxBidAmount, minPurchasePrice, clauseReleasePrice, nextMarketClose, settleListing } from "./market";
+import {
+  canClausePlayer,
+  canListPlayer,
+  clauseReleasePrice,
+  instantSellPrice,
+  maxBidAmount,
+  minPurchasePrice,
+  nextMarketClose,
+  sellLockedUntil,
+  settleListing,
+} from "./market";
 
 describe("nextMarketClose", () => {
   it("returns next Madrid midnight", () => {
@@ -21,6 +31,68 @@ describe("nextMarketClose", () => {
 describe("clauseReleasePrice", () => {
   it("is 150% of VM", () => {
     expect(clauseReleasePrice(10_000_000, DEFAULT_SETTINGS)).toBe(15_000_000);
+  });
+});
+
+describe("clause sell lock + max clauses", () => {
+  const baseOwn = {
+    playerId: "p1",
+    ownerId: "u1",
+    buyPrice: 15_000_000,
+    boughtAt: Date.parse("2026-09-01T12:00:00.000Z"),
+  };
+
+  it("blocks selling a clause acquisition for 7 days", () => {
+    const ownership = { ...baseOwn, acquiredVia: "clause" as const };
+    const day3 = baseOwn.boughtAt + 3 * 24 * 60 * 60 * 1000;
+    const check = canListPlayer({
+      ownerId: "u1",
+      ownership,
+      now: day3,
+      listingsByOwner: 0,
+      salesStartedToday: 0,
+      settings: DEFAULT_SETTINGS,
+    });
+    expect(check.ok).toBe(false);
+    expect(check.reason).toMatch(/clausulazo/i);
+    expect(sellLockedUntil(ownership, DEFAULT_SETTINGS)).toBe(
+      baseOwn.boughtAt + 7 * 24 * 60 * 60 * 1000,
+    );
+  });
+
+  it("allows selling a clause acquisition after 7 days", () => {
+    const ownership = { ...baseOwn, acquiredVia: "clause" as const };
+    const day8 = baseOwn.boughtAt + 8 * 24 * 60 * 60 * 1000;
+    const check = canListPlayer({
+      ownerId: "u1",
+      ownership,
+      now: day8,
+      listingsByOwner: 0,
+      salesStartedToday: 0,
+      settings: DEFAULT_SETTINGS,
+    });
+    expect(check.ok).toBe(true);
+  });
+
+  it("does not lock normal (non-clause) buys when sellLockDays is 0", () => {
+    const ownership = { ...baseOwn, acquiredVia: "bid" as const };
+    const check = canListPlayer({
+      ownerId: "u1",
+      ownership,
+      now: baseOwn.boughtAt + 60_000,
+      listingsByOwner: 0,
+      salesStartedToday: 0,
+      settings: DEFAULT_SETTINGS,
+    });
+    expect(check.ok).toBe(true);
+  });
+
+  it("allows at most 3 clausulazos per player", () => {
+    expect(canClausePlayer({ clauseCount: 2, settings: DEFAULT_SETTINGS }).ok).toBe(true);
+    expect(canClausePlayer({ clauseCount: 2, settings: DEFAULT_SETTINGS }).remaining).toBe(1);
+    const blocked = canClausePlayer({ clauseCount: 3, settings: DEFAULT_SETTINGS });
+    expect(blocked.ok).toBe(false);
+    expect(blocked.remaining).toBe(0);
   });
 });
 

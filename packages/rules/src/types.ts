@@ -21,7 +21,15 @@ export type LeagueSettings = {
   freeAgentsPerCycle: number;
   freeAgentDays: number;
   maxListingsPerManager: number;
+  /** Bloqueo de venta genérico tras cualquier fichaje (0 = libre). */
   sellLockDays: number;
+  /**
+   * Días de protección de venta tras fichar por clausulazo.
+   * Solo aplica si ownership.acquiredVia === "clause".
+   */
+  clauseSellLockDays: number;
+  /** Máximo de veces que un mismo jugador puede ser fichado por clausulazo (de por vida). */
+  maxClausesPerPlayer: number;
   listingDays: number;
   machineOfferJitter: number;
   maxBidTeamValueShare: number;
@@ -41,6 +49,8 @@ export type LeagueSettings = {
   bonusPerPoint: number;
   bonusIdealXi: number;
   bonusMvp: number;
+  /** Puntos por cada hueco vacío del once (típicamente negativo). */
+  emptySlotPenalty: number;
   scoringSystem: ScoringSystem;
   /** Si true, todos los jugadores sin dueño permanecen como agentes libres. */
   keepAllUnownedListed: boolean;
@@ -58,6 +68,8 @@ export const DEFAULT_SETTINGS: LeagueSettings = {
   freeAgentDays: 2,
   maxListingsPerManager: 3,
   sellLockDays: 0,
+  clauseSellLockDays: 7,
+  maxClausesPerPlayer: 3,
   listingDays: 1,
   machineOfferJitter: 0.05,
   maxBidTeamValueShare: 0.25,
@@ -71,6 +83,7 @@ export const DEFAULT_SETTINGS: LeagueSettings = {
   bonusPerPoint: 20_000,
   bonusIdealXi: 50_000,
   bonusMvp: 60_000,
+  emptySlotPenalty: -4,
   scoringSystem: "stats",
   keepAllUnownedListed: true,
   managerScoringFromMatchday: 5,
@@ -128,6 +141,8 @@ export type Ownership = {
   ownerId: string;
   buyPrice: number;
   boughtAt: number;
+  /** Origen del fichaje actual; "clause" activa protección de venta. */
+  acquiredVia?: "clause" | "bid" | "offer" | "market" | "seed" | "other";
 };
 
 export type CompetitorOffer = {

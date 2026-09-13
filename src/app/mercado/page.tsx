@@ -20,6 +20,9 @@ type Listing = {
   ownerId?: string | null;
   ownerName?: string | null;
   clausePrice?: number | null;
+  clauseCount?: number;
+  clausesRemaining?: number;
+  clauseAvailable?: boolean;
   player: {
     name: string;
     position: string;
@@ -84,6 +87,8 @@ export default function MercadoPage() {
     maxPurchaseOfVm: number;
     salesStartedToday: number;
     maxSalesPerDay: number;
+    maxClausesPerPlayer?: number;
+    clauseSellLockDays?: number;
     uid?: string;
   } | null>(null);
   const [amounts, setAmounts] = useState<Record<string, string>>({});
@@ -107,6 +112,8 @@ export default function MercadoPage() {
       maxPurchaseOfVm: number;
       salesStartedToday: number;
       maxSalesPerDay: number;
+      maxClausesPerPlayer?: number;
+      clauseSellLockDays?: number;
     }>("/api/market");
     setData(res);
   }
@@ -399,9 +406,16 @@ export default function MercadoPage() {
           owned &&
           Boolean(listing.ownerId) &&
           listing.ownerId !== myUid &&
-          clausePrice > 0;
+          clausePrice > 0 &&
+          listing.clauseAvailable !== false;
+        const clauseExhausted =
+          owned &&
+          Boolean(listing.ownerId) &&
+          listing.ownerId !== myUid &&
+          listing.clauseAvailable === false;
         const canAffordClause = canClause && data.balance >= clausePrice;
         const playerId = listing.playerId ?? listing.id.replace(/^owned_/, "");
+        const maxClauses = data.maxClausesPerPlayer ?? 3;
         return (
           <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
             <div className="flex justify-between gap-3">
@@ -429,11 +443,21 @@ export default function MercadoPage() {
               Casa {listing.player?.pointsHome ?? 0} · Fuera {listing.player?.pointsAway ?? 0} ·{" "}
               <span className="text-gold">Total {pts}</span>
             </p>
+            {clauseExhausted && (
+              <p className="mt-3 border-t border-line pt-3 text-xs text-white/45">
+                Clausulazo agotado ({maxClauses}/{maxClauses}).
+              </p>
+            )}
             {canClause && (
               <div className="mt-3 space-y-2 border-t border-line pt-3">
                 <p className="text-xs text-white/55">
                   Clausulazo: <span className="text-gold">{formatMoney(clausePrice)}</span> (150% del
                   VM)
+                  {" · "}
+                  Quedan {listing.clausesRemaining ?? maxClauses}/{maxClauses}
+                </p>
+                <p className="text-xs text-white/40">
+                  Tras ficharlo, no podrás venderlo durante {data.clauseSellLockDays ?? 7} días.
                 </p>
                 {canAffordClause ? (
                   <button
@@ -443,7 +467,9 @@ export default function MercadoPage() {
                       const ok = window.confirm(
                         `¿Pagar el clausulazo de ${listing.player?.name}?\n\n` +
                           `Precio: ${formatMoney(clausePrice)} (150% del VM)\n` +
-                          `Se fichará al instante y ${listing.ownerName ?? "el dueño"} recibirá el dinero.`,
+                          `Se fichará al instante y ${listing.ownerName ?? "el dueño"} recibirá el dinero.\n` +
+                          `Protección: no podrás venderlo ${data.clauseSellLockDays ?? 7} días.\n` +
+                          `Clausulazos restantes tras este: ${Math.max(0, (listing.clausesRemaining ?? 1) - 1)}/${maxClauses}.`,
                       );
                       if (!ok) return;
                       api<{ message?: string }>("/api/market", {

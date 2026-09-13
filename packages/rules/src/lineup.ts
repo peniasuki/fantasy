@@ -1,4 +1,4 @@
-import { FORMATIONS, type FormationId, type Position } from "./types";
+import { FORMATIONS, type FormationId, type LeagueSettings, type Position } from "./types";
 
 export type LineupSlot = {
   slot: number;
@@ -26,7 +26,7 @@ export function emptyLineup(formation: FormationId): LineupSlot[] {
 
 /**
  * Valida formación y jugadores.
- * Huecos vacíos (playerId null) están permitidos: cuentan 0 puntos en la jornada.
+ * Huecos vacíos (playerId null) están permitidos: restan puntos al puntuar la jornada.
  * Opcionalmente rechaza jugadores no alineables (lesionados / sancionados).
  */
 export function isValidLineup(
@@ -63,4 +63,43 @@ export function isValidLineup(
 
 export function lineupLockedAt(firstKickoffMs: number, nowMs: number): boolean {
   return nowMs >= firstKickoffMs;
+}
+
+export type ManagerLineupScore = {
+  points: number;
+  filledPoints: number;
+  emptySlots: number;
+  emptyPenalty: number;
+};
+
+/**
+ * Puntos del once de un manager: suma de jugadores alineados + penalización por huecos.
+ * Si faltan plazas respecto a 11, se cuentan como vacías.
+ */
+export function scoreManagerLineup(params: {
+  slots: { playerId?: string | null }[] | null | undefined;
+  pointsByPlayer: Record<string, number>;
+  settings: Pick<LeagueSettings, "emptySlotPenalty">;
+  expectedSlots?: number;
+}): ManagerLineupScore {
+  const expected = params.expectedSlots ?? 11;
+  const slots = params.slots ?? [];
+  const penaltyPerEmpty = params.settings.emptySlotPenalty ?? -4;
+
+  let filledPoints = 0;
+  let filledSlots = 0;
+  for (const slot of slots) {
+    if (!slot.playerId) continue;
+    filledSlots += 1;
+    filledPoints += params.pointsByPlayer[slot.playerId] ?? 0;
+  }
+
+  const emptySlots = Math.max(0, expected - filledSlots);
+  const emptyPenalty = emptySlots * penaltyPerEmpty;
+  return {
+    filledPoints,
+    emptySlots,
+    emptyPenalty,
+    points: filledPoints + emptyPenalty,
+  };
 }

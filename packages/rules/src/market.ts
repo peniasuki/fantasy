@@ -67,6 +67,26 @@ export function machineOffer(vm: number, settings: LeagueSettings, random = Math
   return Math.max(1, Math.round(vm * (1 + jitter)));
 }
 
+function sellLockDaysForOwnership(
+  ownership: Ownership,
+  settings: LeagueSettings,
+): number {
+  if (ownership.acquiredVia === "clause") {
+    return Math.max(0, settings.clauseSellLockDays ?? 7);
+  }
+  return Math.max(0, settings.sellLockDays ?? 0);
+}
+
+/** Hasta cuándo no se puede vender (epoch ms), o null si no hay bloqueo. */
+export function sellLockedUntil(
+  ownership: Ownership,
+  settings: LeagueSettings,
+): number | null {
+  const lockDays = sellLockDaysForOwnership(ownership, settings);
+  if (lockDays <= 0 || !ownership.boughtAt) return null;
+  return ownership.boughtAt + lockDays * 24 * 60 * 60 * 1000;
+}
+
 export function canListPlayer(params: {
   ownerId: string;
   ownership: Ownership;
@@ -78,12 +98,16 @@ export function canListPlayer(params: {
   if (params.ownership.ownerId !== params.ownerId) {
     return { ok: false, reason: "No es tuyo." };
   }
-  const lockDays = params.settings.sellLockDays ?? 0;
-  if (lockDays > 0) {
-    const lockMs = lockDays * 24 * 60 * 60 * 1000;
-    if (params.now - params.ownership.boughtAt < lockMs) {
-      return { ok: false, reason: `Aún no puedes venderlo (bloqueo de ${lockDays} días).` };
+  const until = sellLockedUntil(params.ownership, params.settings);
+  if (until != null && params.now < until) {
+    const lockDays = sellLockDaysForOwnership(params.ownership, params.settings);
+    if (params.ownership.acquiredVia === "clause") {
+      return {
+        ok: false,
+        reason: `Protección por clausulazo: no puedes venderlo hasta pasados ${lockDays} días.`,
+      };
     }
+    return { ok: false, reason: `Aún no puedes venderlo (bloqueo de ${lockDays} días).` };
   }
   const maxSales = params.settings.maxSalesPerDay ?? 3;
   if (params.salesStartedToday >= maxSales) {
@@ -93,6 +117,24 @@ export function canListPlayer(params: {
     return { ok: false, reason: "Máximo de jugadores ya en venta." };
   }
   return { ok: true };
+}
+
+/** Un jugador solo puede ser clausulado un número limitado de veces (de por vida). */
+export function canClausePlayer(params: {
+  clauseCount: number;
+  settings: LeagueSettings;
+}): { ok: boolean; reason?: string; remaining: number } {
+  const max = Math.max(0, params.settings.maxClausesPerPlayer ?? 3);
+  const used = Math.max(0, Math.floor(params.clauseCount));
+  const remaining = Math.max(0, max - used);
+  if (used >= max) {
+    return {
+      ok: false,
+      remaining: 0,
+      reason: `Este jugador ya ha sido fichado ${max} veces por clausulazo (máximo alcanzado).`,
+    };
+  }
+  return { ok: true, remaining };
 }
 
 export type Settlement = {

@@ -105,6 +105,7 @@ export async function POST(request: Request) {
               ownerId: result.winnerId,
               buyPrice: result.price,
               boughtAt: now,
+              acquiredVia: "bid",
             });
             if (result.previousOwnerId !== "machine") {
               const playerRef = db().collection("players").doc(listing.playerId);

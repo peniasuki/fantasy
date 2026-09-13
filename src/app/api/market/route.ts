@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import {
+  canClausePlayer,
   canListPlayer,
   clauseReleasePrice,
   formatMoney,
@@ -13,6 +14,7 @@ import {
   purchasePriceBounds,
   type Bid,
   type CompetitorOffer,
+  type Ownership,
 } from "fantasy-rules";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
@@ -81,7 +83,7 @@ export async function GET() {
     const league = await getLeague();
     const settings = settingsOf(league);
     const leagueRef = db().collection("leagues").doc(LEAGUE_ID);
-    const [listingsSnap, bidsSnap, playersSnap, ownedSnap, offersInSnap, offersOutSnap, membersSnap] =
+    const [listingsSnap, bidsSnap, playersSnap, ownedSnap, offersInSnap, offersOutSnap, membersSnap, clauseActsSnap] =
       await Promise.all([
         leagueRef.collection("listings").get(),
         leagueRef.collection("bids").where("bidderId", "==", user.uid).get(),
@@ -90,7 +92,14 @@ export async function GET() {
         leagueRef.collection("offers").where("toId", "==", user.uid).where("status", "==", "pending").get(),
         leagueRef.collection("offers").where("fromId", "==", user.uid).where("status", "==", "pending").get(),
         leagueRef.collection("members").get(),
+        leagueRef.collection("activity").where("type", "==", "clause").get(),
       ]);
+    const clauseCountByPlayer = new Map<string, number>();
+    for (const d of clauseActsSnap.docs) {
+      const pid = String(d.data().playerId ?? "");
+      if (!pid) continue;
+      clauseCountByPlayer.set(pid, (clauseCountByPlayer.get(pid) ?? 0) + 1);
+    }
     const players = Object.fromEntries(
       playersSnap.docs
         .filter((d) => d.data().active !== false)
@@ -104,6 +113,7 @@ export async function GET() {
               pointsHome: Number(data.pointsHome ?? 0),
               pointsAway: Number(data.pointsAway ?? 0),
               pointsTotal: Number(data.pointsTotal ?? 0),
+              clauseCount: Number(data.clauseCount ?? 0),
             },
           ];
         }),
@@ -157,6 +167,11 @@ export async function GET() {
               : ownership[listing.playerId]?.ownerId
                 ? String(ownership[listing.playerId].ownerId)
                 : null;
+        const clauseCount = Math.max(
+          Number(player.clauseCount ?? 0),
+          clauseCountByPlayer.get(String(listing.playerId)) ?? 0,
+        );
+        const clauseGate = canClausePlayer({ clauseCount, settings });
         return {
           ...listing,
           id: d.id,
@@ -170,6 +185,9 @@ export async function GET() {
           ownerId,
           ownerName: ownerId ? members[ownerId]?.displayName ?? ownerId : null,
           clausePrice: ownerId ? clauseReleasePrice(vm, settings) : null,
+          clauseCount,
+          clausesRemaining: clauseGate.remaining,
+          clauseAvailable: Boolean(ownerId) && clauseGate.ok,
         };
       })
       .filter((row): row is NonNullable<typeof row> => Boolean(row));
@@ -183,6 +201,11 @@ export async function GET() {
       if (!player) continue;
       const ownerId = String(own.ownerId);
       const vm = playerVm(player);
+      const clauseCount = Math.max(
+        Number(player.clauseCount ?? 0),
+        clauseCountByPlayer.get(playerId) ?? 0,
+      );
+      const clauseGate = canClausePlayer({ clauseCount, settings });
       listings.push({
         id: `owned_${playerId}`,
         playerId,
@@ -200,6 +223,9 @@ export async function GET() {
         ownerId,
         ownerName: members[ownerId]?.displayName ?? ownerId,
         clausePrice: clauseReleasePrice(vm, settings),
+        clauseCount,
+        clausesRemaining: clauseGate.remaining,
+        clauseAvailable: clauseGate.ok,
       } as (typeof listings)[number]);
     }
 
@@ -217,6 +243,8 @@ export async function GET() {
       maxPurchaseOfVm: settings.maxPurchaseOfVm,
       salesStartedToday: await countSalesStartedToday(user.uid),
       maxSalesPerDay: settings.maxSalesPerDay ?? 3,
+      maxClausesPerPlayer: settings.maxClausesPerPlayer ?? 3,
+      clauseSellLockDays: settings.clauseSellLockDays ?? 7,
       formatHint: formatMoney(member.balance),
       ownership,
       uid: user.uid,
@@ -324,19 +352,34 @@ export async function POST(request: Request) {
     if (body.action === "list_to_market" || body.action === "list") {
       if (!body.playerId) return NextResponse.json({ error: "Falta jugador." }, { status: 400 });
       const ownSnap = await leagueRef.collection("ownership").doc(body.playerId).get();
-      if (!ownSnap.exists) return NextResponse.json({ error: "No es tuyo." }, { status: 400 });
+      if (!ownSnap.exists || ownSnap.data()?.ownerId !== user.uid) {
+        return NextResponse.json({ error: "No es tuyo." }, { status: 400 });
+      }
       const ownership = ownSnap.data()!;
-      const listings = await leagueRef.collection("listings").where("sellerId", "==", user.uid).get();
+      const listings = await leagueRef
+        .collection("listings")
+        .where("sellerId", "==", user.uid)
+        .get();
+      // Solo cuentan ventas activas (to_market / sale), no otros tipos.
+      const activeSales = listings.docs.filter((d) => {
+        const kind = String(d.data().kind ?? "");
+        return kind === "to_market" || kind === "sale";
+      }).length;
       const salesStartedToday = await countSalesStartedToday(user.uid);
       const check = canListPlayer({
         ownerId: user.uid,
         ownership: ownership as never,
         now: Date.now(),
-        listingsByOwner: listings.size,
+        listingsByOwner: activeSales,
         salesStartedToday,
         settings,
       });
       if (!check.ok) return NextResponse.json({ error: check.reason }, { status: 400 });
+      // Ya en oferta mercado
+      const existingMkt = await leagueRef.collection("listings").doc(`mkt_${body.playerId}`).get();
+      if (existingMkt.exists) {
+        return NextResponse.json({ error: "Este jugador ya está en Oferta Mercado." }, { status: 400 });
+      }
       const player = (await db().collection("players").doc(body.playerId).get()).data();
       const refPrice = lastPurchasePrice({
         buyPrice: ownership.buyPrice,
@@ -511,6 +554,7 @@ export async function POST(request: Request) {
           ownerId: user.uid,
           buyPrice: offer.price,
           boughtAt: now,
+          acquiredVia: "offer",
         });
         tx.set(
           db().collection("players").doc(offer.playerId),
@@ -564,9 +608,17 @@ export async function POST(request: Request) {
       if (!sellerId || sellerId === user.uid) {
         return NextResponse.json({ error: "No puedes pagar la cláusula de tu propio jugador." }, { status: 400 });
       }
-      const player = (await db().collection("players").doc(playerId).get()).data();
+      const playerRef = db().collection("players").doc(playerId);
+      const player = (await playerRef.get()).data();
       if (!player || player.active === false) {
         return NextResponse.json({ error: "Jugador no disponible." }, { status: 404 });
+      }
+      const pastClauses = await leagueRef.collection("activity").where("type", "==", "clause").get();
+      const fromActivity = pastClauses.docs.filter((d) => String(d.data().playerId) === playerId).length;
+      const clauseCount = Math.max(Number(player.clauseCount ?? 0), fromActivity);
+      const clauseGate = canClausePlayer({ clauseCount, settings });
+      if (!clauseGate.ok) {
+        return NextResponse.json({ error: clauseGate.reason }, { status: 400 });
       }
       const vm = playerVm(player);
       const price = clauseReleasePrice(vm, settings);
@@ -585,32 +637,41 @@ export async function POST(request: Request) {
       }
 
       const now = Date.now();
+      const lockDays = settings.clauseSellLockDays ?? 7;
       await db().runTransaction(async (tx) => {
         const buyerRef = leagueRef.collection("members").doc(user.uid);
         const sellerRef = leagueRef.collection("members").doc(sellerId);
         const liveOwn = await tx.get(ownRef);
+        const livePlayer = await tx.get(playerRef);
         const buyer = await tx.get(buyerRef);
         const seller = await tx.get(sellerRef);
         if (!liveOwn.exists || String(liveOwn.data()?.ownerId) !== sellerId) {
           throw new Error("CLAUSE_GONE");
         }
+        const liveCount = Math.max(Number(livePlayer.data()?.clauseCount ?? 0), clauseCount);
+        const liveGate = canClausePlayer({ clauseCount: liveCount, settings });
+        if (!liveGate.ok) throw new Error("CLAUSE_MAX");
         const bal = Number(buyer.data()?.balance ?? 0);
         if (bal < price) throw new Error("SIN_SALDO");
         tx.update(buyerRef, { balance: bal - price });
         tx.update(sellerRef, { balance: Number(seller.data()?.balance ?? 0) + price });
-        tx.set(ownRef, {
+        const ownership: Ownership = {
           playerId,
           ownerId: user.uid,
           buyPrice: price,
           boughtAt: now,
-        });
+          acquiredVia: "clause",
+        };
+        tx.set(ownRef, ownership);
         tx.set(
-          db().collection("players").doc(playerId),
+          playerRef,
           {
             lastTransferPrice: price,
             lastTransferAt: now,
             lastTransferFrom: sellerId,
             lastTransferTo: user.uid,
+            lastTransferVia: "clause",
+            clauseCount: liveCount + 1,
             updatedAt: now,
           },
           { merge: true },
@@ -629,13 +690,18 @@ export async function POST(request: Request) {
         toId: user.uid,
         price,
         vm,
+        clauseCountAfter: clauseCount + 1,
+        sellLockDays: lockDays,
       });
 
       return NextResponse.json({
         ok: true,
         price,
         playerId,
-        message: `Clausulazo pagado: ${formatMoney(price)} (150% del VM).`,
+        clauseCount: clauseCount + 1,
+        clausesRemaining: Math.max(0, (settings.maxClausesPerPlayer ?? 3) - (clauseCount + 1)),
+        sellLockDays: lockDays,
+        message: `Clausulazo pagado: ${formatMoney(price)} (150% del VM). Protección de venta: ${lockDays} días.`,
       });
     }
 
@@ -656,6 +722,12 @@ export async function POST(request: Request) {
     }
     if (message === "CLAUSE_GONE") {
       return NextResponse.json({ error: "El jugador ya no pertenece a ese manager." }, { status: 400 });
+    }
+    if (message === "CLAUSE_MAX") {
+      return NextResponse.json(
+        { error: "Este jugador ya ha alcanzado el máximo de clausulazos." },
+        { status: 400 },
+      );
     }
     return NextResponse.json({ error: message }, { status: 500 });
   }

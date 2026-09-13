@@ -73,14 +73,16 @@ Puedes fichar al instante un jugador de otro manager pagando el **clausulazo**:
 | Efecto | El jugador pasa a tu plantilla **al momento** |
 | Pago | Sale de tu **saldo** (hace falta efectivo) |
 | Destino | El manager que lo pierde **recibe** ese importe |
+| Protección | El nuevo dueño **no puede venderlo durante 7 días** |
+| Límite | Cada jugador solo puede ser fichado por clausulazo **3 veces** (de por vida) |
 
-No aplica a libres (esos se pujan). Si no tienes saldo o tu plantilla está llena (22), no puedes clausular.
+No aplica a libres (esos se pujan). Si no tienes saldo o tu plantilla está llena (22), no puedes clausular. Si el jugador ya lleva 3 clausulazos, la opción desaparece.
 
 ---
 
 ## 4. Vender jugadores
 
-Puedes vender en **cualquier momento** (lesionado, sancionado, etc.).  
+Puedes vender en **cualquier momento** (lesionado, sancionado, etc.), **excepto** si lo acabas de fichar por clausulazo: entonces hay **7 días de protección**.  
 Máximo **3 ventas al día** (día civil en Madrid).
 
 Cada venta cuenta: oferta al mercado, oferta a un rival o venta inmediata.
@@ -129,7 +131,7 @@ El jugador queda libre a VM.
 
 - Eliges formación (4-3-3, 4-4-2, 3-5-2, etc.).
 - Solo puntúan los jugadores de tu **once titular**.
-- Un **hueco vacío = 0 puntos**.
+- Un **hueco vacío = −4 puntos**.
 - **Lesionados y sancionados no se pueden alinear.**
 - Si **no cambias** tu once, se mantiene para las siguientes jornadas.
 
@@ -151,8 +153,8 @@ El jugador queda libre a VM.
 - Clausulazo → sale del once del manager que lo pierde.
 
 **Ejemplo**  
-Formación 4-3-3. Te falta un delantero alineable → ese hueco suma 0.  
-Si alineas 11 y suman 38, 12 y −2 puntos → tu jornada son **48 puntos** (solo titulares).
+Formación 4-3-3. Te falta un delantero alineable → ese hueco resta **4**.  
+Si alineas 10 jugadores que suman 48 → tu jornada son **44 puntos** (48 − 4).
 
 ---
 
@@ -172,11 +174,14 @@ Los puntos de cada jugador los tomamos de **Jornada Perfecta** (media AS / SofaS
 | Empieza a contar | Desde la **jornada 5** |
 | Jornadas 1–4 | Sirven para ver puntos de jugadores, **no** suman a la liga de managers |
 | Qué suma | Solo tu **once titular** de cada jornada puntuada |
+| Hueco vacío | **−4 puntos** por cada posición sin cubrir |
 
 **Ejemplo**  
 Jornada 5: haces 52 pts.  
 Jornada 6: haces 41 pts.  
 Clasificación: **93 puntos**.
+
+Si alineas 10 y dejas 1 hueco: puntos de esos 10 jugadores **− 4**.
 
 ---
 
@@ -197,7 +202,7 @@ Haces 45 puntos y eres el que más suma esa jornada:
 - Total al saldo: **960.000 €**  
 - A la clasificación: **+45 puntos**
 
-Ese dinero sí sirve para pujar en el mercado.
+Ese dinero sí sirve para pujar en el mercado. (Si el once queda en negativo por huecos, la prima por puntos también puede ser negativa.)
 
 ---
 
@@ -207,7 +212,7 @@ Ese dinero sí sirve para pujar en el mercado.
 2. Pujas por libres (ciegas, 75%–150% del VM, cierre 00:00).  
 3. Puedes vender de 3 formas: mercado (75–100% al cierre), rival (7 días) o inmediata (60%).  
 4. Máximo **3 ventas/día**.  
-5. Solo puntúa el once; hueco vacío = 0; lesionados/sancionados no alineables.  
+5. Solo puntúa el once; **hueco vacío = −4 pts**; lesionados/sancionados no alineables.  
 6. Clasificación y primas de dinero desde la **J5**.  
 7. **20k € por punto** + **60k €** si eres el mejor de la jornada.
 
@@ -225,7 +230,7 @@ No. Mientras está en “Oferta Mercado”, solo la máquina lo recompra al cier
 No hasta que la máquina lo compre y vuelva a quedar libre.
 
 **¿Qué pasa si no alineo a alguien?**  
-Ese hueco suma 0. Mejor un suplente flojo que un hueco vacío… si está disponible.
+Ese hueco resta **4 puntos**. Mejor un suplente flojo que un hueco vacío… si está disponible.
 
 ---
 

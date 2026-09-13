@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
-import { emptyLineup, isValidLineup, type FormationId } from "fantasy-rules";
+import {
+  emptyLineup,
+  isValidLineup,
+  sellLockedUntil,
+  type FormationId,
+  type Ownership,
+} from "fantasy-rules";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/firebase-admin";
 import { LEAGUE_ID, getLeague, requireMember, settingsOf } from "@/lib/league";
@@ -9,6 +15,9 @@ export async function GET() {
   try {
     const user = await requireUser();
     await requireMember(user.uid);
+    const league = await getLeague();
+    const settings = settingsOf(league);
+    const now = Date.now();
     const [ownedSnap, playersSnap, lineupSnap, lock] = await Promise.all([
       db().collection("leagues").doc(LEAGUE_ID).collection("ownership").where("ownerId", "==", user.uid).get(),
       db().collection("players").get(),
@@ -27,11 +36,22 @@ export async function GET() {
       .map((d) => ({ uid: d.id, displayName: d.data().displayName ?? d.id }));
     const squad = ownedSnap.docs.map((d) => {
       const own = d.data();
-      return {
-        playerId: own.playerId as string,
+      const ownership = {
+        playerId: String(own.playerId),
+        ownerId: String(own.ownerId),
         buyPrice: Number(own.buyPrice ?? 0),
         boughtAt: Number(own.boughtAt ?? 0),
-        player: players[own.playerId],
+        acquiredVia: own.acquiredVia,
+      } as Ownership;
+      const lockedUntil = sellLockedUntil(ownership, settings);
+      return {
+        playerId: ownership.playerId,
+        buyPrice: ownership.buyPrice,
+        boughtAt: ownership.boughtAt,
+        acquiredVia: ownership.acquiredVia ?? null,
+        sellLockedUntil: lockedUntil,
+        sellLocked: lockedUntil != null && now < lockedUntil,
+        player: players[ownership.playerId],
       };
     });
     return NextResponse.json({

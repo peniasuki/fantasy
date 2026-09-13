@@ -216,6 +216,13 @@ export default function AdminPage() {
       </button>
       <button
         disabled={canRun === false}
+        className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
+        onClick={() => void run("/api/jobs/sync-jp-prices")}
+      >
+        Actualizar VM / Valor (JP)
+      </button>
+      <button
+        disabled={canRun === false}
         className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
         onClick={() => run("/api/jobs/settle-market")}
       >

@@ -209,11 +209,54 @@ export function pickFreeAgents(playerIds: string[], count: number, random = Math
   return copy.slice(0, count);
 }
 
-export function nextMarketClose(now: Date, hour = 7): Date {
-  const close = new Date(now);
-  close.setHours(hour, 0, 0, 0);
+type MadridParts = { y: number; m: number; d: number; h: number; mi: number; s: number };
+
+function madridParts(now: Date): MadridParts {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Madrid",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(now);
+  const num = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((p) => p.type === type)?.value ?? 0);
+  return {
+    y: num("year"),
+    m: num("month"),
+    d: num("day"),
+    h: num("hour"),
+    mi: num("minute"),
+    s: num("second"),
+  };
+}
+
+/** Instant UTC for a civil date/time in Europe/Madrid. */
+function madridLocalToUtc(y: number, m: number, d: number, hour: number, minute = 0): Date {
+  let utc = Date.UTC(y, m - 1, d, hour, minute, 0);
+  for (let i = 0; i < 4; i += 1) {
+    const p = madridParts(new Date(utc));
+    const asUtc = Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi, p.s);
+    const want = Date.UTC(y, m - 1, d, hour, minute, 0);
+    utc += want - asUtc;
+  }
+  return new Date(utc);
+}
+
+/**
+ * Próximo cierre de mercado en Europe/Madrid.
+ * Por defecto: cada día a las 00:00 (medianoche).
+ */
+export function nextMarketClose(now: Date = new Date(), hour = 0): Date {
+  const p = madridParts(now);
+  let close = madridLocalToUtc(p.y, p.m, p.d, hour, 0);
   if (now.getTime() >= close.getTime()) {
-    close.setDate(close.getDate() + 1);
+    const noonToday = madridLocalToUtc(p.y, p.m, p.d, 12, 0);
+    const next = madridParts(new Date(noonToday.getTime() + 24 * 60 * 60 * 1000));
+    close = madridLocalToUtc(next.y, next.m, next.d, hour, 0);
   }
   return close;
 }

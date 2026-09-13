@@ -259,7 +259,7 @@ export default function EquipoPage() {
                         method: "POST",
                         body: JSON.stringify({ action: "list_to_market", playerId: s.playerId }),
                       })
-                        .then((res) => afterSale(res.message ?? "En venta al mercado (cierre ~07:00)."))
+                        .then((res) => afterSale(res.message ?? "En venta al mercado (cierre 00:00)."))
                         .catch((e) => setMsg(e.message))
                     }
                   >

@@ -37,7 +37,7 @@ Empiezas con 40M € y 0 jugadores. Fichas 15 jugadores y te quedan 8M € de sa
 
 - Todos los jugadores **sin dueño** están en el mercado a su **Valor de Mercado (VM)**.
 - Las pujas son **ciegas**: nadie ve lo que pujas hasta el cierre.
-- El mercado cierra cada día hacia las **07:00 (hora de Madrid)**.
+- El mercado cierra cada día a las **00:00 (hora de Madrid)**.
 - Gana la **puja más alta** válida.
 
 ### Límites de puja
@@ -81,7 +81,7 @@ En **Equipo** verás de cada jugador:
 
 1. Pones el jugador “en venta al mercado”.
 2. **Nadie puede pujar** por él mientras está así.
-3. Al cierre (~07:00) la máquina te lo compra por un precio **aleatorio entre el 75% y el 100%** de tu último fichaje.
+3. Al cierre (00:00) la máquina te lo compra por un precio **aleatorio entre el 75% y el 100%** de tu último fichaje.
 4. El jugador vuelve libre al mercado, a precio de **VM**.
 
 **Ejemplo**  
@@ -175,7 +175,7 @@ Ese dinero sí sirve para pujar en el mercado.
 ## 9. Resumen rápido
 
 1. Empiezas con **40M €** y máximo **22** jugadores.  
-2. Pujas por libres (ciegas, 75%–150% del VM, cierre ~07:00).  
+2. Pujas por libres (ciegas, 75%–150% del VM, cierre 00:00).  
 3. Puedes vender de 3 formas: mercado (75–100% al cierre), rival (7 días) o inmediata (60%).  
 4. Máximo **3 ventas/día**.  
 5. Solo puntúa el once; hueco vacío = 0; lesionados/sancionados no alineables.  

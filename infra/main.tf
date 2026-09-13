@@ -116,10 +116,23 @@ resource "google_cloud_run_v2_service_iam_member" "public" {
 
 resource "google_cloud_scheduler_job" "market" {
   name      = "settle-market"
-  schedule  = "0 7 * * *"
+  schedule  = "0 0 * * *"
   time_zone = "Europe/Madrid"
   http_target {
     uri         = "${google_cloud_run_v2_service.app.uri}/api/jobs/settle-market"
+    http_method = "POST"
+    headers     = { "x-jobs-secret" = var.jobs_secret }
+  }
+  depends_on = [google_project_service.apis]
+}
+
+# Tras el cierre (00:00): refresca VM desde Jornada Perfecta /mercado/ (campo Valor/price).
+resource "google_cloud_scheduler_job" "jp_prices" {
+  name      = "sync-jp-prices"
+  schedule  = "5 0 * * *"
+  time_zone = "Europe/Madrid"
+  http_target {
+    uri         = "${google_cloud_run_v2_service.app.uri}/api/jobs/sync-jp-prices"
     http_method = "POST"
     headers     = { "x-jobs-secret" = var.jobs_secret }
   }

@@ -1,7 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { scoreEstadisticas } from "./scoring";
 import { DEFAULT_SETTINGS } from "./types";
-import { instantSellPrice, maxBidAmount, minPurchasePrice, settleListing } from "./market";
+import { instantSellPrice, maxBidAmount, minPurchasePrice, nextMarketClose, settleListing } from "./market";
+
+describe("nextMarketClose", () => {
+  it("returns next Madrid midnight", () => {
+    // Sunday 13 Sep 2026 12:00 CEST
+    const now = new Date("2026-09-13T10:00:00.000Z");
+    const close = nextMarketClose(now);
+    expect(close.toISOString()).toBe("2026-09-13T22:00:00.000Z"); // 00:00 CEST = 22:00 UTC
+  });
+
+  it("rolls to the following midnight after 00:00", () => {
+    const now = new Date("2026-09-13T22:00:00.000Z"); // exactly midnight CEST
+    const close = nextMarketClose(now);
+    expect(close.toISOString()).toBe("2026-09-14T22:00:00.000Z");
+  });
+});
 
 describe("scoreEstadisticas", () => {
   it("gives 0 without minutes", () => {

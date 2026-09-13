@@ -44,7 +44,7 @@ export default function ReglasPage() {
         </h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
           <li>Todos los sin dueño van al mercado a su Valor de Mercado (VM).</li>
-          <li>Pujas <strong className="text-white">ciegas</strong> hasta el cierre (~07:00 Madrid).</li>
+          <li>Pujas <strong className="text-white">ciegas</strong> hasta el cierre (00:00 Madrid).</li>
           <li>Gana la puja más alta válida.</li>
           <li>
             Si empatan al céntimo, gana quien <strong className="text-white">pujó antes</strong> ese
@@ -146,7 +146,7 @@ export default function ReglasPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">9. Resumen</h2>
         <ol className="list-decimal space-y-1 pl-5 text-sm text-white/75">
           <li>40M € iniciales, máx. 22 jugadores.</li>
-          <li>Pujas ciegas 75–150% del VM, cierre ~07:00.</li>
+          <li>Pujas ciegas 75–150% del VM, cierre 00:00.</li>
           <li>3 formas de venta; máx. 3 ventas/día.</li>
           <li>Solo puntúa el once; clasificación y primas desde J5.</li>
         </ol>

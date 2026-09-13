@@ -6,13 +6,14 @@ import { LEAGUE_ID } from "@/lib/league";
 import { getNextUnscoredMatchday } from "@/lib/lineup-lock";
 
 /**
- * Cierra alineaciones de una jornada (por defecto la próxima no puntuada).
- * Hasta que esa jornada se puntúe, nadie puede editar el once.
+ * Cierra o abre alineaciones de una jornada (por defecto la próxima no puntuada).
+ * Cerrada: nadie edita el once hasta puntuar esa jornada (o abrir manualmente).
  */
 export async function POST(request: Request) {
   try {
     const admin = await requireJobOrAdmin(request);
     const url = new URL(request.url);
+    const unlock = url.searchParams.get("unlock") === "1" || url.searchParams.get("action") === "unlock";
     const rawMd = url.searchParams.get("matchday");
     let matchdayNum: number | null = rawMd ? Number(rawMd) : null;
 
@@ -34,6 +35,30 @@ export async function POST(request: Request) {
     }
 
     const now = Date.now();
+    if (unlock) {
+      await db()
+        .collection("leagues")
+        .doc(LEAGUE_ID)
+        .collection("lineupLocks")
+        .doc(String(matchdayNum))
+        .set(
+          {
+            matchday: matchdayNum,
+            locked: false,
+            unlockedAt: now,
+            unlockedBy: admin?.uid ?? "job",
+            source: "admin",
+          },
+          { merge: true },
+        );
+      return NextResponse.json({
+        ok: true,
+        matchday: matchdayNum,
+        locked: false,
+        message: `Alineaciones abiertas para la jornada ${matchdayNum}.`,
+      });
+    }
+
     const lockAt = new Date(now).toISOString();
     await db()
       .collection("leagues")
@@ -54,6 +79,7 @@ export async function POST(request: Request) {
       ok: true,
       matchday: matchdayNum,
       lockAt,
+      locked: true,
       message: `Alineaciones cerradas para la jornada ${matchdayNum}.`,
     });
   } catch (error) {

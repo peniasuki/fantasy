@@ -79,6 +79,7 @@ export default function EquipoPage() {
   const [locked, setLocked] = useState(false);
   const [lockAt, setLockAt] = useState<string | null>(null);
   const [lockMatchday, setLockMatchday] = useState<number | null>(null);
+  const [autoLock, setAutoLock] = useState(false);
   const [msg, setMsg] = useState("");
   const [sellPlayerId, setSellPlayerId] = useState<string | null>(null);
   const [offerTo, setOfferTo] = useState("");
@@ -92,6 +93,7 @@ export default function EquipoPage() {
       locked: boolean;
       lockAt: string | null;
       lockMatchday: number | null;
+      autoLock?: boolean;
     }>("/api/squad");
     setSquad(res.squad);
     setRivals(res.rivals ?? []);
@@ -100,6 +102,7 @@ export default function EquipoPage() {
     setLocked(res.locked);
     setLockAt(res.lockAt ?? null);
     setLockMatchday(res.lockMatchday ?? null);
+    setAutoLock(Boolean(res.autoLock));
   }
 
   useEffect(() => {
@@ -145,17 +148,23 @@ export default function EquipoPage() {
           Alineación bloqueada
           {lockMatchday != null ? ` · Jornada ${lockMatchday}` : ""}
           {lockAt ? ` · desde ${formatLockAt(lockAt)}` : ""}.
+          Se reabre al puntuar esa jornada.
+        </p>
+      ) : autoLock && lockAt ? (
+        <p className="text-xs text-white/60">
+          Cierre automático
+          {lockMatchday != null ? ` J${lockMatchday}` : ""}:{" "}
+          <span className="text-gold">{formatLockAt(lockAt)}</span> (Madrid)
         </p>
       ) : (
         <p className="text-xs text-white/60">
-          Cierre de alineación
-          {lockMatchday != null ? ` J${lockMatchday}` : ""}:{" "}
-          <span className="text-gold">{formatLockAt(lockAt)}</span> (Madrid)
+          Alineación abierta
+          {lockMatchday != null ? ` · próxima J${lockMatchday}` : ""}. Cierre manual desde Admin.
         </p>
       )}
       <p className="text-xs text-white/50">
         Hueco vacío = 0 puntos. Lesionados y sancionados no se pueden alinear. Un jugador solo en un
-        hueco.
+        hueco. Si no cambias el once, se mantiene para las siguientes jornadas.
       </p>
       <div className="rounded-2xl bg-gradient-to-b from-grass/40 to-grass/10 p-3">
         {slots.map((slot) => (

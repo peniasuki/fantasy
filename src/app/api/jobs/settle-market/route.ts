@@ -137,11 +137,8 @@ export async function POST(request: Request) {
 
         if (!applied) continue;
 
-        if (
-          result.reason === "machine_buy" &&
-          result.previousOwnerId !== "machine" &&
-          typeof result.previousOwnerId === "string"
-        ) {
+        // Cualquier traspaso desde un manager (venta a máquina, puja, etc.) saca al jugador del once.
+        if (result.previousOwnerId !== "machine" && typeof result.previousOwnerId === "string") {
           const lineupRef = leagueRef.collection("lineups").doc(result.previousOwnerId);
           const lineupSnap = await lineupRef.get();
           if (lineupSnap.exists) {
@@ -160,12 +157,16 @@ export async function POST(request: Request) {
             });
             if (changed) await lineupRef.set({ slots: next, updatedAt: now }, { merge: true });
           }
-          const offers = await leagueRef
-            .collection("offers")
-            .where("playerId", "==", listing.playerId)
-            .where("status", "==", "pending")
-            .get();
-          await Promise.all(offers.docs.map((d) => d.ref.set({ status: "cancelled", closedAt: now }, { merge: true })));
+          if (result.reason === "machine_buy") {
+            const offers = await leagueRef
+              .collection("offers")
+              .where("playerId", "==", listing.playerId)
+              .where("status", "==", "pending")
+              .get();
+            await Promise.all(
+              offers.docs.map((d) => d.ref.set({ status: "cancelled", closedAt: now }, { merge: true })),
+            );
+          }
         }
 
         const staleBids = bidsSnap.docs.filter((d) => d.data().listingId === listing.id);

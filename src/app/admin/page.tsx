@@ -233,13 +233,26 @@ export default function AdminPage() {
         className="w-full rounded-lg border border-gold/50 py-3 text-gold disabled:opacity-40"
         onClick={() => {
           const ok = window.confirm(
-            "¿Cerrar alineaciones de la próxima jornada?\n\nNadie podrá cambiar el once hasta que se puntúe esa jornada.",
+            "¿Cerrar alineaciones de la próxima jornada?\n\nNadie podrá cambiar el once hasta que se puntúe esa jornada (o la abras de nuevo).",
           );
           if (!ok) return;
           void run("/api/jobs/lock-lineups");
         }}
       >
         Cerrar alineaciones (manual)
+      </button>
+      <button
+        disabled={canRun === false}
+        className="w-full rounded-lg border border-line py-3 disabled:opacity-40"
+        onClick={() => {
+          const ok = window.confirm(
+            "¿Abrir alineaciones de la próxima jornada?\n\nLos managers podrán editar el once de nuevo.",
+          );
+          if (!ok) return;
+          void run("/api/jobs/lock-lineups?unlock=1");
+        }}
+      >
+        Abrir alineaciones (manual)
       </button>
       <button
         disabled={canRun === false}

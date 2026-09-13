@@ -109,7 +109,9 @@ export default function ReglasPage() {
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
           <li>Solo puntúa el once titular.</li>
           <li>Hueco vacío = 0 puntos.</li>
-          <li>Lesionados y sancionados no alineables.</li>
+          <li>Lesionados y sancionados no alineables (salen del once al actualizarse).</li>
+          <li>Si no cambias el once, se mantiene jornada tras jornada.</li>
+          <li>J5 cierra sola por calendario; el resto, cierre manual Admin. Al puntuar, se reabre.</li>
         </ul>
         <p className="rounded-lg bg-panel px-3 py-2 text-sm text-white/65">
           <span className="text-white/45">Ejemplo · </span>

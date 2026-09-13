@@ -42,6 +42,7 @@ export async function GET() {
       lockAt: lock.lockAt,
       lockMatchday: lock.matchday,
       lockSource: lock.source,
+      autoLock: lock.autoLock,
       firstKickoff: null,
     });
   } catch (error) {

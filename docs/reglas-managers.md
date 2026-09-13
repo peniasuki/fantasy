@@ -131,8 +131,24 @@ El jugador queda libre a VM.
 - Solo puntúan los jugadores de tu **once titular**.
 - Un **hueco vacío = 0 puntos**.
 - **Lesionados y sancionados no se pueden alinear.**
+- Si **no cambias** tu once, se mantiene para las siguientes jornadas.
 
-La alineación se bloquea cuando llega el cierre de la próxima jornada a puntuar.
+### Abierta / cerrada
+
+| Estado | Qué pasa |
+|---|---|
+| Abierta | Puedes editar formación y titulares en Equipo |
+| Cerrada | Nadie puede modificar el once hasta que se puntúe esa jornada |
+
+**Cierre**
+- **Jornada 5:** cierre automático a la hora del calendario (ya programada).
+- **Resto de jornadas (de momento):** cierre **manual** desde Admin.
+- Al **puntuar** una jornada, las alineaciones se **reabren** para la siguiente.
+
+**Cambios automáticos del once** (sin entrar en Equipo)
+- Lesión o sanción en la sync JP → sale del once.
+- Venta (inmediata, rival aceptada o recompra máquina) → sale del once del vendedor.
+- Clausulazo → sale del once del manager que lo pierde.
 
 **Ejemplo**  
 Formación 4-3-3. Te falta un delantero alineable → ese hueco suma 0.  

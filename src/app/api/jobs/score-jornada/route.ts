@@ -292,6 +292,21 @@ export async function POST(request: Request) {
       }),
     );
 
+    // Reabrir alineaciones: esta jornada ya no bloquea; la siguiente empieza abierta
+    // (salvo cierre programado J5 o cierre manual admin).
+    writes.push((batch) =>
+      batch.set(
+        leagueRef.collection("lineupLocks").doc(String(matchday)),
+        {
+          matchday,
+          locked: false,
+          unlockedAt: now,
+          unlockedBy: "score-jornada",
+        },
+        { merge: true },
+      ),
+    );
+
     await commitInChunks(writes);
 
     return NextResponse.json({

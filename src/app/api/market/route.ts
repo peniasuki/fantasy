@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   canListPlayer,
+  clauseReleasePrice,
   formatMoney,
   instantSellPrice,
   lastPurchasePrice,
@@ -159,6 +160,7 @@ export async function GET() {
         return {
           ...listing,
           id: d.id,
+          playerId: String(listing.playerId),
           player,
           myBid: bidsSnap.docs.find((b) => b.data().listingId === d.id)?.data() ?? null,
           minBid: bounds.min,
@@ -167,6 +169,7 @@ export async function GET() {
           ownershipStatus: listing.kind === "free_agent" ? "free" : "owned",
           ownerId,
           ownerName: ownerId ? members[ownerId]?.displayName ?? ownerId : null,
+          clausePrice: ownerId ? clauseReleasePrice(vm, settings) : null,
         };
       })
       .filter((row): row is NonNullable<typeof row> => Boolean(row));
@@ -196,6 +199,7 @@ export async function GET() {
         ownershipStatus: "owned",
         ownerId,
         ownerName: members[ownerId]?.displayName ?? ownerId,
+        clausePrice: clauseReleasePrice(vm, settings),
       } as (typeof listings)[number]);
     }
 
@@ -215,6 +219,7 @@ export async function GET() {
       maxSalesPerDay: settings.maxSalesPerDay ?? 3,
       formatHint: formatMoney(member.balance),
       ownership,
+      uid: user.uid,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "ERROR";
@@ -239,7 +244,8 @@ export async function POST(request: Request) {
         | "accept_offer"
         | "reject_offer"
         | "cancel_offer"
-        | "unlist";
+        | "unlist"
+        | "clause";
       listingId?: string;
       playerId?: string;
       amount?: number;
@@ -546,6 +552,93 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
+    if (body.action === "clause") {
+      if (!body.playerId) return NextResponse.json({ error: "Falta jugador." }, { status: 400 });
+      const playerId = String(body.playerId);
+      const ownRef = leagueRef.collection("ownership").doc(playerId);
+      const ownSnap = await ownRef.get();
+      if (!ownSnap.exists) {
+        return NextResponse.json({ error: "Ese jugador no está fichado." }, { status: 400 });
+      }
+      const sellerId = String(ownSnap.data()?.ownerId ?? "");
+      if (!sellerId || sellerId === user.uid) {
+        return NextResponse.json({ error: "No puedes pagar la cláusula de tu propio jugador." }, { status: 400 });
+      }
+      const player = (await db().collection("players").doc(playerId).get()).data();
+      if (!player || player.active === false) {
+        return NextResponse.json({ error: "Jugador no disponible." }, { status: 404 });
+      }
+      const vm = playerVm(player);
+      const price = clauseReleasePrice(vm, settings);
+      if (price <= 0) {
+        return NextResponse.json({ error: "Cláusula inválida." }, { status: 400 });
+      }
+      const buyerOwned = await leagueRef.collection("ownership").where("ownerId", "==", user.uid).get();
+      if (buyerOwned.size >= settings.maxSquadSize) {
+        return NextResponse.json({ error: "Plantilla llena." }, { status: 400 });
+      }
+      if (member.balance < price) {
+        return NextResponse.json(
+          { error: `Necesitas ${formatMoney(price)} en saldo (150% del VM).` },
+          { status: 400 },
+        );
+      }
+
+      const now = Date.now();
+      await db().runTransaction(async (tx) => {
+        const buyerRef = leagueRef.collection("members").doc(user.uid);
+        const sellerRef = leagueRef.collection("members").doc(sellerId);
+        const liveOwn = await tx.get(ownRef);
+        const buyer = await tx.get(buyerRef);
+        const seller = await tx.get(sellerRef);
+        if (!liveOwn.exists || String(liveOwn.data()?.ownerId) !== sellerId) {
+          throw new Error("CLAUSE_GONE");
+        }
+        const bal = Number(buyer.data()?.balance ?? 0);
+        if (bal < price) throw new Error("SIN_SALDO");
+        tx.update(buyerRef, { balance: bal - price });
+        tx.update(sellerRef, { balance: Number(seller.data()?.balance ?? 0) + price });
+        tx.set(ownRef, {
+          playerId,
+          ownerId: user.uid,
+          buyPrice: price,
+          boughtAt: now,
+        });
+        tx.set(
+          db().collection("players").doc(playerId),
+          {
+            lastTransferPrice: price,
+            lastTransferAt: now,
+            lastTransferFrom: sellerId,
+            lastTransferTo: user.uid,
+            updatedAt: now,
+          },
+          { merge: true },
+        );
+      });
+
+      await clearPlayerFromLineup(sellerId, playerId);
+      const listingDocs = await leagueRef.collection("listings").where("playerId", "==", playerId).get();
+      await Promise.all(listingDocs.docs.map((d) => d.ref.delete()));
+      await cancelPendingOffersForPlayer(playerId);
+      await leagueRef.collection("activity").doc(`clause_${playerId}_${now}`).set({
+        type: "clause",
+        at: now,
+        playerId,
+        fromId: sellerId,
+        toId: user.uid,
+        price,
+        vm,
+      });
+
+      return NextResponse.json({
+        ok: true,
+        price,
+        playerId,
+        message: `Clausulazo pagado: ${formatMoney(price)} (150% del VM).`,
+      });
+    }
+
     if (body.action === "unlist" && body.listingId) {
       const listing = await leagueRef.collection("listings").doc(body.listingId).get();
       if (listing.data()?.sellerId !== user.uid) {
@@ -560,6 +653,9 @@ export async function POST(request: Request) {
     const message = error instanceof Error ? error.message : "ERROR";
     if (message === "SIN_SALDO") {
       return NextResponse.json({ error: "No tienes saldo suficiente." }, { status: 400 });
+    }
+    if (message === "CLAUSE_GONE") {
+      return NextResponse.json({ error: "El jugador ya no pertenece a ese manager." }, { status: 400 });
     }
     return NextResponse.json({ error: message }, { status: 500 });
   }

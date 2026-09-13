@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { scoreEstadisticas } from "./scoring";
 import { DEFAULT_SETTINGS } from "./types";
-import { instantSellPrice, maxBidAmount, minPurchasePrice, nextMarketClose, settleListing } from "./market";
+import { instantSellPrice, maxBidAmount, minPurchasePrice, clauseReleasePrice, nextMarketClose, settleListing } from "./market";
 
 describe("nextMarketClose", () => {
   it("returns next Madrid midnight", () => {
@@ -15,6 +15,12 @@ describe("nextMarketClose", () => {
     const now = new Date("2026-09-13T22:00:00.000Z"); // exactly midnight CEST
     const close = nextMarketClose(now);
     expect(close.toISOString()).toBe("2026-09-14T22:00:00.000Z");
+  });
+});
+
+describe("clauseReleasePrice", () => {
+  it("is 150% of VM", () => {
+    expect(clauseReleasePrice(10_000_000, DEFAULT_SETTINGS)).toBe(15_000_000);
   });
 });
 

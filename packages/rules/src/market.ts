@@ -12,6 +12,11 @@ export function maxPurchasePrice(vm: number, settings: LeagueSettings): number {
   return Math.floor(vm * settings.maxPurchaseOfVm);
 }
 
+/** Clausulazo: precio fijo de fichaje inmediato de un jugador rival (por defecto 150% VM). */
+export function clauseReleasePrice(vm: number, settings: LeagueSettings): number {
+  return maxPurchasePrice(vm, settings);
+}
+
 export function minPurchasePrice(vm: number, settings: LeagueSettings): number {
   const ratio = settings.minPurchaseOfVm ?? 0.75;
   return Math.max(0, Math.ceil(vm * ratio));

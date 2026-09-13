@@ -66,6 +66,17 @@ export default function ReglasPage() {
       </section>
 
       <section className="space-y-2">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">3b. Clausulazo</h2>
+        <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
+          <li>
+            Fichas al instante un jugador rival pagando el <strong className="text-white">150% del VM</strong>.
+          </li>
+          <li>Sale de tu saldo; el dueño anterior recibe ese importe.</li>
+          <li>Hace falta efectivo y plaza libre en plantilla (máx. 22).</li>
+        </ul>
+      </section>
+
+      <section className="space-y-2">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">4. Vender</h2>
         <p className="text-sm text-white/75">
           Puedes vender en cualquier estado. Máximo <strong className="text-white">3 ventas/día</strong>{" "}

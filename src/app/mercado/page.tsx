@@ -3,10 +3,12 @@
 import { formatMoney } from "fantasy-rules";
 import { useEffect, useMemo, useState } from "react";
 import { api } from "@/lib/api";
+import { useMe } from "@/components/MeProvider";
 import { useVisibleWindow } from "@/lib/use-visible-window";
 
 type Listing = {
   id: string;
+  playerId?: string;
   kind: string;
   askPrice: number;
   expiresAt: number;
@@ -17,6 +19,7 @@ type Listing = {
   ownershipStatus?: "free" | "owned";
   ownerId?: string | null;
   ownerName?: string | null;
+  clausePrice?: number | null;
   player: {
     name: string;
     position: string;
@@ -69,6 +72,7 @@ function isOwnedListing(listing: Listing): boolean {
 }
 
 export default function MercadoPage() {
+  const me = useMe();
   const [data, setData] = useState<{
     listings: Listing[];
     incomingOffers: Offer[];
@@ -80,6 +84,7 @@ export default function MercadoPage() {
     maxPurchaseOfVm: number;
     salesStartedToday: number;
     maxSalesPerDay: number;
+    uid?: string;
   } | null>(null);
   const [amounts, setAmounts] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState("");
@@ -388,6 +393,15 @@ export default function MercadoPage() {
         const owned = isOwnedListing(listing);
         const bidable = listing.bidable !== false && listing.kind !== "to_market" && listing.kind !== "owned";
         const pts = listing.player?.pointsTotal ?? 0;
+        const myUid = data.uid ?? me?.uid;
+        const clausePrice = listing.clausePrice ?? 0;
+        const canClause =
+          owned &&
+          Boolean(listing.ownerId) &&
+          listing.ownerId !== myUid &&
+          clausePrice > 0;
+        const canAffordClause = canClause && data.balance >= clausePrice;
+        const playerId = listing.playerId ?? listing.id.replace(/^owned_/, "");
         return (
           <article key={listing.id} className="rounded-2xl border border-line bg-panel p-4">
             <div className="flex justify-between gap-3">
@@ -415,12 +429,50 @@ export default function MercadoPage() {
               Casa {listing.player?.pointsHome ?? 0} · Fuera {listing.player?.pointsAway ?? 0} ·{" "}
               <span className="text-gold">Total {pts}</span>
             </p>
+            {canClause && (
+              <div className="mt-3 space-y-2 border-t border-line pt-3">
+                <p className="text-xs text-white/55">
+                  Clausulazo: <span className="text-gold">{formatMoney(clausePrice)}</span> (150% del
+                  VM)
+                </p>
+                {canAffordClause ? (
+                  <button
+                    type="button"
+                    className="w-full rounded-lg border border-gold/50 py-2 text-sm text-gold"
+                    onClick={() => {
+                      const ok = window.confirm(
+                        `¿Pagar el clausulazo de ${listing.player?.name}?\n\n` +
+                          `Precio: ${formatMoney(clausePrice)} (150% del VM)\n` +
+                          `Se fichará al instante y ${listing.ownerName ?? "el dueño"} recibirá el dinero.`,
+                      );
+                      if (!ok) return;
+                      api<{ message?: string }>("/api/market", {
+                        method: "POST",
+                        body: JSON.stringify({ action: "clause", playerId }),
+                      })
+                        .then((res) => {
+                          setMsg(res.message ?? "Clausulazo pagado");
+                          load();
+                        })
+                        .catch((e) => setMsg(e.message));
+                    }}
+                  >
+                    Pagar clausulazo
+                  </button>
+                ) : (
+                  <p className="text-xs text-red-300">
+                    Saldo insuficiente para el clausulazo ({formatMoney(data.balance)} disponibles).
+                  </p>
+                )}
+              </div>
+            )}
             {listing.kind === "to_market" ? (
               <p className="mt-2 text-xs text-white/50">
                 En venta al mercado. Recompra automática al cierre (75–100% del último fichaje). No se
                 puede pujar.
               </p>
-            ) : listing.kind === "owned" ? null : (
+            ) : null}
+            {!owned && (
               <>
                 <p className="mt-1 text-xs text-white/45">
                   Mín {formatMoney(listing.minBid)} · Máx {formatMoney(listing.maxBid)}

@@ -63,6 +63,19 @@ Si pujas 9M y otro manager puja 9,5M, él se lo lleva al cierre. Tú no pierdes 
 
 Si dos managers pujan **exactamente lo mismo**, gana quien llegó antes a ese importe (se guarda la hora de la puja).
 
+## 3b. Clausulazo
+
+Puedes fichar al instante un jugador de otro manager pagando el **clausulazo**:
+
+| Concepto | Valor |
+|---|---|
+| Precio | **150% del VM** actual |
+| Efecto | El jugador pasa a tu plantilla **al momento** |
+| Pago | Sale de tu **saldo** (hace falta efectivo) |
+| Destino | El manager que lo pierde **recibe** ese importe |
+
+No aplica a libres (esos se pujan). Si no tienes saldo o tu plantilla está llena (22), no puedes clausular.
+
 ---
 
 ## 4. Vender jugadores

@@ -146,8 +146,10 @@ El jugador queda libre a VM.
 
 **Cierre**
 - **Jornada 5:** cierre automático a la hora del calendario (ya programada).
+- **Jornada 6:** cierre programado el **15 sep 2026 a las 19:00** (Madrid).
 - **Resto de jornadas (de momento):** cierre **manual** desde Admin.
 - Al **puntuar** una jornada, las alineaciones se **reabren** para la siguiente.
+- **Excepción con once cerrado:** si te clausulan un titular, ese hueco sí se puede cubrir con un suplente. No hay más cambios permitidos hasta reabrir.
 
 **Cambios automáticos del once** (sin entrar en Equipo)
 - Lesión o sanción en la sync JP → sale del once.

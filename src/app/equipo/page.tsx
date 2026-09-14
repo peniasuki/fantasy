@@ -34,7 +34,12 @@ type SquadRow = {
 
 type Rival = { uid: string; displayName: string };
 
-type SlotRow = { slot: number; position: string; playerId: string | null };
+type SlotRow = {
+  slot: number;
+  position: string;
+  playerId: string | null;
+  clauseFillable?: boolean;
+};
 
 function playerAlignable(p?: Player | null): boolean {
   if (!p) return false;
@@ -132,9 +137,18 @@ export default function EquipoPage() {
 
   function assign(slot: number, playerId: string) {
     setSlots((current) =>
-      current.map((s) => (s.slot === slot ? { ...s, playerId: playerId || null } : s)),
+      current.map((s) => {
+        if (s.slot !== slot) return s;
+        if (locked) {
+          if (!s.clauseFillable) return s;
+          return { ...s, playerId: playerId || null };
+        }
+        return { ...s, playerId: playerId || null, clauseFillable: undefined };
+      }),
     );
   }
+
+  const canSaveLineup = !locked || slots.some((s) => s.clauseFillable);
 
   async function afterSale(message: string) {
     setSellMsg("");
@@ -183,11 +197,18 @@ export default function EquipoPage() {
           {lockMatchday != null ? ` · Jornada ${lockMatchday}` : ""}
           {lockAt ? ` · desde ${formatLockAt(lockAt)}` : ""}.
           Se reabre al puntuar esa jornada.
+          {slots.some((s) => s.clauseFillable) ? (
+            <>
+              {" "}
+              Excepción: puedes cubrir el hueco de un{" "}
+              <span className="text-white">clausulazo</span> con un suplente.
+            </>
+          ) : null}
         </p>
       ) : autoLock && lockAt ? (
         <p className="text-xs text-white/60">
-          Cierre automático
-          {lockMatchday != null ? ` J${lockMatchday}` : ""}:{" "}
+          Alineación abierta
+          {lockMatchday != null ? ` · próxima J${lockMatchday}` : ""}. Cierre programado:{" "}
           <span className="text-gold">{formatLockAt(lockAt)}</span> (Madrid)
         </p>
       ) : (
@@ -197,20 +218,25 @@ export default function EquipoPage() {
         </p>
       )}
       <p className="text-xs text-white/50">
-        Hueco vacío = 0 puntos. Lesionados y sancionados no se pueden alinear. Un jugador solo en un
+        Hueco vacío = −4 puntos. Lesionados y sancionados no se pueden alinear. Un jugador solo en un
         hueco. Si no cambias el once, se mantiene para las siguientes jornadas.
       </p>
       <div className="rounded-2xl bg-gradient-to-b from-grass/40 to-grass/10 p-3">
-        {slots.map((slot) => (
+        {slots.map((slot) => {
+          const slotEditable = !locked || Boolean(slot.clauseFillable);
+          return (
           <label key={`${formation}-${slot.slot}`} className="mb-2 block rounded-lg bg-black/30 px-2 py-2 text-sm">
             <span className="mr-2 text-white/50">{slot.position}</span>
+            {slot.clauseFillable && locked ? (
+              <span className="mr-2 text-xs text-gold">clausulazo</span>
+            ) : null}
             <select
-              disabled={locked}
+              disabled={!slotEditable}
               value={slot.playerId ?? ""}
               onChange={(e) => assign(slot.slot, e.target.value)}
-              className="w-[70%] bg-transparent"
+              className="w-[70%] bg-transparent disabled:opacity-50"
             >
-              <option value="">— (0 pts)</option>
+              <option value="">— (−4 pts)</option>
               {squad
                 .filter((s) => {
                   if (s.player?.position !== slot.position) return false;
@@ -234,21 +260,25 @@ export default function EquipoPage() {
                 })}
             </select>
           </label>
-        ))}
+          );
+        })}
       </div>
       <button
-        disabled={locked}
+        disabled={!canSaveLineup}
         className="w-full rounded-lg bg-grass py-3 disabled:opacity-40"
         onClick={() =>
-          api("/api/squad", {
+          api<{ message?: string }>("/api/squad", {
             method: "PUT",
             body: JSON.stringify({ formation, slots }),
           })
-            .then(() => setMsg("Alineación guardada"))
+            .then(async (res) => {
+              setMsg(res.message ?? "Alineación guardada");
+              await load();
+            })
             .catch((e) => setMsg(e.message))
         }
       >
-        Guardar once
+        {locked ? "Cubrir hueco de clausulazo" : "Guardar once"}
       </button>
       {msg && <p className="text-sm text-white/70">{msg}</p>}
       <h3 className="text-sm uppercase tracking-wide text-white/50">Plantilla</h3>

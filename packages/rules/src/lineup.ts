@@ -4,6 +4,11 @@ export type LineupSlot = {
   slot: number;
   position: Position;
   playerId: string | null;
+  /**
+   * Hueco dejado por clausulazo: con alineación cerrada solo estos se pueden cubrir.
+   * Se limpia al guardar un suplente (o al reabrir la jornada).
+   */
+  clauseFillable?: boolean;
 };
 
 export function slotsForFormation(formation: FormationId): Position[] {
@@ -59,6 +64,68 @@ export function isValidLineup(
     used.add(slot.playerId);
   }
   return { ok: true };
+}
+
+/**
+ * Con alineación cerrada solo se permite cubrir huecos marcados por clausulazo
+ * (null → jugador). Formación y titulares ya ocupados no pueden cambiar.
+ */
+export function canPatchLockedLineup(params: {
+  previousFormation: FormationId;
+  previousSlots: LineupSlot[];
+  nextFormation: FormationId;
+  nextSlots: LineupSlot[];
+}): { ok: boolean; reason?: string } {
+  if (params.previousFormation !== params.nextFormation) {
+    return { ok: false, reason: "Con la alineación cerrada no puedes cambiar la formación." };
+  }
+  if (params.previousSlots.length !== 11 || params.nextSlots.length !== 11) {
+    return { ok: false, reason: "La alineación debe tener 11 plazas." };
+  }
+  let filledClauseHole = false;
+  for (let i = 0; i < 11; i += 1) {
+    const prev = params.previousSlots[i];
+    const next = params.nextSlots[i];
+    if (prev.position !== next.position || prev.slot !== next.slot) {
+      return { ok: false, reason: "No puedes alterar la estructura del once cerrado." };
+    }
+    if (prev.playerId) {
+      if (next.playerId !== prev.playerId) {
+        return {
+          ok: false,
+          reason: "Con la alineación cerrada no puedes cambiar ni quitar titulares.",
+        };
+      }
+      continue;
+    }
+    // Hueco vacío
+    if (!next.playerId) continue;
+    if (!prev.clauseFillable) {
+      return {
+        ok: false,
+        reason: "Solo puedes cubrir huecos dejados por un clausulazo.",
+      };
+    }
+    filledClauseHole = true;
+  }
+  if (!filledClauseHole) {
+    return {
+      ok: false,
+      reason: "No hay cambios permitidos: solo puedes cubrir un hueco de clausulazo.",
+    };
+  }
+  return { ok: true };
+}
+
+/** Quita clauseFillable de huecos ya cubiertos al guardar. */
+export function sanitizeLineupSlots(slots: LineupSlot[]): LineupSlot[] {
+  return slots.map((s) => {
+    if (s.playerId) {
+      const { clauseFillable: _drop, ...rest } = s;
+      return { ...rest, playerId: s.playerId };
+    }
+    return s.clauseFillable ? { ...s, clauseFillable: true } : { ...s, playerId: null };
+  });
 }
 
 export function lineupLockedAt(firstKickoffMs: number, nowMs: number): boolean {

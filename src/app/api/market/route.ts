@@ -47,17 +47,30 @@ async function recordSaleEvent(uid: string, kind: string, playerId: string) {
     .set({ id, uid, day: today, kind, playerId, at: Date.now() });
 }
 
-async function clearPlayerFromLineup(uid: string, playerId: string) {
+async function clearPlayerFromLineup(
+  uid: string,
+  playerId: string,
+  opts?: { reason?: "clause" | "other" },
+) {
   const ref = db().collection("leagues").doc(LEAGUE_ID).collection("lineups").doc(uid);
   const snap = await ref.get();
   if (!snap.exists) return;
   const data = snap.data()!;
-  const slots = (data.slots ?? []) as { slot: number; position: string; playerId: string | null }[];
+  const slots = (data.slots ?? []) as {
+    slot: number;
+    position: string;
+    playerId: string | null;
+    clauseFillable?: boolean;
+  }[];
   let changed = false;
   const next = slots.map((s) => {
     if (s.playerId === playerId) {
       changed = true;
-      return { ...s, playerId: null };
+      if (opts?.reason === "clause") {
+        return { ...s, playerId: null, clauseFillable: true };
+      }
+      const { clauseFillable: _drop, ...rest } = s;
+      return { ...rest, playerId: null };
     }
     return s;
   });
@@ -678,7 +691,7 @@ export async function POST(request: Request) {
         );
       });
 
-      await clearPlayerFromLineup(sellerId, playerId);
+      await clearPlayerFromLineup(sellerId, playerId, { reason: "clause" });
       const listingDocs = await leagueRef.collection("listings").where("playerId", "==", playerId).get();
       await Promise.all(listingDocs.docs.map((d) => d.ref.delete()));
       await cancelPendingOffersForPlayer(playerId);

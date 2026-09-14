@@ -8,10 +8,20 @@ import { db } from "@/lib/firebase-admin";
 import { LEAGUE_ID } from "@/lib/league";
 
 /**
- * Jornadas con cierre automático por calendario (lockAt).
- * El resto solo se cierran con Admin → Cerrar alineaciones.
+ * Jornadas con cierre automático por calendario (lockAt del JSON).
+ * El resto solo se cierran con Admin → Cerrar alineaciones o con un
+ * cierre programado en SCHEDULED_ADMIN_LOCKS.
  */
 export const SCHEDULED_LINEUP_LOCK_MATCHDAYS = new Set<number>([5]);
+
+/**
+ * Cierres programados fuera del calendario (ISO con offset Madrid).
+ * La UI muestra la hora; Cloud Scheduler (o isPastLockAt) aplica el bloqueo.
+ */
+export const SCHEDULED_ADMIN_LOCKS: Readonly<Record<number, string>> = {
+  /** Jornada 6 — 15 sep 2026, 19:00 Madrid */
+  6: "2026-09-15T19:00:00+02:00",
+};
 
 export type LineupLockState = {
   locked: boolean;
@@ -41,6 +51,8 @@ export async function getLineupLockState(now = new Date()): Promise<LineupLockSt
   }
 
   const autoLock = SCHEDULED_LINEUP_LOCK_MATCHDAYS.has(upcoming.number);
+  const adminScheduleAt = SCHEDULED_ADMIN_LOCKS[upcoming.number] ?? null;
+  const scheduledLockAt = adminScheduleAt ?? (autoLock ? upcoming.lockAt : null);
 
   const manualSnap = await db()
     .collection("leagues")
@@ -52,28 +64,31 @@ export async function getLineupLockState(now = new Date()): Promise<LineupLockSt
   if (manual?.locked === true) {
     return {
       locked: true,
-      lockAt: typeof manual.lockAt === "string" ? manual.lockAt : upcoming.lockAt,
+      lockAt:
+        typeof manual.lockAt === "string"
+          ? manual.lockAt
+          : scheduledLockAt ?? upcoming.lockAt,
       matchday: upcoming.number,
       source: "admin",
-      autoLock,
+      autoLock: Boolean(scheduledLockAt),
     };
   }
-  // Admin abrió explícitamente esta jornada: no reaplica el horario automático.
+  // Admin / score-jornada abrió explícitamente: no fuerza el horario, pero sí lo muestra.
   if (manual?.locked === false) {
     return {
       locked: false,
-      lockAt: autoLock ? upcoming.lockAt : null,
+      lockAt: scheduledLockAt,
       matchday: upcoming.number,
       source: "none",
-      autoLock,
+      autoLock: Boolean(scheduledLockAt),
     };
   }
 
-  if (autoLock) {
-    const locked = isPastLockAt(upcoming.lockAt, now);
+  if (scheduledLockAt) {
+    const locked = isPastLockAt(scheduledLockAt, now);
     return {
       locked,
-      lockAt: upcoming.lockAt,
+      lockAt: scheduledLockAt,
       matchday: upcoming.number,
       source: locked ? "schedule" : "none",
       autoLock: true,

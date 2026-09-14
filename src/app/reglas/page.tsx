@@ -73,6 +73,11 @@ export default function ReglasPage() {
           </li>
           <li>Sale de tu saldo; el dueño anterior recibe ese importe.</li>
           <li>Hace falta efectivo y plaza libre en plantilla (máx. 22).</li>
+          <li>
+            Protección: el nuevo dueño no puede venderlo durante{" "}
+            <strong className="text-white">7 días</strong>. Máximo{" "}
+            <strong className="text-white">3 clausulazos</strong> por jugador (de por vida).
+          </li>
         </ul>
       </section>
 
@@ -108,21 +113,34 @@ export default function ReglasPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">5. Alineación</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
           <li>Solo puntúa el once titular.</li>
-          <li>Hueco vacío = 0 puntos.</li>
+          <li>
+            Cada <strong className="text-white">hueco vacío resta 4 puntos</strong> (−4) a tu
+            jornada. Un once sin nadie alineado suma −44.
+          </li>
           <li>Lesionados y sancionados no alineables (salen del once al actualizarse).</li>
           <li>Si no cambias el once, se mantiene jornada tras jornada.</li>
-          <li>J5 cierra sola por calendario; el resto, cierre manual Admin. Al puntuar, se reabre.</li>
+          <li>
+            Al puntuar una jornada, las alineaciones se reabren. El siguiente cierre puede ser
+            programado (p. ej. J6 el 15 sep a las 19:00 Madrid) o manual desde Admin.
+          </li>
+          <li>
+            Con el once <strong className="text-white">cerrado</strong> no se puede tocar… salvo una
+            excepción: si te quitan un titular por <strong className="text-white">clausulazo</strong>,
+            ese hueco sí puedes cubrirlo con un suplente.
+          </li>
         </ul>
         <p className="rounded-lg bg-panel px-3 py-2 text-sm text-white/65">
           <span className="text-white/45">Ejemplo · </span>
-          Once con 48 pts totales entre titulares → tu jornada son 48.
+          Alineas 10 jugadores que suman 48 pts y dejas 1 hueco → jornada ={" "}
+          <strong className="text-white">44</strong> (48 − 4). Mejor un suplente flojo que un hueco.
         </p>
       </section>
 
       <section className="space-y-2">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">6. Puntos</h2>
         <p className="text-sm text-white/75">
-          Fuente: Jornada Perfecta (media AS / SofaScore). Solo cuentan si están en tu once.
+          Fuente: Jornada Perfecta (media AS / SofaScore). Solo cuentan si están en tu once. Los
+          huecos vacíos aplican la penalización de −4 (ver alineación).
         </p>
       </section>
 
@@ -131,6 +149,10 @@ export default function ReglasPage() {
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
           <li>Empieza en la <strong className="text-white">jornada 5</strong>.</li>
           <li>J1–J4: puntos de jugadores en catálogo, no suman a managers.</li>
+          <li>
+            Al total de la jornada se suman los puntos de titulares y se restan{" "}
+            <strong className="text-white">4 por cada hueco vacío</strong>.
+          </li>
         </ul>
         <p className="rounded-lg bg-panel px-3 py-2 text-sm text-white/65">
           <span className="text-white/45">Ejemplo · </span>
@@ -142,7 +164,8 @@ export default function ReglasPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-gold">8. Primas de dinero</h2>
         <ul className="list-disc space-y-1 pl-5 text-sm text-white/75">
           <li>
-            <strong className="text-white">20.000 €</strong> por cada punto de tu once
+            <strong className="text-white">20.000 €</strong> por cada punto de tu once (el total ya
+            incluye la penalización de huecos; puede ser negativa)
           </li>
           <li>
             <strong className="text-white">+60.000 €</strong> si eres el mejor de la jornada (MVP)
@@ -161,7 +184,7 @@ export default function ReglasPage() {
           <li>40M € iniciales, máx. 22 jugadores.</li>
           <li>Pujas ciegas 75–150% del VM, cierre 00:00.</li>
           <li>3 formas de venta; máx. 3 ventas/día.</li>
-          <li>Solo puntúa el once; clasificación y primas desde J5.</li>
+          <li>Solo puntúa el once; hueco vacío = −4 pts; clasificación y primas desde J5.</li>
         </ol>
       </section>
 

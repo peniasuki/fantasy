@@ -309,8 +309,9 @@ export async function POST(request: Request) {
       }),
     );
 
-    // Reabrir alineaciones: esta jornada ya no bloquea; la siguiente empieza abierta
-    // (salvo cierre programado J5 o cierre manual admin).
+    // Reabrir alineaciones: esta jornada deja de bloquear; la siguiente queda abierta
+    // hasta un cierre admin/programado (p. ej. 15-sep 19:00 para J6).
+    const nextMatchday = matchday + 1;
     writes.push((batch) =>
       batch.set(
         leagueRef.collection("lineupLocks").doc(String(matchday)),
@@ -323,6 +324,21 @@ export async function POST(request: Request) {
         { merge: true },
       ),
     );
+    if (nextMatchday >= 1 && nextMatchday <= 38) {
+      writes.push((batch) =>
+        batch.set(
+          leagueRef.collection("lineupLocks").doc(String(nextMatchday)),
+          {
+            matchday: nextMatchday,
+            locked: false,
+            unlockedAt: now,
+            unlockedBy: "score-jornada",
+            unlockedAfterMatchday: matchday,
+          },
+          { merge: true },
+        ),
+      );
+    }
 
     await commitInChunks(writes);
 
@@ -335,6 +351,7 @@ export async function POST(request: Request) {
       playersIgnored: ignored,
       managersScored: scoreManagers,
       managerScoringFromMatchday: managerFrom,
+      lineupsOpenForMatchday: nextMatchday <= 38 ? nextMatchday : null,
       managers: roundScores.map((r) => ({
         uid: r.uid,
         points: r.points,

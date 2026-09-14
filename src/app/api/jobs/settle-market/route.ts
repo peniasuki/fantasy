@@ -175,6 +175,18 @@ export async function POST(request: Request) {
         settled += 1;
       }
 
+      // Al cierre: cualquier puja que no se haya resuelto (perdedoras, sin saldo, listados
+      // sin venta) se elimina. El mercado del día siguiente empieza limpio.
+      const leftoverBids = await leagueRef.collection("bids").get();
+      const bidsCleared = leftoverBids.size;
+      if (bidsCleared > 0) {
+        await commitInChunks(
+          leftoverBids.docs.map((doc) => (batch: WriteBatch) => {
+            batch.delete(doc.ref);
+          }),
+        );
+      }
+
       const [ownedAfter, listingsAfter] = await Promise.all([
         leagueRef.collection("ownership").get(),
         leagueRef.collection("listings").get(),
@@ -237,6 +249,7 @@ export async function POST(request: Request) {
           settled,
           skippedOwned,
           skippedNoFunds,
+          bidsCleared,
           freeAgentsCreated: created,
           freeAgentsRefreshed: refreshed,
           freeAgentsTotal: freePool.length,
@@ -250,6 +263,7 @@ export async function POST(request: Request) {
         settled,
         skippedOwned,
         skippedNoFunds,
+        bidsCleared,
         freeAgentsCreated: created,
         freeAgentsRefreshed: refreshed,
         freeAgentsListed: freePool.length,

@@ -63,6 +63,8 @@ Si pujas 9M y otro manager puja 9,5M, él se lo lleva al cierre. Tú no pierdes 
 
 Si dos managers pujan **exactamente lo mismo**, gana quien llegó antes a ese importe (se guarda la hora de la puja).
 
+Al cierre, las pujas que **no ganan** (perdedoras o sin saldo suficiente) **se eliminan**. Hay que volver a pujar al día siguiente.
+
 ## 3b. Clausulazo
 
 Puedes fichar al instante un jugador de otro manager pagando el **clausulazo**:
